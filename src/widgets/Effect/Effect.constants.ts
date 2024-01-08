@@ -1,7 +1,7 @@
 export const EffectConstants = {
   type: [
-    { value: 'add', label: 'Добавить число' },
-    { value: 'percent', label: 'Добавить число' },
+    { value: 'add', label: 'Добавить/Отнять число' },
+    { value: 'percent', label: 'Добавить/Отнять процент' },
     { value: 'period', label: 'Периодический урон' },
     { value: 'control', label: 'Контроль' },
   ],
@@ -89,5 +89,20 @@ export const EffectConstants = {
     { value: 'enemies', label: 'На врагов' },
     { value: 'teammate', label: 'На союзника' },
     { value: 'teammates', label: 'На союзников' },
-  ]
+  ],
+  element: [
+    { value: 'element_damage_view', label: 'Стихии:', disabled: true },
+    { value: 'fire_damage', label: 'Огонь' },
+    { value: 'water_damage', label: 'Вода' },
+    { value: 'earth_damage', label: 'Земля' },
+    { value: 'air_damage', label: 'Воздух' },
+    { value: 'light_damage', label: 'Свет' },
+    { value: 'dark_damage', label: 'Тьма' },
+    { value: 'phys_damage', label: 'Физ.' },
+  ],
+  control: [
+    { value: 'control_view', label: 'Эффекты контроля:', disabled: true },
+    { value: 'stun', label: 'Стан' },
+    { value: 'root', label: 'Обездвиживание' },
+  ],
 }

@@ -91,7 +91,7 @@ const Home: FC = () => {
     <div className='block_column p_40 w_100p'>
       <h3 className='mb_30'>Конструктор техник</h3>
       
-      <div className="block_row gap_20 w_100p">
+      <div className="block_row gap_20 w_100p technique__wrap">
         <div className="block_column align-start card brs_10 maxw_450">
           <form className="block_column align-start w_100p">
             <Controller control={ control } name='name' render={ ({ field }) => (
@@ -131,7 +131,8 @@ const Home: FC = () => {
             <Controller control={ control } name='damage' render={ ({ field }) => (
               <div className="block_column align-start w_100p">
                 <label>Урон</label>
-                <input type="number" className='w_100p' value={ field.value } onChange={ field.onChange } placeholder='1 - это 100%'/>
+                <input type="number" step="0.01" className='w_100p' value={ field.value } onChange={ field.onChange }
+                       placeholder='1 - это 100%'/>
               </div>
             ) }/>
             

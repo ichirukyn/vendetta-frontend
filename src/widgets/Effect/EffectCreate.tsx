@@ -14,7 +14,7 @@ export const EffectCreateScheme = object().shape({
   name: string().required('Введите название эффекта (Усиление, Щит, Шок и т.п.)'),
   type: string(),
   attribute: string(),
-  value: number().required('Введите значение'),
+  value: number().optional(),
   if_first: string().nullable(),
   if: string().notRequired().nullable(),
   if_second: number().notRequired().nullable(),
@@ -32,8 +32,11 @@ const EffectCreate: FC<IEffectCreateProps> = ({ update_data, index }) => {
   const {
     control,
     formState: { errors },
+    watch,
     handleSubmit
   } = useForm({ resolver: yupResolver(EffectCreateScheme) })
+  
+  const type = watch('type')
   
   const onSubmit = (data: InferType<typeof EffectCreateScheme>) => {
     if (!data?.if_first || !data?.if || !data?.if_second) {
@@ -73,17 +76,32 @@ const EffectCreate: FC<IEffectCreateProps> = ({ update_data, index }) => {
         <div className="block_column align-start w_100p">
           <label>Атрибут</label>
           <Select className='w_100p' value={ field.value } onChange={ field.onChange }>
-            { EffectConstants.attribute.map(({ label, value }) => (
-              <MenuItem key={ value } value={ value }>{ label }</MenuItem>
-            )) }
+            { (type === 'add' || type === 'percent') &&
+              EffectConstants.attribute.map(({ label, value, disabled }) => (
+                <MenuItem key={ value } value={ value } disabled={ disabled || false }>{ label }</MenuItem>
+              ))
+            }
+            { type === 'period' &&
+              EffectConstants.element.map(({ label, value, disabled }) => (
+                <MenuItem key={ value } value={ value } disabled={ disabled || false }>{ label }</MenuItem>
+              ))
+            }
+            { type === 'control' &&
+              EffectConstants.control.map(({ label, value, disabled }) => (
+                <MenuItem key={ value } value={ value } disabled={ disabled || false }>{ label }</MenuItem>
+              ))
+            }
           </Select>
         </div>
       ) }/>
       
       <Controller control={ control } name='value' render={ ({ field }) => (
         <div className="block_column align-start w_100p">
-          <label>Значение (В зависимости от типа, разное, смотреть в подсказку)</label>
-          <input type="number" className='w_100p' value={ field.value } onChange={ field.onChange } placeholder='1, 0, 0.5, -100, etc..'/>
+          <label>
+            { type === 'period' || type === 'control' ? 'Шанс попадания эффектов (В процентах!)' : 'Значение' }
+          </label>
+          <input type="number" step="0.01" className='w_100p' value={ field.value } onChange={ field.onChange }
+                 placeholder='1, 0, 0.5, -100, etc..'/>
           <label className='text_error_200'>{ errors.value?.message }</label>
         </div>
       ) }/>
@@ -137,7 +155,7 @@ const EffectCreate: FC<IEffectCreateProps> = ({ update_data, index }) => {
       <Controller control={ control } name='duration' render={ ({ field }) => (
         <div className="block_column align-start w_100p">
           <label>Длительность эффекта</label>
-          <input type="number" className='w_100p' placeholder='0' value={ field.value } onChange={ field.onChange }/>
+          <input type="number" step="0.01" className='w_100p' placeholder='0' value={ field.value } onChange={ field.onChange }/>
         </div>
       ) }/>
       

@@ -154,3 +154,11 @@
     border-width: 1px !important;
   }
 }
+
+.technique__wrap {
+  @include max-desktop_768 {
+    flex-direction: column;
+    align-items: center !important;
+    gap: 40px !important;
+  }
+}

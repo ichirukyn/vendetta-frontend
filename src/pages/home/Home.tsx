@@ -217,8 +217,8 @@ const Home: FC = () => {
             <Accordion key={ index } expanded={ accordion === index } onChange={ () => setAccordion(accordion === index ? null : index) }
                        className='w_100p'>
               <AccordionSummary aria-controls={ `${ index }-content` } id={ `${ index }-header` } className='b_1 bc_gray_100'>
-                <div className="block_row justify-between w_100p">
-                  <p className='text_title2'>Эффект: { value?.name }</p>
+                <div className="block_row align-center justify-between w_100p">
+                  <p className='text_body'>Эффект: { value?.name }</p>
                   <IconButton onClick={ () => effectDelete(index) }><Delete/></IconButton>
                 </div>
               </AccordionSummary>

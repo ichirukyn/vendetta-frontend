@@ -1,17 +1,17 @@
 // background
-$bg_body: #0F1035;
+$bg_body: #121212;
 
 // border-color
 $bc_active_green: #3e6238;
 
 /* Gray */
-$gray_0: #000;
-$gray_100: rgba(255, 255, 255, 0.08);
-$gray_200: #706E85;
-$gray_300: #B0AEC2;
-$gray_400: #a7a7a7;
-$gray_500: #a3a3a3;
-$gray_600: #e0e0ff;
+$gray_0: #0B0A0A;
+$gray_100: #121212;
+$gray_200: #171716;
+$gray_300: #242323;
+$gray_400: #333232;
+$gray_500: #6F6F6F;
+$gray_600: #ABABAB;
 $gray_700: #ffffff;
 
 /* Primary */
@@ -23,12 +23,12 @@ $primary_400: #000;
 $primary_500: #000;
 
 /* Secondary color */
-$secondary_0: #365486;
-$secondary_100: #7FC7D9;
-$secondary_200: #DCF2F1;
+$secondary_0: #BE4603;
+$secondary_100: #DB6F15;
+$secondary_200: #D67630;
 
 /* color */
-$color_active: #3e71ec;
+$color_active: #DB6F15;
 $color_disable: #3c3e49;
 $color_disable_bg: #3c3e49;
 
@@ -120,7 +120,7 @@ $button_color-font-family: $font_main;
 $button_color-font-weight: 600;
 
 $button_color-text: $gray_700;
-$button_color-bg: $secondary_0;
+$button_color-bg: #DB6F15;
 $button_color-border: transparent;
 
 $button_padding: 10px 30px;
@@ -131,7 +131,7 @@ $button_height: unset;
 /* Input */
 $input_color-focus: 1px solid transparent;
 $input_color-text: $gray_700;
-$input_bg: $primary_300;
+$input_bg: #242323;
 
 $input_border: 1px solid transparent;
 $input_padding: 5px 10px;
@@ -158,7 +158,7 @@ $image_justify: 15px;
 $card_padding: 24px 24px;
 $card_radius: 24px;
 $card_gap: 20px;
-$card_bg: $primary_0;
+$card_bg: #171716;
 $card_outline: 1px solid;
 
 /* Divider */

@@ -1,0 +1,62 @@
+.road__wrapper {
+  //margin-top: 133px;
+}
+
+.road {
+  margin-top: -15px;
+  gap: 21px !important;
+}
+
+.road__button {
+  top: -511px;
+
+  & .icon-arrow__left {
+    left: -20px;
+  }
+
+  & .icon-arrow__right {
+    right: -23px;
+  }
+}
+
+.road__rocket {
+  min-width: 1080px;
+}
+
+.road__quart {
+  min-width: 415px;
+}
+
+.road__arrow {
+  background: #3e71ec60 !important;
+}
+
+.road__wrapper {
+  @include max-desktop_640 {
+    .road__quart {
+      min-width: 320px;
+    }
+    .road__wave {
+      max-width: calc(360px * 4);
+    }
+    .road__rocket {
+      min-width: 900px;
+    }
+  }
+
+  .road__quart_text.p20 {
+    padding: 10px !important;
+  }
+
+  .road__quart_block {
+    &.p_10X {
+      padding: 0 !important;
+      gap: 15px;
+    }
+
+    & p.image_centerY {
+      gap: 10px;
+      font-size: 12px;
+    }
+  }
+}

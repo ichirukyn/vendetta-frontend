@@ -1,0 +1,40 @@
+.card {
+  padding: $card_padding;
+  border-radius: $card_radius;
+  gap: $card_gap;
+  background: $card_bg;
+}
+
+
+.card_gradient {
+  background: $secondary_0;
+
+  border-radius: $card_radius;
+  border: 1px solid transparent;
+
+  & .card_content {
+    border-radius: $card_radius;
+    background: $gray_0;
+  }
+}
+
+
+.card_outline {
+  background: transparent;
+  border: $card_outline;
+}
+
+
+.card_outline_active {
+  background: transparent;
+  border: 1px solid $color_active;
+}
+
+
+.card_absolute {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -100%;
+  right: -100%;
+}

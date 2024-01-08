@@ -1,0 +1,11 @@
+.table-play__wrapper {
+  margin-top: 80px;
+}
+
+.table-play__wrapper {
+  @include max-desktop_480 {
+    table td {
+      padding: 5px 15px;
+    }
+  }
+}

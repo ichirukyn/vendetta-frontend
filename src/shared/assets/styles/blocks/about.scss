@@ -1,0 +1,133 @@
+.about {
+  gap: 71px;
+}
+
+.about__info {
+  gap: 24px;
+}
+
+.about__list {
+  margin-top: 16px;
+  gap: 18px;
+}
+
+.about__wrapper {
+  min-height: 800px;
+  z-index: 11;
+}
+
+@include min-desktop_1024 {
+  .about__form {
+    max-width: 536px;
+  }
+}
+
+.about__form {
+  height: 100%;
+  padding: 35px 32px !important;
+  gap: 20px;
+  border-radius: 40px;
+}
+
+.about__img {
+  top: 90px;
+}
+
+.about__wrapper {
+  @include min-desktop_1920 {
+    .about__img {
+      margin: 0 auto;
+      max-width: 2400px;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+  }
+
+  @include max-desktop_1920 {
+    .about__picture {
+      width: 100% !important;
+      max-width: $container_maxw;
+    }
+  }
+  @include max-desktop_1024 {
+    .about__img {
+      max-width: 1400px;
+      object-position: -100px 0;
+      top: 0;
+      width: unset !important;
+    }
+  }
+
+  @include max-desktop_968 {
+    min-height: unset;
+
+    & > .container {
+      margin-top: 120px !important;
+    }
+
+    .about {
+      flex-direction: column;
+
+      & > div {
+        width: 100%;
+      }
+    }
+
+    .about__form {
+      padding: 48px 24px;
+
+      & > img {
+        width: 100%;
+      }
+    }
+  }
+
+  @include max-desktop_720 {
+    .about__img {
+      object-position: -350px 0;
+    }
+  }
+
+  @include max-desktop_576 {
+    .about {
+      max-width: calc(100vw - 60px);
+    }
+    .about_other {
+      display: none;
+    }
+    .about__list {
+      position: relative;
+      flex-wrap: nowrap;
+      overflow: auto;
+      left: -30px;
+      min-width: 100vw;
+      gap: 30px;
+      padding: 20px 0;
+    }
+
+    .about__card {
+      min-width: 200px;
+    }
+    .about__partners img {
+      max-width: 25px;
+    }
+  }
+
+  @include max-desktop_480 {
+    .about__card {
+      min-width: 150px !important;
+    }
+    .about__card {
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+
+      & img {
+        width: 120px !important;
+        max-width: 120px !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+.sidebar__wrapper,
+.navbar__wrapper {
+  position: sticky;
+  top: 120px;
+
+  background: $sidebar_bg;
+
+  max-width: $sidebar_maxw;
+  width: 100%;
+}
+
+.sidebar {
+  max-width: $sidebar_maxw;
+  width: 100%;
+  padding: $sidebar_padding;
+  border-radius: 20px;
+
+  & .active {
+    color: $color_active;
+    font-weight: 700;
+  }
+}

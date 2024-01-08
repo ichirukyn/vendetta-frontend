@@ -1,0 +1,89 @@
+/* React */
+#root {
+  height: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+
+  overflow-x: hidden;
+}
+
+/* Image */
+img {
+  max-width: 100%;
+  object-fit: cover;
+  user-select: none;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+/* Other */
+
+.card {
+  padding: $card_padding;
+  border-radius: $card_radius;
+  gap: $card_gap;
+  background: $card_bg;
+}
+
+.card_outline {
+  background: transparent;
+  border: $card_outline;
+}
+
+.card__image {
+  overflow: hidden;
+  position: relative;
+  padding: 50px 0 50px 50px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(23.5px);
+}
+
+
+// MUI select
+.MuiInputBase-root {
+  background: $input_bg !important;
+  color: $gray_700 !important;
+  padding: 0 !important;
+  height: $input_height !important;
+
+  & .Mui-disabled {
+    cursor: not-allowed !important;
+    color: $gray_500 !important;
+    -webkit-text-fill-color: $gray_500 !important;
+  }
+}
+
+.Mui-expanded {
+  margin: 0 !important;
+}
+
+.MuiPaper-root {
+  background: $input_bg !important;
+
+  &.MuiAccordion-root {
+    background: $card_bg !important;
+    border: 1px solid $input_bg;
+  }
+}
+
+.MuiSelect-root {
+  background: $input_bg !important;
+
+  .MuiSelect-select {
+    padding-right: 18px !important;
+    padding-left: 0 !important;
+
+  }
+
+  .MuiSvgIcon-root {
+    right: 0 !important;
+  }
+
+  .MuiOutlinedInput-notchedOutline {
+    border: none !important;
+  }
+}

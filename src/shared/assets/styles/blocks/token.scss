@@ -1,0 +1,367 @@
+.token__wrapper {
+  gap: 70px;
+}
+
+.token__about picture {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.token__about > div {
+  gap: 30px;
+}
+
+.token__coin {
+  position: absolute;
+  right: -200px;
+  bottom: -250px;
+}
+
+.token__stats {
+  .card_bg_content {
+    gap: 10px;
+    padding: 20px;
+    min-height: 130px;
+  }
+
+  &,
+  & > div {
+    gap: 20px;
+  }
+}
+
+.token__plan {
+  gap: 46px;
+
+  & .token__plan-hover {
+    gap: 8px !important;
+    transition: 0.3s;
+
+    & > div {
+      padding: 12px !important;
+      height: 48px !important;
+      border-radius: 16px !important;
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+@include min-desktop_1024 {
+  .token__img {
+    max-width: 650px !important;
+  }
+  .token__graph {
+    gap: 8px !important;
+
+    & > .card_outline_blue,
+    & > img[alt='arrow_left'] {
+      position: relative;
+      top: -34px;
+    }
+  }
+
+  .token__hint {
+    //max-height: 90px !important;
+    min-height: unset !important;
+    padding: 30px !important;
+  }
+
+  .token__header {
+    max-width: 660px;
+    width: 100%;
+  }
+
+  .token__img {
+    left: 0;
+  }
+
+  .token__info {
+    gap: 88px;
+  }
+
+  .token__info_right {
+    min-width: 260px;
+    top: 26px;
+    left: -49px;
+  }
+
+  .token__wrapper {
+    img[alt='arrow_right_top'] {
+      top: 35px;
+    }
+
+    img[alt='arrow_right'] {
+      left: 12px;
+    }
+  }
+
+  .token__info_left {
+    left: 5px;
+  }
+}
+
+.token__hint {
+  padding: 30px;
+}
+
+.token__bonus {
+  margin-top: 0;
+}
+
+.token__bonus_header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  & .text_title {
+    margin-top: 73px;
+  }
+
+  & p {
+    margin-top: -2px;
+    margin-left: 80px;
+  }
+
+  & .token__bonus_block {
+    max-width: 580px;
+  }
+}
+
+.token__bonus_surface {
+  max-width: 1800px;
+  top: -350px;
+}
+
+.token__bonus {
+  img[alt='neon_coin'] {
+    max-width: 360px;
+    top: -40px;
+    left: -50px;
+  }
+
+  img[alt='neon_planet'] {
+    max-width: 380px;
+    top: 0;
+    left: 50px;
+  }
+}
+
+@include min-desktop_1280 {
+  .token__bonus {
+    img[alt='neon_coin'] {
+      max-width: 362px;
+      top: -62px;
+      left: -162px;
+    }
+
+    img[alt='neon_planet'] {
+      max-width: 427px;
+      top: -66px;
+      left: 80px;
+    }
+  }
+
+  .token__bonus_block {
+    gap: 20px;
+  }
+
+  .token__planet .token__bonus_block {
+    position: relative;
+    top: -58px;
+    left: -80px;
+    gap: 18px !important;
+  }
+}
+
+.token__plan {
+  & .token__plan-hover .card:hover {
+    background: $color_active !important;
+    transition: 0.5s;
+    cursor: pointer;
+  }
+}
+
+.token__img {
+  position: relative;
+  max-width: 500px;
+  width: 100%;
+}
+
+.token__wrapper {
+  @include max-desktop_1024 {
+    .token__bonus {
+      img[alt='neon_coin'] {
+        max-width: 360px;
+        top: -40px;
+        left: 0;
+      }
+
+      img[alt='neon_planet'] {
+        max-width: 380px;
+        left: 0;
+      }
+    }
+
+    .token__stats {
+      .card_bg_content {
+        gap: 10px;
+        padding: 20px;
+        min-height: 150px;
+      }
+    }
+    .token__about > div {
+      gap: 10px;
+    }
+
+    .token__coin {
+      opacity: 0.8;
+      max-width: 1000px;
+      right: -100px;
+    }
+
+    .token__stats .card_bg_content,
+    .token__hint {
+      padding: 15px;
+    }
+
+    .token__info {
+      gap: 80px !important;
+    }
+  }
+
+  @include max-desktop_800 {
+    .token__bonus img {
+      max-width: 300px !important;
+    }
+
+    img.token__bonus_surface {
+      max-width: 1800px !important;
+    }
+
+    .token__info {
+      gap: 20px !important;
+    }
+    .token__graph .card {
+      padding: 15px !important;
+      gap: 10px !important;
+    }
+  }
+
+  @include max-desktop_768 {
+    .token__stats .card_bg_content {
+      gap: 5px;
+    }
+  }
+
+  @include max-desktop_720 {
+    .token__info .block_column .left_20 {
+      left: 0 !important;
+    }
+
+    .token__plan .text_title {
+      min-height: 72px;
+    }
+  }
+
+  @include max-desktop_640 {
+    img.token__bonus_surface {
+      transform: rotate(170deg);
+      min-width: 3000px !important;
+      top: -650px !important;
+    }
+
+    .token__bonus_header {
+      align-items: center;
+
+      & img {
+        top: 0 !important;
+      }
+
+      .text_title {
+        margin-top: 30px !important;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+    .token__bonus_surface {
+      top: 0 !important;
+      //max-width: 800px !important;
+    }
+
+    .token__graph {
+      flex-direction: column-reverse;
+
+      .block_row.token__info_left {
+        left: -50px !important;
+      }
+
+      .block_row.token__info_right {
+        left: 40px !important;
+      }
+
+      .card_outline_blue {
+        width: 100%;
+      }
+    }
+
+    .token__coin {
+      opacity: 1;
+      transform: scale(1.5);
+      right: -250px;
+    }
+
+    .token__stats > div,
+    .token__stats,
+    .token__plan > div {
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .token__plan {
+      flex-direction: column;
+
+      .text_title {
+        min-height: unset;
+      }
+    }
+
+    .token__stats .card_bg_content,
+    .token__hint {
+      min-height: unset;
+    }
+
+    .token__bonus {
+      gap: 30px;
+
+      & .token__bonus_block {
+        gap: 10px;
+      }
+
+      & > div {
+        flex-direction: column-reverse;
+      }
+
+      & .token__planet {
+        flex-direction: column;
+      }
+
+      img {
+        max-width: 250px;
+      }
+    }
+  }
+
+  @include max-desktop_380 {
+    .token__graph {
+      flex-direction: column-reverse;
+
+      .block_row.token__info_left {
+        left: -30px !important;
+      }
+    }
+  }
+}

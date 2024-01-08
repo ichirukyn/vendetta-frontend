@@ -1,0 +1,37 @@
+/* cursors */
+
+.cursor_pointer {
+  cursor: pointer !important;
+}
+
+.cursor_default {
+  cursor: default !important;
+}
+
+
+.event_none {
+  pointer-events: none !important;
+}
+
+.event_unset {
+  pointer-events: unset !important;
+}
+
+.event_all {
+  pointer-events: all !important;
+}
+
+/* Select */
+
+.us_none {
+  user-select: none !important;
+}
+
+.us_unset {
+  user-select: unset !important;
+}
+
+.us_all {
+  user-select: all !important;
+}
+

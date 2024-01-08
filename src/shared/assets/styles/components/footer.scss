@@ -1,0 +1,10 @@
+footer {
+  position: relative;
+  width: 100%;
+  background: $footer_bg;
+  padding: $footer_padding;
+
+  & * {
+    color: $footer_color-text !important;
+  }
+}

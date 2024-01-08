@@ -1,0 +1,30 @@
+@import '@/shared/assets/styles/vars.scss';
+@import '@/shared/assets/styles/fonts.scss';
+@import '@/shared/assets/styles/null.scss';
+
+// Mixins
+@import '@/shared/assets/styles/mixins/media.scss';
+
+// Components
+@import '@/shared/assets/styles/components/add.scss';
+@import '@/shared/assets/styles/components/base.scss';
+@import '@/shared/assets/styles/components/header.scss';
+@import '@/shared/assets/styles/components/footer.scss';
+@import '@/shared/assets/styles/components/main.scss';
+@import '@/shared/assets/styles/components/sidebar.scss';
+@import '@/shared/assets/styles/components/table.scss';
+@import '@/shared/assets/styles/components/typography.scss';
+@import '@/shared/assets/styles/components/media.scss';
+@import '@/shared/assets/styles/components/policy.scss';
+
+//UI
+@import '@/shared/assets/styles/components/UI/card.scss';
+@import '@/shared/assets/styles/components/UI/select.scss';
+@import '@/shared/assets/styles/components/UI/checkbox.scss';
+@import '@/shared/assets/styles/components/UI/button.scss';
+@import '@/shared/assets/styles/components/UI/input.scss';
+@import '@/shared/assets/styles/components/UI/accordion.scss';
+@import '@/shared/assets/styles/components/UI/alert.scss';
+@import '@/shared/assets/styles/components/UI/modal.scss';
+@import '@/shared/assets/styles/components/UI/action_menu.scss';
+@import '@/shared/assets/styles/components/UI/progress-bar.scss';

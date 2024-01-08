@@ -1,0 +1,50 @@
+.play__wrapper {
+}
+
+.play {
+  gap: 26px;
+  max-width: 735px;
+  width: 100%;
+}
+
+.play__text_bot {
+  margin-bottom: 55px;
+}
+
+.play__text_mid {
+  margin-bottom: -5px;
+}
+
+.play__text_top {
+  margin-bottom: -5px;
+}
+
+.play__img {
+  right: -75px;
+  bottom: -9px;
+}
+
+.play__wrapper {
+  @include max-desktop_1024 {
+    img {
+      opacity: 0.5;
+    }
+  }
+
+  @include max-desktop_720 {
+    img {
+      max-width: unset;
+      position: absolute;
+      left: -200px;
+    }
+    .play {
+      gap: 15px;
+    }
+  }
+  @include max-desktop_380 {
+    img {
+      transform: scale(0.7);
+      left: -300px;
+    }
+  }
+}

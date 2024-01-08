@@ -1,0 +1,156 @@
+@import 'Main/block';
+@import 'Main/object';
+
+/* Main block */
+.container_wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: $container_maxw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: $container_margin;
+
+  @include max-desktop_380 {
+    margin: 0 15px;
+  }
+}
+
+
+// deprecate
+.text_block {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px 20px;
+
+  &.text_block-column {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  & span {
+    font-size: 14px !important;
+    font-weight: 400;
+    line-height: 130%;
+    color: $gray_200;
+  }
+
+  & p {
+    color: $gray_100;
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
+
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: #000;
+  opacity: 0.3;
+  z-index: 3;
+}
+
+// deprecate
+.inputblock.error {
+  * {
+    color: #ff4343;
+  }
+}
+
+// deprecate
+.CopyIcon:hover path {
+  fill: $color_active;
+}
+
+.block__alert {
+  border: 1px solid;
+  box-shadow: 0 8px 8px rgba(9, 13, 20, 0.4), -8px -8px 16px rgba(224, 224, 255, 0.04), 16px 16px 48px rgba(9, 13, 20, 0.4);
+  backdrop-filter: blur(6px);
+  border-radius: 16px;
+
+  &.alert__error {
+    background: #4d2d3c;
+    border-color: #FF5372;
+
+    & p {
+      color: #FF5372;
+    }
+  }
+
+  &.alert__success {
+    background: #1d3e37;
+    border-color: #00F495;
+
+    & p {
+      color: #00F495;
+    }
+  }
+
+  &.alert__info {
+    background: #223440;
+    border-color: #27A7E7;
+
+    & p {
+      color: #27A7E7;
+    }
+  }
+
+  &.alert__warning {
+    background: #3c3424;
+    border-color: #FFA500;
+
+    & p {
+      color: #FFA500;
+    }
+  }
+}
+
+.divider {
+  width: 100%;
+  padding: 0 !important;
+  border-top: 1px solid $divider;
+
+  &.divider_25p {
+    border-color: $divider_25p;
+  }
+
+  &.divider_50p {
+    border-color: $divider_50p;
+  }
+
+  &.divider_75p {
+    border-color: $divider_75p;
+  }
+
+  &.multiply {
+    mix-blend-mode: multiply;
+  }
+
+  &.w_auto {
+    width: auto !important;
+  }
+
+  &.divider_hide {
+    display: none;
+  }
+
+  &.dashed {
+    border-style: dashed;
+    border-width: 1px !important;
+  }
+}

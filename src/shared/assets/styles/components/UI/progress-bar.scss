@@ -1,0 +1,37 @@
+.status-bar {
+  height: 16px;
+  position: relative;
+
+  background: #0f1b2a;
+  border-radius: 8px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  overflow: hidden;
+}
+
+.progress {
+  width: 20%;
+}
+
+.status-bar .progress {
+  height: 100%;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  background: $secondary_0;
+}
+
+.status-bar .content {
+  display: none;
+  width: 100%;
+
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}

@@ -1,0 +1,179 @@
+.buy__wrapper {
+  margin-top: 100px !important;
+}
+
+@include min-desktop_968 {
+  .buy__wrapper {
+    margin-top: 238px !important;
+  }
+  .buy__bank img {
+    max-width: 900px;
+    position: relative;
+    top: -122px;
+    left: -21px;
+  }
+
+  .buy__info_img img {
+    position: relative;
+    top: -130px;
+    left: -24px;
+  }
+}
+
+.buy__tabs {
+  min-height: 400px;
+}
+
+.buy__info_text {
+  top: -24px;
+  left: -15px;
+  max-width: 550px;
+}
+
+@include min-desktop_1280 {
+  .buy__info_text h2 {
+    max-width: 400px;
+  }
+}
+
+.tab__list {
+  & .card_bg_gradient {
+    background: transparent !important;
+  }
+
+  & .card_bg_content {
+    pointer-events: none;
+    padding: 18px 46px;
+  }
+
+  & .tab__title.tab_active.card_bg_gradient {
+    background: linear-gradient(135deg, rgba(0, 255, 170, 1), rgba(69, 121, 245, 1), rgba(156, 66, 245, 1)) !important;
+  }
+}
+
+.tab__title {
+  cursor: pointer;
+  user-select: none;
+  width: 100%;
+
+  & div {
+    padding: 16px;
+  }
+}
+
+.tab__list + .tab__list_block {
+  margin-top: 33px;
+  width: 95%;
+
+  & .card_bg_content {
+    padding: 25px !important;
+  }
+}
+
+.tab {
+  //display: none;
+  overflow: hidden;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.5s ease-in;
+
+  &.tab_active {
+    overflow: auto;
+    //display: flex;
+    opacity: 1;
+    height: auto;
+    pointer-events: all;
+  }
+}
+
+.buy__wrapper {
+  @include max-desktop_1024 {
+    .buy__info_text {
+      justify-content: flex-start;
+    }
+  }
+
+  @include max-desktop_968 {
+    gap: 60px !important;
+
+    .buy__bank {
+      position: absolute;
+      right: 0;
+      max-width: 400px;
+      opacity: 0.8;
+    }
+
+    .buy__info_img {
+      min-width: 400px;
+
+      img {
+        position: relative;
+        top: -60px !important;
+      }
+    }
+  }
+  @include max-desktop_720 {
+    .tab__list {
+      gap: 10px;
+
+      & .card_bg_content {
+        padding: 15px 20px;
+      }
+    }
+
+    .buy__info_img {
+      position: absolute;
+      opacity: 0.8;
+      max-width: 350px;
+      right: 0;
+    }
+  }
+
+  @include max-desktop_576 {
+    .buy__bank,
+    .buy__info_img {
+      right: -150px;
+      object-fit: unset;
+      opacity: 0.6;
+    }
+    .buy__telegram {
+      min-width: 56px;
+      min-height: 56px;
+    }
+    .tab__list .tab__list_block {
+      width: 100%;
+    }
+    .tab__list > div {
+      min-width: 80px;
+    }
+  }
+
+  @include max-desktop_380 {
+    .buy {
+      margin: 0 !important;
+
+      .buy__tabs {
+        & > .image_centerY,
+        & > .tab__list_block {
+          margin: 0 8px;
+        }
+      }
+    }
+    .tab__list {
+      position: relative;
+      //left: 30px;
+      max-width: calc(100vw - 0px);
+      //min-width: 100vw;
+      overflow: auto;
+      gap: 5px;
+
+      & .card_bg_content {
+        padding: 15px 15px;
+      }
+    }
+    .buy__info_text {
+      margin: 0 30px !important;
+    }
+  }
+}

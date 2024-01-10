@@ -1,13 +1,17 @@
-import { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { boolean, InferType, number, object, string } from "yup";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Checkbox, MenuItem, Select } from "@mui/material";
+import { Checkbox, IconButton, MenuItem, Select } from "@mui/material";
 import { EffectConstants } from "@/widgets";
+import { EffectType } from "@/shared/types/technique";
+import { Delete } from "@mui/icons-material";
 
 export interface IEffectCreateProps {
   index: number
+  effectDelete: (index: number) => void
   update_data?: (a: InferType<typeof EffectCreateScheme>, index: number) => void
+  defaultData?: EffectType
 }
 
 export const EffectCreateScheme = object().shape({
@@ -24,29 +28,60 @@ export const EffectCreateScheme = object().shape({
 })
 
 export type EffectEmpty = {
+  id?: number
   name: string
 }
 
-const EffectCreate: FC<IEffectCreateProps> = ({ update_data, index }) => {
-  
+const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, effectDelete }) => {
   const {
     control,
     formState: { errors },
     watch,
-    handleSubmit
+    handleSubmit,
+    setValue
   } = useForm({ resolver: yupResolver(EffectCreateScheme) })
   
   const type = watch('type')
   
+  useEffect(() => {
+    if (defaultData) {
+      setValue('name', defaultData.name)
+      setValue('type', defaultData.type)
+      setValue('attribute', defaultData.attribute)
+      setValue('value', defaultData.value)
+      setValue('if_first', defaultData.if_first)
+      setValue('if', defaultData.if)
+      setValue('if_second', defaultData.if_second)
+      setValue('direction', defaultData.direction)
+      setValue('duration', defaultData.duration)
+      setValue('is_single', defaultData.is_single)
+    }
+  }, [defaultData]);
+  
   const onSubmit = (data: InferType<typeof EffectCreateScheme>) => {
+    if (!data.direction) data.direction = EffectConstants.direction[0].value
+    
+    if (!data.value || data?.value < 0) data.value = 1
+    if (data.value > 5) data.value = 5
+    
     if (!data?.if_first || !data?.if || !data?.if_second) {
       data.if_first = undefined
       data.if = undefined
       data.if_second = undefined
     }
     
+    if (!data.attribute) {
+      if (data.type == 'control') data.attribute = EffectConstants.control[0].value
+      else if (data.type == 'period') data.attribute = EffectConstants.element[0].value
+      else data.attribute = EffectConstants.attribute[0].value
+    }
+    
+    
     if (update_data) {
-      console.log('update_data')
+      if (defaultData) {
+        data = { ...defaultData, ...data }
+      }
+      
       update_data(data, index)
     }
   }
@@ -76,20 +111,28 @@ const EffectCreate: FC<IEffectCreateProps> = ({ update_data, index }) => {
         <div className="block_column align-start w_100p">
           <label>Атрибут</label>
           <Select className='w_100p' value={ field.value } onChange={ field.onChange }>
-            { (type === 'add' || type === 'percent') &&
-              EffectConstants.attribute.map(({ label, value, disabled }) => (
-                <MenuItem key={ value } value={ value } disabled={ disabled || false }>{ label }</MenuItem>
-              ))
+            { type === 'period'
+              ? (
+                EffectConstants.element.map(({ label, value, disabled }) => (
+                  <MenuItem key={ value } value={ value } disabled={ disabled || false }>{ label }</MenuItem>
+                ))
+              )
+              : (
+                EffectConstants.attribute.map(({ label, value, disabled }) => (
+                  <MenuItem key={ value } value={ value } disabled={ disabled || false }>{ label }</MenuItem>
+                ))
+              )
             }
-            { type === 'period' &&
-              EffectConstants.element.map(({ label, value, disabled }) => (
-                <MenuItem key={ value } value={ value } disabled={ disabled || false }>{ label }</MenuItem>
-              ))
-            }
-            { type === 'control' &&
-              EffectConstants.control.map(({ label, value, disabled }) => (
-                <MenuItem key={ value } value={ value } disabled={ disabled || false }>{ label }</MenuItem>
-              ))
+            { type === 'control'
+              ? (
+                EffectConstants.control.map(({ label, value, disabled }) => (
+                  <MenuItem key={ value } value={ value } disabled={ disabled || false }>{ label }</MenuItem>
+                ))
+              ) : (
+                EffectConstants.attribute.map(({ label, value, disabled }) => (
+                  <MenuItem key={ value } value={ value } disabled={ disabled || false }>{ label }</MenuItem>
+                ))
+              )
             }
           </Select>
         </div>
@@ -106,7 +149,7 @@ const EffectCreate: FC<IEffectCreateProps> = ({ update_data, index }) => {
         </div>
       ) }/>
       
-      <Controller control={ control } name='if_first' defaultValue={ null } render={ ({ field }) => (
+      <Controller control={ control } name='if_first' defaultValue={ '' } render={ ({ field }) => (
         <div className="block_column align-start w_100p">
           <label>Если атрибут</label>
           <Select className='w_100p' value={ field.value } onChange={ field.onChange }>
@@ -117,7 +160,7 @@ const EffectCreate: FC<IEffectCreateProps> = ({ update_data, index }) => {
         </div>
       ) }/>
       
-      <Controller control={ control } name='if' defaultValue={ null } render={ ({ field }) => (
+      <Controller control={ control } name='if' defaultValue={ '' } render={ ({ field }) => (
         <div className="block_column align-start w_100p">
           <label>Условие</label>
           <Select className='w_100p' value={ field.value } onChange={ field.onChange }>
@@ -168,11 +211,12 @@ const EffectCreate: FC<IEffectCreateProps> = ({ update_data, index }) => {
         </div>
       ) }/>
       
-      <div className="block_row justify-start w_100p">
-        <button className='button mt_10'>Сохранить</button>
+      <div className="block_row justify-between align-center w_100p mt_10">
+        <button className='button'>Сохранить</button>
+        <IconButton onClick={ () => effectDelete(index) }><Delete/></IconButton>
       </div>
     </form>
   );
 };
 
-export default EffectCreate;
+export default EffectForm;

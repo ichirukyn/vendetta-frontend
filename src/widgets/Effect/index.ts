@@ -1,2 +1,2 @@
-export * from './EffectCreate'
+export * from './EffectForm'
 export * from './Effect.constants'

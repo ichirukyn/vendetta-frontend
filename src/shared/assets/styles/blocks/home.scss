@@ -1,0 +1,9 @@
+.main__block {
+  h3 {
+    text-align: center;
+  }
+
+  @include max-desktop_768 {
+    padding: 40px 15px !important;
+  }
+}

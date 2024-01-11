@@ -3,6 +3,8 @@ import { fetchAllTechnique } from "@/shared/api/technique";
 import { TechniqueType } from "@/shared/types/technique";
 import Table from "@/shared/ui/Table/Table";
 import { TechniqueColumn } from "@/widgets/technique/technique.column";
+import { Link } from "react-router-dom";
+import { pathRoutes } from "@/app";
 
 const TechniqueList: FC = () => {
   const [techniqueList, setTechniqueList] = useState<TechniqueType[] | []>([])
@@ -19,6 +21,12 @@ const TechniqueList: FC = () => {
       
       
       <Table rows={ techniqueList } columns={ TechniqueColumn } style={ { isHeader: true } }/>
+      
+      <div className="block_row justify-end w_100p mt_10">
+        <Link to={ pathRoutes.technique.create }>
+          <button className='button'>Создать</button>
+        </Link>
+      </div>
     </div>
   );
 };

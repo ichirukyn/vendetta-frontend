@@ -1,2 +1,6 @@
+export * from './class'
+export * from './enemy'
+export * from './item'
 export * from './hero'
+export * from './race'
 export * from './technique'

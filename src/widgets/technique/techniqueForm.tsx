@@ -17,6 +17,8 @@ import { EffectType, TechniqueEffectType, TechniqueType } from "@/shared/types/t
 import { toast } from "react-toastify";
 import { Accordion, AccordionDetails, AccordionSummary, Checkbox, MenuItem, Select } from "@mui/material";
 import EffectForm from "@/widgets/Effect/EffectForm";
+import { ClassType, RaceType } from "@/shared/types";
+import { fetchAllClassByRace, fetchAllRace } from "@/shared/api/race";
 
 export interface ITechniqueFormProps {
   id?: number,
@@ -34,13 +36,19 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
   const [accordion, setAccordion] = useState<null | number>(null)
   const [effectList, setEffectList] = useState<TechniqueEffectType[] | [] | EffectEmpty[]>([])
   
+  const [raceList, setRaceList] = useState<RaceType[]>([])
+  const [classList, setClassList] = useState<ClassType[]>([])
+  
   const race_id = watch('race_id')
+  
   const onSubmit = async (data: InferType<typeof TechniqueCreateScheme>) => {
     if (!data.damage || data?.damage < 0) data.damage = 1
     if (!data.cooldown || data?.damage < 0) data.cooldown = 0
     
     if (data.damage > 5) data.damage = 5
     if (data.cooldown > 5) data.cooldown = 5
+    
+    if (data.race_id != 0 && data.class_id == 0) return toast('Нужно завершить выбор класса', { type: 'warning' })
     
     if (!id) {
       const technique = await createTechnique(data as TechniqueType)
@@ -86,6 +94,19 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
     
     toast('Техника создана!', { type: "success" })
   }
+  
+  
+  useEffect(() => {
+    fetchAllRace().then((res) => setRaceList(res.data))
+  }, []);
+  
+  useEffect(() => {
+    setValue('class_id', 0)
+    
+    if (!race_id || race_id == 0) return
+    
+    fetchAllClassByRace(race_id!).then((res) => setClassList(res.data))
+  }, [race_id]);
   
   useEffect(() => {
     if (id) {
@@ -213,9 +234,9 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
               <label>Привязка к расе</label>
               <Select className='w_100p' value={ field.value } onChange={ field.onChange }>
                 <MenuItem value={ 0 } disabled>Выбрать расу</MenuItem>
-                <MenuItem value={ 1 }>Люди</MenuItem>
-                <MenuItem value={ 2 }>Эльфы</MenuItem>
-                <MenuItem value={ 3 }>Дворфы</MenuItem>
+                { raceList.map(({ id, name }) => (
+                  <MenuItem value={ id }>{ name }</MenuItem>
+                )) }
               </Select>
             </div>
           ) }/>
@@ -225,9 +246,9 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
               <label>Привязка к классу</label>
               <Select className='w_100p' value={ field.value } onChange={ field.onChange } disabled={ !race_id }>
                 <MenuItem value={ 0 } disabled>Выбрать класс</MenuItem>
-                <MenuItem value={ 1 }>Воин</MenuItem>
-                <MenuItem value={ 2 }>Маг</MenuItem>
-                <MenuItem value={ 3 }>Лучник</MenuItem>
+                { classList.map(({ id, name }) => (
+                  <MenuItem value={ id }>{ name }</MenuItem>
+                )) }
               </Select>
             </div>
           ) }/>

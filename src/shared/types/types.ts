@@ -1,0 +1,1 @@
+export type OptionsType = { label: string, value?: number }

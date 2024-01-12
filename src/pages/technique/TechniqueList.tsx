@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { fetchAllTechnique } from "@/shared/api/technique";
 import { TechniqueType } from "@/shared/types/technique";
 import Table from "@/shared/ui/Table/Table";
-import { TechniqueColumn } from "@/widgets/technique/technique.column";
+import { TechniqueColumn } from "@/widgets/Technique/Technique.column";
 import { Link } from "react-router-dom";
 import { pathRoutes } from "@/app";
 

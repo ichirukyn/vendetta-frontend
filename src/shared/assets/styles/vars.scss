@@ -134,10 +134,10 @@ $input_color-text: $gray_700;
 $input_bg: #242323;
 
 $input_border: 1px solid transparent;
-$input_padding: 5px 10px;
+$input_padding: 5px 10px !important;
 $input_margin: 0 0 0 0;
 $input_radius: 6px;
-$input_height: 44px;
+$input_height: unset;
 
 $input_file_bg: #f0eff3;
 $input_file_color: $gray_200;

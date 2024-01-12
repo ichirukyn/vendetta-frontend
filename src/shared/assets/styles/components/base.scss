@@ -5,7 +5,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 40px;
 
   overflow-x: hidden;
 }
@@ -44,6 +43,10 @@ img {
 
 
 // MUI select
+.MuiInputBase-input {
+  padding: 11px 10px !important;
+}
+
 .MuiInputBase-root {
   background: $input_bg !important;
   color: $gray_700 !important;
@@ -86,4 +89,24 @@ img {
   .MuiOutlinedInput-notchedOutline {
     border: none !important;
   }
+}
+
+
+.Toastify {
+  & * {
+    color: $gray_0;
+  }
+
+  &__toast {
+    height: 50px !important;
+  }
+
+  &__toast-container {
+    padding: 0 !important;
+  }
+
+  &__toast-body {
+    padding: 0 5px 7px 0 !important;
+  }
+
 }

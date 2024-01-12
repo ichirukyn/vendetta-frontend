@@ -12,6 +12,10 @@ import EnemyList from "@/pages/enemy/EnemyList";
 import HeroList from "@/pages/hero/HeroList";
 import ItemList from "@/pages/item/ItemList";
 import MapList from "@/pages/map/MapList";
+import ItemCreate from "@/pages/item/ItemCreate";
+import ItemEdit from "@/pages/item/ItemEdit";
+import EnemyCreate from "@/pages/enemy/EnemyCreate";
+import EnemyEdit from "@/pages/enemy/EnemyEdit";
 
 
 export const Routers = [
@@ -43,7 +47,16 @@ export const Routers = [
     Component: EnemyList,
     Layout: Default,
   },
-  
+  {
+    path: pathRoutes.enemy.create,
+    Component: EnemyCreate,
+    Layout: Default,
+  },
+  {
+    path: `${ pathRoutes.enemy.edit }/:id`,
+    Component: EnemyEdit,
+    Layout: Default,
+  },
   // Hero
   {
     path: pathRoutes.hero.base,
@@ -55,6 +68,16 @@ export const Routers = [
   {
     path: pathRoutes.item.base,
     Component: ItemList,
+    Layout: Default,
+  },
+  {
+    path: pathRoutes.item.create,
+    Component: ItemCreate,
+    Layout: Default,
+  },
+  {
+    path: `${ pathRoutes.item.edit }/:id`,
+    Component: ItemEdit,
     Layout: Default,
   },
   

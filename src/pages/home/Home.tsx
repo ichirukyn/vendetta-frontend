@@ -11,10 +11,10 @@ const Home: FC = () => {
       <div className="block_column align-start">
         <Link to={ pathRoutes.technique.base } className='td_underline tab_active text_title'>Техники</Link>
         <Link to={ pathRoutes.hero.base } className='td_underline tab_active text_title'>Игроки</Link>
-        <br/>
-        <p className='text_title'>(Ниже в разработке)</p>
         <Link to={ pathRoutes.enemy.base } className='td_underline tab_active text_title'>Противники</Link>
         <Link to={ pathRoutes.item.base } className='td_underline tab_active text_title'>Предметы</Link>
+        <br/>
+        <p className='text_title'>(Ниже в разработке)</p>
         <Link to={ pathRoutes.map.base } className='td_underline tab_active text_title'>Карта</Link>
       </div>
     </div>

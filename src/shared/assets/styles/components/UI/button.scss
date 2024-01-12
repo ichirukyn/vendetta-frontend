@@ -17,7 +17,6 @@
   user-select: none;
   -webkit-user-drag: none;
 
-
   &.button_outline_white {
     border-color: $gray_700;
     color: $gray_700;
@@ -36,6 +35,9 @@
     border-color: $error_100 !important;
   }
 
+  &:active {
+    background: #f68d36;
+  }
 
   &:disabled {
     background: $color_disable_bg;

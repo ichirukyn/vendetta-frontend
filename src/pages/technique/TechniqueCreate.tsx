@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import TechniqueForm from "@/widgets/technique/techniqueForm";
-import TechniqueTooltip from "@/widgets/technique/TechniqueTooltip";
+import TechniqueForm from "@/widgets/Technique/TechniqueForm";
+import TechniqueTooltip from "@/widgets/Technique/TechniqueTooltip";
 
 const TechniqueCreate: FC = () => {
   return (

@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { TechniqueCreateScheme } from "@/widgets/technique/technique.schemas";
+import { TechniqueCreateScheme } from "@/widgets/Technique/Technique.schemas";
 import { InferType } from "yup";
 import { EffectCreateScheme, EffectEmpty } from "@/widgets";
 import {
@@ -30,7 +30,8 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
     watch,
     formState: { errors },
     handleSubmit,
-    setValue
+    setValue,
+    reset
   } = useForm({ resolver: yupResolver(TechniqueCreateScheme) })
   
   const [accordion, setAccordion] = useState<null | number>(null)
@@ -49,19 +50,30 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
     if (data.cooldown > 5) data.cooldown = 5
     
     if (data.race_id != 0 && data.class_id == 0) return toast('Нужно завершить выбор класса', { type: 'warning' })
+    if (data.race_id == 0 && data.class_id == 0) {
+      data.race_id = null
+      data.class_id = null
+    }
     
     if (!id) {
       const technique = await createTechnique(data as TechniqueType)
       
       if (!technique.data) return toast('Ошибка', { type: 'error' })
+      reset()
+      
+      let error = false
       
       if (effectList.length) {
         effectList.map(async (effect) => {
-          if (!technique.data.id) return toast('Ошибка technique_id', { type: "error" })
-          
+          if (!technique.data.id) {
+            error = true
+            return toast('Ошибка technique_id', { type: "error" })
+          }
           await createTechniqueEffect(effect as EffectType, technique.data.id)
         })
       }
+      
+      if (!error) setEffectList([])
     } else {
       updateTechnique(data as TechniqueType, id).then((res) => {
         if (res.data) {
@@ -233,9 +245,9 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
             <div className="block_column align-start w_100p">
               <label>Привязка к расе</label>
               <Select className='w_100p' value={ field.value } onChange={ field.onChange }>
-                <MenuItem value={ 0 } disabled>Выбрать расу</MenuItem>
+                <MenuItem value={ 0 }>Любая раса</MenuItem>
                 { raceList.map(({ id, name }) => (
-                  <MenuItem value={ id }>{ name }</MenuItem>
+                  <MenuItem value={ id } key={ id }>{ name }</MenuItem>
                 )) }
               </Select>
             </div>
@@ -245,9 +257,9 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
             <div className="block_column align-start w_100p">
               <label>Привязка к классу</label>
               <Select className='w_100p' value={ field.value } onChange={ field.onChange } disabled={ !race_id }>
-                <MenuItem value={ 0 } disabled>Выбрать класс</MenuItem>
+                <MenuItem value={ 0 }>Любой класс</MenuItem>
                 { classList.map(({ id, name }) => (
-                  <MenuItem value={ id }>{ name }</MenuItem>
+                  <MenuItem value={ id } key={ id }>{ name }</MenuItem>
                 )) }
               </Select>
             </div>

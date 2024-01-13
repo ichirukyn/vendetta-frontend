@@ -47,7 +47,6 @@ const EnemyWeaponForm: FC<IEnemyWeaponFormProps> = ({ weapon, updateWeapon }) =>
       <Controller control={ control } name='weapon_id' defaultValue={ 1 } render={ ({ field }) => (
         <div className="block_row align-start justify-between gap_15 w_100p mt_10">
           <Select className='w_100p' value={ field.value } onChange={ field.onChange }>
-            <MenuItem value={ 0 } disabled>Любой класс</MenuItem>
             { weaponList.map(({ id, name }) => (
               <MenuItem value={ id } key={ id }>{ name }</MenuItem>
             )) }

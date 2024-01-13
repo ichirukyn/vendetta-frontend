@@ -185,27 +185,6 @@ const ItemForm: FC<ITechniqueFormProps> = ({ id }) => {
           ) }/>
         </form>
         
-        {/*<button className='button button_outline_active w_100p' onClick={ effectAdd }>Добавить эффект</button>*/ }
-        
-        {/*{ effectList.map((value, index) => (*/ }
-        {/*  <Accordion key={ index } expanded={ accordion === index } onChange={ () => setAccordion(accordion === index ? null : index) }*/ }
-        {/*             className='w_100p'>*/ }
-        {/*    <AccordionSummary aria-controls={ `${ index }-content` } id={ `${ index }-header` } className='b_1 bc_gray_100'>*/ }
-        {/*      <div className="block_row align-center justify-between w_100p">*/ }
-        {/*        <p className='text_body'>Эффект: { value?.name }</p>*/ }
-        {/*      </div>*/ }
-        {/*    </AccordionSummary>*/ }
-        {/*    <AccordionDetails>*/ }
-        {/*      <EffectForm*/ }
-        {/*        update_data={ onUpdateEffect }*/ }
-        {/*        index={ index }*/ }
-        {/*        defaultData={ effectList[index] as EffectType | undefined }*/ }
-        {/*        effectDelete={ effectDelete }/>*/ }
-        {/*    </AccordionDetails>*/ }
-        {/*  </Accordion>*/ }
-        {/*)) }*/ }
-        
-        
         <button className='button w_100p mt_10' onClick={ handleSubmit(onSubmit) }>Отправить</button>
       </div>
     </>

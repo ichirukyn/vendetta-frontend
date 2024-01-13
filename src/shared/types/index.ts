@@ -1,5 +1,6 @@
 export * from './class'
 export * from './enemy'
+export * from './event'
 export * from './item'
 export * from './hero'
 export * from './race'

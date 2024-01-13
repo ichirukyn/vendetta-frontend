@@ -117,22 +117,17 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
                   <MenuItem key={ value } value={ value } disabled={ disabled || false }>{ label }</MenuItem>
                 ))
               )
-              : (
-                EffectConstants.attribute.map(({ label, value, disabled }) => (
-                  <MenuItem key={ value } value={ value } disabled={ disabled || false }>{ label }</MenuItem>
-                ))
-              )
-            }
-            { type === 'control'
-              ? (
-                EffectConstants.control.map(({ label, value, disabled }) => (
-                  <MenuItem key={ value } value={ value } disabled={ disabled || false }>{ label }</MenuItem>
-                ))
-              ) : (
-                EffectConstants.attribute.map(({ label, value, disabled }) => (
-                  <MenuItem key={ value } value={ value } disabled={ disabled || false }>{ label }</MenuItem>
-                ))
-              )
+              :
+              type === 'control'
+                ? (
+                  EffectConstants.control.map(({ label, value, disabled }) => (
+                    <MenuItem key={ value } value={ value } disabled={ disabled || false }>{ label }</MenuItem>
+                  ))
+                ) : (
+                  EffectConstants.attribute.map(({ label, value, disabled }) => (
+                    <MenuItem key={ value } value={ value } disabled={ disabled || false }>{ label }</MenuItem>
+                  ))
+                )
             }
           </Select>
         </div>

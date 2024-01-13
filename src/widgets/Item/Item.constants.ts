@@ -2,7 +2,7 @@ export const ItemConstants = {
   type: [
     { value: 'weapon', label: 'Оружие' },
     { value: 'quest', label: 'Квестовый предмет' },
-    { value: 'others', label: 'Прочее' },
+    { value: 'other', label: 'Прочее' },
   ],
   class_type: [
     { value: 'Воин', label: 'Воин' },

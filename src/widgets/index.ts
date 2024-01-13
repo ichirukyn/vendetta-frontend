@@ -1,5 +1,6 @@
 export * from './Effect'
 export * from './Enemy'
+export * from './Event'
 export * from './Header'
 export * from './Item'
 export * from './Footer'

@@ -4,6 +4,7 @@ const pathBase = {
   hero: '/hero',
   item: '/item',
   map: '/map',
+  event: '/event',
 }
 
 export const pathRoutes = {
@@ -37,5 +38,11 @@ export const pathRoutes = {
     edit: `${ pathBase.map }/edit`,
     create: `${ pathBase.map }/create`,
     application: `${ pathBase.map }/application`,
+  },
+  event: {
+    base: `${ pathBase.event }`,
+    edit: `${ pathBase.event }/edit`,
+    create: `${ pathBase.event }/create`,
+    application: `${ pathBase.event }/application`,
   },
 }

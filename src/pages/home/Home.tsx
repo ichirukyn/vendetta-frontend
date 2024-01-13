@@ -13,6 +13,8 @@ const Home: FC = () => {
         <Link to={ pathRoutes.hero.base } className='td_underline tab_active text_title'>Игроки</Link>
         <Link to={ pathRoutes.enemy.base } className='td_underline tab_active text_title'>Противники</Link>
         <Link to={ pathRoutes.item.base } className='td_underline tab_active text_title'>Предметы</Link>
+        <Link to={ pathRoutes.event.base } className='td_underline tab_active text_title'>События</Link>
+        
         <br/>
         <p className='text_title'>(Ниже в разработке)</p>
         <Link to={ pathRoutes.map.base } className='td_underline tab_active text_title'>Карта</Link>

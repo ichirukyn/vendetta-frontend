@@ -16,6 +16,9 @@ import ItemCreate from "@/pages/item/ItemCreate";
 import ItemEdit from "@/pages/item/ItemEdit";
 import EnemyCreate from "@/pages/enemy/EnemyCreate";
 import EnemyEdit from "@/pages/enemy/EnemyEdit";
+import EventEdit from "@/pages/event/EventEdit";
+import EventCreate from "@/pages/event/EventCreate";
+import EventList from "@/pages/event/EventList";
 
 
 export const Routers = [
@@ -78,6 +81,23 @@ export const Routers = [
   {
     path: `${ pathRoutes.item.edit }/:id`,
     Component: ItemEdit,
+    Layout: Default,
+  },
+  
+  // Event
+  {
+    path: pathRoutes.event.base,
+    Component: EventList,
+    Layout: Default,
+  },
+  {
+    path: pathRoutes.event.create,
+    Component: EventCreate,
+    Layout: Default,
+  },
+  {
+    path: `${ pathRoutes.event.edit }/:id`,
+    Component: EventEdit,
     Layout: Default,
   },
   

@@ -152,8 +152,8 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
   }
   
   const effectAdd = () => {
-    if (effectList.length > 4) return toast('Максимум 5 эффектов')
-    const name = `Бонус: ${ effectList.length.toString() }`
+    if (effectList.length > 4) return toast('Максимум 5 эффектов', { type: 'warning' })
+    const name = `Бонус - ${ effectList.length.toString() }`
     let effects = [...effectList, { name: name }]
     setEffectList(effects)
   }

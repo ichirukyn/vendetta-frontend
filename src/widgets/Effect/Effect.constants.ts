@@ -74,6 +74,8 @@ export const EffectConstants = {
     { value: 'prev_view', label: 'Разное:', disabled: true },
     { value: 'prev', label: 'Прошлое значение' },
     { value: 'prev_percent', label: 'Прошлый процент' },
+    { value: 'total_stats', label: 'Всего ОС' },
+    { value: 'lvl', label: 'Уровень' },
   ],
   condition: [
     { value: '>', label: 'Больше' },

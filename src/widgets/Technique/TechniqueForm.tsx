@@ -31,7 +31,6 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
     formState: { errors },
     handleSubmit,
     setValue,
-    reset
   } = useForm({ resolver: yupResolver(TechniqueCreateScheme) })
   
   const [accordion, setAccordion] = useState<null | number>(null)
@@ -43,23 +42,29 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
   const race_id = watch('race_id')
   
   const onSubmit = async (data: InferType<typeof TechniqueCreateScheme>) => {
-    if (!data.damage || data?.damage < 0) data.damage = 1
+    if (!data.damage || data?.damage < 0) data.damage = 0
     if (!data.cooldown || data?.damage < 0) data.cooldown = 0
     
     if (data.damage > 5) data.damage = 5
     if (data.cooldown > 5) data.cooldown = 5
     
-    if (data.race_id != 0 && data.class_id == 0) return toast('Нужно завершить выбор класса', { type: 'warning' })
+    if (data.race_id != 0) {
+      let classValid = classList.find((item) => item.id === data.class_id && item.race_id == data.race_id)
+      
+      if (classValid && data.class_id != 0) return toast('Нужно завершить выбор класса', { type: 'warning' })
+    }
+    
     if (data.race_id == 0 && data.class_id == 0) {
       data.race_id = null
       data.class_id = null
     }
     
+    
     if (!id) {
       const technique = await createTechnique(data as TechniqueType)
       
       if (!technique.data) return toast('Ошибка', { type: 'error' })
-      reset()
+      id = technique.data.id
       
       let error = false
       
@@ -73,7 +78,10 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
         })
       }
       
-      if (!error) setEffectList([])
+      if (!error) {
+        toast('Техника создана!', { type: "success" })
+        setEffectList([])
+      }
     } else {
       updateTechnique(data as TechniqueType, id).then((res) => {
         if (res.data) {
@@ -103,8 +111,6 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
         })
       }
     }
-    
-    toast('Техника создана!', { type: "success" })
   }
   
   
@@ -113,11 +119,7 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
   }, []);
   
   useEffect(() => {
-    setValue('class_id', 0)
-    
-    if (!race_id || race_id == 0) return
-    
-    fetchAllClassByRace(race_id!).then((res) => setClassList(res.data))
+    if (race_id) fetchAllClassByRace(race_id).then((res) => setClassList(res.data))
   }, [race_id]);
   
   useEffect(() => {
@@ -227,6 +229,7 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
                 <MenuItem value='light_damage'>Свет</MenuItem>
                 <MenuItem value='dark_damage'>Тьма</MenuItem>
                 <MenuItem value='phys_damage'>Физ.</MenuItem>
+                <MenuItem value='none'>Без модификатора</MenuItem>
               </Select>
             </div>
           ) }/>
@@ -256,7 +259,7 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
           <Controller control={ control } name='class_id' defaultValue={ 0 } render={ ({ field }) => (
             <div className="block_column align-start w_100p">
               <label>Привязка к классу</label>
-              <Select className='w_100p' value={ field.value } onChange={ field.onChange } disabled={ !race_id }>
+              <Select className='w_100p' value={ field.value } onChange={ field.onChange }>
                 <MenuItem value={ 0 }>Любой класс</MenuItem>
                 { classList.map(({ id, name }) => (
                   <MenuItem value={ id } key={ id }>{ name }</MenuItem>

@@ -4,4 +4,7 @@ export type ClassType = {
   desc?: string
   desc_short?: string
   main_attr?: string
+  race_id?: number
+  type?: 'Воин' | 'Убийца' | 'Лучник' | 'Маг'
+  hidden?: boolean
 }

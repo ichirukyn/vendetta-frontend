@@ -29,4 +29,5 @@ export type EffectType = {
   direction: string
   duration: number
   is_single: boolean
+  every_turn?: boolean
 }

@@ -1,9 +1,10 @@
 export const EffectConstants = {
   type: [
-    { value: 'add', label: 'Добавить/Отнять число' },
+    { value: 'number', label: 'Добавить/Отнять число' },
     { value: 'percent', label: 'Добавить/Отнять процент' },
     { value: 'period', label: 'Периодический урон' },
     { value: 'control', label: 'Контроль' },
+    { value: 'aoe', label: 'АоЕ урон' },
   ],
   attribute: [
     { value: 'mana', label: 'Мана' },
@@ -101,10 +102,15 @@ export const EffectConstants = {
     { value: 'light_damage', label: 'Свет' },
     { value: 'dark_damage', label: 'Тьма' },
     { value: 'phys_damage', label: 'Физ.' },
+    { value: 'none', label: 'Без модификатора' },
   ],
   control: [
     { value: 'control_view', label: 'Эффекты контроля:', disabled: true },
     { value: 'stun', label: 'Стан' },
     { value: 'root', label: 'Обездвиживание' },
+  ],
+  aoe: [
+    { value: 'damage_view', label: 'Урон:', disabled: true },
+    { value: 'default_damage', label: 'Урон игрока' },
   ],
 }

@@ -24,7 +24,8 @@ export const EffectCreateScheme = object().shape({
   if_second: number().notRequired().nullable(),
   direction: string(),
   duration: number().optional(),
-  is_single: boolean().optional()
+  is_single: boolean().optional(),
+  every_turn: boolean().optional()
 })
 
 export type EffectEmpty = {
@@ -32,6 +33,7 @@ export type EffectEmpty = {
   name: string
 }
 
+const attributeException = ['aoe', 'period', 'control']
 const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, effectDelete }) => {
   const {
     control,
@@ -55,11 +57,13 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
       setValue('direction', defaultData.direction)
       setValue('duration', defaultData.duration)
       setValue('is_single', defaultData.is_single)
+      setValue('every_turn', defaultData?.every_turn)
     }
   }, [defaultData]);
   
   const onSubmit = (data: InferType<typeof EffectCreateScheme>) => {
     if (!data.direction) data.direction = EffectConstants.direction[0].value
+    if (data.every_turn) data.is_single = true
     
     if (!data.value || data?.value < 0) data.value = 1
     if (data.value > 5) data.value = 5
@@ -73,6 +77,7 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
     if (!data.attribute) {
       if (data.type == 'control') data.attribute = EffectConstants.control[0].value
       else if (data.type == 'period') data.attribute = EffectConstants.element[0].value
+      else if (data.type == 'aoe') data.attribute = EffectConstants.aoe[0].value
       else data.attribute = EffectConstants.attribute[0].value
     }
     
@@ -111,24 +116,26 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
         <div className="block_column align-start w_100p">
           <label>Атрибут</label>
           <Select className='w_100p' value={ field.value } onChange={ field.onChange }>
-            { type === 'period'
-              ? (
-                EffectConstants.element.map(({ label, value, disabled }) => (
-                  <MenuItem key={ value } value={ value } disabled={ disabled || false }>{ label }</MenuItem>
-                ))
-              )
-              :
-              type === 'control'
-                ? (
-                  EffectConstants.control.map(({ label, value, disabled }) => (
-                    <MenuItem key={ value } value={ value } disabled={ disabled || false }>{ label }</MenuItem>
-                  ))
-                ) : (
-                  EffectConstants.attribute.map(({ label, value, disabled }) => (
-                    <MenuItem key={ value } value={ value } disabled={ disabled || false }>{ label }</MenuItem>
-                  ))
-                )
-            }
+            { type === 'aoe' && (
+              EffectConstants.aoe.map(({ label, value, disabled }) => (
+                <MenuItem key={ value } value={ value } disabled={ disabled || false }>{ label }</MenuItem>
+              ))
+            ) }
+            { type === 'period' && (
+              EffectConstants.element.map(({ label, value, disabled }) => (
+                <MenuItem key={ value } value={ value } disabled={ disabled || false }>{ label }</MenuItem>
+              ))
+            ) }
+            { type === 'control' && (
+              EffectConstants.control.map(({ label, value, disabled }) => (
+                <MenuItem key={ value } value={ value } disabled={ disabled || false }>{ label }</MenuItem>
+              ))
+            ) }
+            { !attributeException.includes(type || '') && (
+              EffectConstants.attribute.map(({ label, value, disabled }) => (
+                <MenuItem key={ value } value={ value } disabled={ disabled || false }>{ label }</MenuItem>
+              ))
+            ) }
           </Select>
         </div>
       ) }/>
@@ -202,6 +209,15 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
           <label className='image_centerY gap_0 cursor_pointer'>
             <Checkbox value={ field.value || true } onChange={ field.onChange }/>
             Применять лишь раз?
+          </label>
+        </div>
+      ) }/>
+      
+      <Controller control={ control } name='every_turn' defaultValue={ false } render={ ({ field }) => (
+        <div className="block_column align-start w_100p">
+          <label className='image_centerY gap_0 cursor_pointer'>
+            <Checkbox value={ field.value || true } onChange={ field.onChange }/>
+            Применять каждый ход, пока действет эффект?
           </label>
         </div>
       ) }/>

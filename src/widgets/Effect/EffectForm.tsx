@@ -65,8 +65,7 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
     if (!data.direction) data.direction = EffectConstants.direction[0].value
     if (data.every_turn) data.is_single = true
     
-    if (!data.value || data?.value < 0) data.value = 1
-    if (data.value > 5) data.value = 5
+    if (!data.value || data?.value < 0) data.value = 0
     
     if (!data?.if_first || !data?.if || !data?.if_second) {
       data.if_first = undefined

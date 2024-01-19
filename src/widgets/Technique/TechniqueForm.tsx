@@ -50,8 +50,7 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
     
     if (data.race_id != 0) {
       let classValid = classList.find((item) => item.id === data.class_id && item.race_id == data.race_id)
-      
-      if (classValid && data.class_id != 0) return toast('Нужно завершить выбор класса', { type: 'warning' })
+      if (!classValid && data.class_id != 0) return toast('Нужно завершить выбор класса', { type: 'warning' })
     }
     
     if (data.race_id == 0 && data.class_id == 0) {

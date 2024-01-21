@@ -10,13 +10,16 @@ export const EffectConstants = {
     { value: 'mana', label: 'Мана' },
     { value: 'mana_max', label: 'Мана от макс. значения' },
     { value: 'mana_percent', label: 'Процент маны' },
-    { value: 'mana_modify', label: 'Модификатор маны' },
     
     { value: 'hp_view', label: 'Хп:', disabled: true },
     { value: 'hp', label: 'Хп' },
     { value: 'hp_max', label: 'Хп от макс. значения' },
     { value: 'hp_percent', label: 'Процент Хп' },
-    { value: 'hp_modify', label: 'Модификатор Хп' },
+    
+    { value: 'qi_view', label: 'Ки:', disabled: true },
+    { value: 'qi', label: 'Ки' },
+    { value: 'qi_max', label: 'Ки от макс. значения' },
+    { value: 'qi_percent', label: 'Процент Ки' },
     
     { value: 'stats_view', label: 'Характеритсики:', disabled: true },
     { value: 'strength', label: 'Сила' },
@@ -27,6 +30,7 @@ export const EffectConstants = {
     { value: 'soul', label: 'Дух' },
     { value: 'intelligence', label: 'Интеллект' },
     { value: 'submission', label: 'Подчинение' },
+    { value: 'control', label: 'Контроль' },
     
     { value: 'flat_stats_view', label: 'Простые характеритсики:', disabled: true },
     { value: 'flat_strength', label: 'Сила П.' },
@@ -39,8 +43,8 @@ export const EffectConstants = {
     { value: 'flat_submission', label: 'Подчинение П.' },
     
     { value: 'crit_view', label: 'Криты:', disabled: true },
-    { value: 'crit_rate', label: 'Крит урон' },
-    { value: 'crit_damage', label: 'Крит. шанс попадания' },
+    { value: 'crit_damage', label: 'Крит урон' },
+    { value: 'crit_rate', label: 'Крит. шанс попадания' },
     
     { value: 'bonus_resist_view', label: 'Бонусы/Сопротивления:', disabled: true },
     { value: 'bonus_damage', label: 'Бонус урона' },
@@ -77,6 +81,14 @@ export const EffectConstants = {
     { value: 'prev_percent', label: 'Прошлый процент' },
     { value: 'total_stats', label: 'Всего ОС' },
     { value: 'lvl', label: 'Уровень' },
+
+    { value: 'modify_view', label: 'Модификаторы:', disabled: true },
+    { value: 'mana_modify', label: 'Модификатор маны' },
+    { value: 'hp_modify', label: 'Модификатор Хп' },
+    { value: 'qi_modify', label: 'Модификатор Ки' },
+    { value: 'evasion_modify', label: 'Модификатор Уклонения' },
+    { value: 'counter_modify', label: 'Модификатор Контрудара' },
+    { value: 'defence_modify', label: 'Модификатор Защиты' },
   ],
   condition: [
     { value: '>', label: 'Больше' },

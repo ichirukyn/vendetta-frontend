@@ -65,7 +65,7 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
     if (!data.direction) data.direction = EffectConstants.direction[0].value
     if (data.every_turn) data.is_single = true
     
-    if (!data.value || data?.value < 0) data.value = 0
+    if (!data.value) data.value = 0
     
     if (!data?.if_first || !data?.if || !data?.if_second) {
       data.if_first = undefined
@@ -178,6 +178,7 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
           <input
             type="number"
             className='w_100p'
+            step={ 0.01 }
             value={ field.value || undefined }
             onChange={ field.onChange }
             placeholder='1, 0, 0.5, -100, etc..'

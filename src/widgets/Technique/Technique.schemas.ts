@@ -6,6 +6,7 @@ export const TechniqueCreateScheme = object().shape({
   desc_short: string().required('Введите описание или скопируйте из строки выше'),
   damage: number().optional(),
   type_damage: string(),
+  type_attack: string(),
   distance: string(),
   race_id: number().nullable(),
   class_id: number().nullable(),

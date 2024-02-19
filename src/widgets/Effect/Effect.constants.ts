@@ -3,13 +3,15 @@ export const EffectConstants = {
     { value: 'number', label: 'Добавить/Отнять число' },
     { value: 'percent', label: 'Добавить/Отнять процент' },
     { value: 'period', label: 'Периодический урон' },
-    { value: 'control', label: 'Контроль' },
-    { value: 'aoe', label: 'АоЕ урон' },
+    { value: 'control', label: 'Контроль противника' },
+    { value: 'activate', label: 'Активация техники' },
+    { value: 'coast', label: 'Затраты техники' },
   ],
   attribute: [
     { value: 'mana', label: 'Мана' },
     { value: 'mana_max', label: 'Мана от макс. значения' },
     { value: 'mana_percent', label: 'Процент маны' },
+    { value: 'control_mana', label: 'Контроль маны' },
     
     { value: 'hp_view', label: 'Хп:', disabled: true },
     { value: 'hp', label: 'Хп' },
@@ -19,7 +21,13 @@ export const EffectConstants = {
     { value: 'qi_view', label: 'Ки:', disabled: true },
     { value: 'qi', label: 'Ки' },
     { value: 'qi_max', label: 'Ки от макс. значения' },
-    { value: 'qi_percent', label: 'Процент Ки' },
+    { value: 'qi_percent', label: 'Процент ки' },
+    { value: 'control_qi', label: 'Контроль ки' },
+    
+    { value: 'shield_view', label: 'Щит:', disabled: true },
+    { value: 'shield', label: 'Щит' },
+    { value: 'shield_max', label: 'Щит от макс. значения' },
+    { value: 'shield_percent', label: 'Процент Щита' },
     
     { value: 'stats_view', label: 'Характеритсики:', disabled: true },
     { value: 'strength', label: 'Сила' },
@@ -30,7 +38,6 @@ export const EffectConstants = {
     { value: 'soul', label: 'Дух' },
     { value: 'intelligence', label: 'Интеллект' },
     { value: 'submission', label: 'Подчинение' },
-    { value: 'control', label: 'Контроль' },
     
     { value: 'flat_stats_view', label: 'Простые характеритсики:', disabled: true },
     { value: 'flat_strength', label: 'Сила П.' },
@@ -81,7 +88,7 @@ export const EffectConstants = {
     { value: 'prev_percent', label: 'Прошлый процент' },
     { value: 'total_stats', label: 'Всего ОС' },
     { value: 'lvl', label: 'Уровень' },
-
+    
     { value: 'modify_view', label: 'Модификаторы:', disabled: true },
     { value: 'mana_modify', label: 'Модификатор маны' },
     { value: 'hp_modify', label: 'Модификатор Хп' },
@@ -120,6 +127,18 @@ export const EffectConstants = {
     { value: 'control_view', label: 'Эффекты контроля:', disabled: true },
     { value: 'stun', label: 'Стан' },
     { value: 'root', label: 'Обездвиживание' },
+  ],
+  coast: [
+    { value: 'mana', label: 'Мана' },
+    { value: 'mana_max', label: 'Мана от макс. значения' },
+    { value: 'mana_percent', label: 'Процент маны' },
+    { value: 'control_mana', label: 'Контроль маны' },
+    
+    { value: 'qi_view', label: 'Ки:', disabled: true },
+    { value: 'qi', label: 'Ки' },
+    { value: 'qi_max', label: 'Ки от макс. значения' },
+    { value: 'qi_percent', label: 'Процент ки' },
+    { value: 'control_qi', label: 'Контроль ки' },
   ],
   aoe: [
     { value: 'damage_view', label: 'Урон:', disabled: true },

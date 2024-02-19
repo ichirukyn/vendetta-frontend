@@ -10,6 +10,8 @@ export const EnemyColumn: GridColDef[] = [
     }
   },
   { field: 'rank', minWidth: 120 },
-  { field: 'class_id', minWidth: 50 },
-  { field: 'race_id', minWidth: 50 },
+  { field: 'race_name', minWidth: 180 },
+  { field: 'class_name', minWidth: 180 },
+  { field: 'lvl', minWidth: 50, align: 'center', headerAlign: 'center' },
+  { field: 'total_stats', minWidth: 90 },
 ]

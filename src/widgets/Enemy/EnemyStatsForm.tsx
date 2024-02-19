@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useEffect } from 'react';
+import React, { ChangeEvent, FC, useEffect, useMemo } from 'react';
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { EnemyStatsSchemas } from "@/widgets";
@@ -35,8 +35,9 @@ const EnemyStatsForm: FC<IEnemyStatsFormProps> = ({ stats, updateStats }) => {
     handleSubmit,
     setValue,
     getValues,
-    reset
   } = useForm({ resolver: yupResolver(EnemyStatsSchemas) })
+  
+  const lvl = watch('lvl')
   
   const updateTotalStats = (e: ChangeEvent<HTMLInputElement>, onChange: (e: ChangeEvent<HTMLInputElement>) => void, stat_name: string) => {
     let total_stats = 0
@@ -65,6 +66,11 @@ const EnemyStatsForm: FC<IEnemyStatsFormProps> = ({ stats, updateStats }) => {
     
     updateStats(data as EnemyStatsType)
   }
+  
+  const lvlScore = useMemo(() => {
+    //TODO: Убрать хардкод "18"
+    return lvl ? (lvl * 10) + 18 : 20 + 18
+  }, [lvl])
   
   useEffect(() => {
     if (stats) setData(stats)
@@ -196,7 +202,7 @@ const EnemyStatsForm: FC<IEnemyStatsFormProps> = ({ stats, updateStats }) => {
       <Controller control={ control } name='total_stats' render={ ({ field }) => (
         <div className="block_column align-start w_100p">
           <label>Всего очков</label>
-          <input type="number" className='w_100p' value={ field.value || 1 } onChange={ field.onChange } placeholder='0' disabled/>
+          <h3 className={ field.value === lvlScore ? 'text_success_0' : 'text_error_0' }>{ field.value } из { lvlScore }</h3>
         </div>
       ) }/>
       

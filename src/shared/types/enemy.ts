@@ -1,9 +1,16 @@
+import { TechniqueType } from "@/shared/types/technique";
+import { ClassType } from "@/shared/types/class";
+import { RaceType } from "@/shared/types/race";
+
 export type EnemyType = {
   id: number;
   name: string;
   rank: string;
   class_id: number;
   race_id: number;
+  race: RaceType;
+  class: ClassType;
+  stats: EnemyStatsType;
 }
 
 export type EnemyStatsType = {
@@ -35,5 +42,6 @@ export type EnemyTechniqueType = {
   id?: number;
   enemy_id?: number;
   technique_id: number;
+  technique?: TechniqueType;
   lvl?: number;
 }

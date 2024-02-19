@@ -33,7 +33,7 @@ export type EffectEmpty = {
   name: string
 }
 
-const attributeException = ['aoe', 'period', 'control']
+const attributeException = ['aoe', 'period', 'control', 'coast']
 const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, effectDelete }) => {
   const {
     control,
@@ -127,6 +127,11 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
             ) }
             { type === 'control' && (
               EffectConstants.control.map(({ label, value, disabled }) => (
+                <MenuItem key={ value } value={ value } disabled={ disabled || false }>{ label }</MenuItem>
+              ))
+            ) }
+            { type === 'coast' && (
+              EffectConstants.coast.map(({ label, value, disabled }) => (
                 <MenuItem key={ value } value={ value } disabled={ disabled || false }>{ label }</MenuItem>
               ))
             ) }

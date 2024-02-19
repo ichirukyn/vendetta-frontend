@@ -10,7 +10,7 @@ const TechniqueList: FC = () => {
   const [techniqueList, setTechniqueList] = useState<TechniqueType[] | []>([])
   
   useEffect(() => {
-    fetchAllTechnique().then((res) => {
+    fetchAllTechnique({ hidden: true }).then((res) => {
       setTechniqueList(res.data)
     })
   }, []);

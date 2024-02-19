@@ -8,7 +8,6 @@ import { fetchAllClassByRace, fetchAllRace } from "@/shared/api/race";
 import { fetchAllClass } from "@/shared/api/class";
 import {
   createEnemy,
-  createEnemyStats,
   createEnemyTechnique,
   createEnemyWeapon,
   deleteEnemyTechnique,
@@ -57,13 +56,9 @@ const EnemyForm: FC<IEnemyFormProps> = ({ id }) => {
     if (!weapon?.weapon_id) return toast('Выберите оружие', { type: 'warning' })
     if (!techniqueList.length) return toast('Выберите минимум 1 технику', { type: 'warning' })
     
-    await createEnemyWeapon({ weapon_id: weapon.weapon_id } as EnemyWeaponType, id!)
     if (!id) {
       const enemy = await createEnemy(data as EnemyType)
-      
       if (!enemy.data.id) return toast('Ошибка, повтрорите позже', { type: 'error' })
-      
-      await createEnemyStats(stats, enemy.data.id)
       
       
       let newList: EnemyTechniqueType[] = []
@@ -72,6 +67,7 @@ const EnemyForm: FC<IEnemyFormProps> = ({ id }) => {
           if (data) newList.push(data)
         })
       })
+      await createEnemyWeapon({ weapon_id: weapon.weapon_id } as EnemyWeaponType, enemy.data.id!)
       
       if (newList.length) setTechniqueList(newList)
       id = enemy.data.id as number
@@ -87,21 +83,19 @@ const EnemyForm: FC<IEnemyFormProps> = ({ id }) => {
       const res = await fetchAllEnemyTechnique(id)
       if (!res.data) return
       
-      res.data.forEach((item) => {
-        // Находим идентификаторы, которые есть в начальном массиве, но нет в новом
-        res.data.forEach(({ technique_id }) => {
-          if (!techniqueList.find((technique) => technique.technique_id === technique_id)) {
-            deleteEnemyTechnique(id!, technique_id);
-          }
-        });
-        
-        // Находим идентификаторы, которые есть в новом массиве, но нет в начальном
-        techniqueList.forEach(({ technique_id }) => {
-          if (!res.data.find((technique) => technique.technique_id === technique_id)) {
-            createEnemyTechnique({ technique_id: technique_id }, id!);
-          }
-        });
-      })
+      // Находим идентификаторы, которые есть в начальном массиве, но нет в новом
+      res.data.forEach(({ technique_id }) => {
+        if (!techniqueList.find((technique) => technique.technique_id === technique_id)) {
+          deleteEnemyTechnique(id!, technique_id);
+        }
+      });
+      
+      // Находим идентификаторы, которые есть в новом массиве, но нет в начальном
+      techniqueList.forEach(({ technique_id }) => {
+        if (!res.data.find((technique) => technique.technique_id === technique_id)) {
+          createEnemyTechnique({ technique_id: technique_id }, id!);
+        }
+      });
       
       toast('Противник обновлен', { type: 'success' })
     }

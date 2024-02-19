@@ -17,7 +17,7 @@ const EnemyTechniqueForm: FC<IEnemyTechniqueFormProps> = ({ techniqueList, updat
   }
   
   useEffect(() => {
-    fetchAllTechnique().then((res) => {
+    fetchAllTechnique({ hidden: true }).then((res) => {
       if (res.data) {
         setList(res.data)
       }

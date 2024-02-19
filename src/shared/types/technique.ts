@@ -5,6 +5,7 @@ export type TechniqueType = {
   desc_short: string
   damage: number
   type_damage: string
+  type_attack: string
   distance: string
   is_stack: boolean
   class_id?: number

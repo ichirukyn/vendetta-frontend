@@ -19,6 +19,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Checkbox, MenuItem, Sele
 import EffectForm from "@/widgets/Effect/EffectForm";
 import { ClassType, RaceType } from "@/shared/types";
 import { fetchAllClassByRace, fetchAllRace } from "@/shared/api/race";
+import { TechniqueConstants } from "@/widgets/Technique/Technique.constant";
 
 export interface ITechniqueFormProps {
   id?: number,
@@ -139,6 +140,7 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
     setValue('desc_short', data.desc_short)
     setValue('damage', data.damage)
     setValue('type_damage', data.type_damage)
+    setValue('type_attack', data.type_attack)
     setValue('distance', data.distance)
     setValue('race_id', data.race_id)
     setValue('class_id', data.class_id)
@@ -221,14 +223,9 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
             <div className="block_column align-start w_100p">
               <label>Модификатор стихии</label>
               <Select className='w_100p' value={ field.value } onChange={ field.onChange }>
-                <MenuItem value='fire_damage'>Огонь</MenuItem>
-                <MenuItem value='water_damage'>Вода</MenuItem>
-                <MenuItem value='earth_damage'>Земля</MenuItem>
-                <MenuItem value='air_damage'>Воздух</MenuItem>
-                <MenuItem value='light_damage'>Свет</MenuItem>
-                <MenuItem value='dark_damage'>Тьма</MenuItem>
-                <MenuItem value='phys_damage'>Физ.</MenuItem>
-                <MenuItem value='none'>Без модификатора</MenuItem>
+                { TechniqueConstants.elements.map(({ value, label }) => (
+                  <MenuItem value={ value } key={ value }>{ label }</MenuItem>
+                )) }
               </Select>
             </div>
           ) }/>
@@ -273,6 +270,18 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
               <Select className='w_100p' value={ field.value } onChange={ field.onChange }>
                 <MenuItem value='attack'>Атака</MenuItem>
                 <MenuItem value='support'>Поддержка</MenuItem>
+              </Select>
+            </div>
+          ) }/>
+          
+          
+          <Controller control={ control } name='type_attack' defaultValue={ 'all' } render={ ({ field }) => (
+            <div className="block_column align-start w_100p">
+              <label>Привязка к основному атрибуту</label>
+              <Select className='w_100p' value={ field.value } onChange={ field.onChange }>
+                { TechniqueConstants.type_attack.map(({ value, label }) => (
+                  <MenuItem value={ value } key={ value }>{ label }</MenuItem>
+                )) }
               </Select>
             </div>
           ) }/>

@@ -2,9 +2,19 @@ import { AxiosResponse } from "axios";
 import axiosInstance from "@/shared/api/axios";
 import { TechniqueEffectType, TechniqueType } from "@/shared/types/technique";
 
-export const fetchAllTechnique = async () => {
+type allTechniqueQueryType = {
+  hidden?: boolean,
+  race_id?: number
+  class_id?: number,
+  hero_id?: number,
+}
+
+export const fetchAllTechnique = async ({ race_id, class_id, hidden, hero_id }: allTechniqueQueryType) => {
   const response: AxiosResponse<TechniqueType[]> = await axiosInstance.get(
     `/technique`,
+    {
+      params: { race_id, class_id, hidden, hero_id }
+    }
   )
   
   return response

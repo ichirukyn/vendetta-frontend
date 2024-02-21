@@ -18,6 +18,7 @@ const Home: FC = () => {
         <br/>
         <p className='text_title'>(Ниже в разработке)</p>
         <Link to={ pathRoutes.map.base } className='td_underline tab_active text_title'>Карта</Link>
+        <Link to={ pathRoutes.branch.base } className='td_underline tab_active text_title'>Ветка навыков</Link>
       </div>
     </div>
   );

@@ -162,3 +162,21 @@
     gap: 40px !important;
   }
 }
+
+.branch__wrapper {
+  .visx-group {
+    text {
+      font-size: 10px !important;
+      pointer-events: none;
+    }
+
+    circle, rect {
+      filter: drop-shadow(0px 0px 1px #fff);
+
+      &:hover {
+        filter: drop-shadow(0px 0px 4px #fff);
+        cursor: pointer;
+      }
+    }
+  }
+}

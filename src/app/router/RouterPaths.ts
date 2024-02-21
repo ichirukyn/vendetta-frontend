@@ -5,6 +5,7 @@ const pathBase = {
   item: '/item',
   map: '/map',
   event: '/event',
+  branch: '/branch',
 }
 
 export const pathRoutes = {
@@ -44,5 +45,9 @@ export const pathRoutes = {
     edit: `${ pathBase.event }/edit`,
     create: `${ pathBase.event }/create`,
     application: `${ pathBase.event }/application`,
+  },
+  branch: {
+    base: `${ pathBase.branch }`,
+    view: `${ pathBase.branch }/view`,
   },
 }

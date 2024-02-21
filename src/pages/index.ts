@@ -1,3 +1,4 @@
+export * from './branch'
 export * from './enemy'
 export * from './event'
 export * from './hero'

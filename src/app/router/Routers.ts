@@ -19,6 +19,7 @@ import EnemyEdit from "@/pages/enemy/EnemyEdit";
 import EventEdit from "@/pages/event/EventEdit";
 import EventCreate from "@/pages/event/EventCreate";
 import EventList from "@/pages/event/EventList";
+import BranchList from "@/pages/branch/BranchList";
 
 
 export const Routers = [
@@ -105,6 +106,13 @@ export const Routers = [
   {
     path: pathRoutes.map.base,
     Component: MapList,
+    Layout: Default,
+  },
+  
+  // Branch
+  {
+    path: pathRoutes.branch.base,
+    Component: BranchList,
     Layout: Default,
   },
 ]

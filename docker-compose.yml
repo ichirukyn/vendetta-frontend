@@ -5,7 +5,7 @@ services:
       context: ./
       dockerfile: Dockerfile
       args:
-        - API_URL="http://localhost:3005/"
+        - API_URL="$PORT"
     container_name: vendetta-frontend
     ports:
       - '5000:5000'

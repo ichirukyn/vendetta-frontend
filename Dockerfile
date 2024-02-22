@@ -1,8 +1,5 @@
 FROM node:17-alpine
 
-ARG API_URL
-ENV VITE_API_BASE_URL=$API_URL
-
 COPY . .
 
 RUN npm i

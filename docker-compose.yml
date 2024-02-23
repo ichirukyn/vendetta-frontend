@@ -1,13 +1,19 @@
-version: '3.1'
+version: '3.3'
+
 services:
   frontend:
     build:
       context: ./
       dockerfile: Dockerfile
       args:
-        - API_URL="$PORT"
+        - API_URL="VITE_API_BASE_URL"
     container_name: vendetta-frontend
     ports:
       - '5000:5000'
+    networks:
+      - tg
 volumes:
   postgresDB:
+networks:
+  tg:
+    external: true

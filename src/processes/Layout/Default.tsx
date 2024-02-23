@@ -1,4 +1,6 @@
 import { FC, ReactNode } from 'react';
+import { Link } from "react-router-dom";
+import { Home } from "@mui/icons-material";
 
 export interface IDefaultProps {
   children: ReactNode
@@ -6,9 +8,18 @@ export interface IDefaultProps {
 
 const Default: FC<IDefaultProps> = ({ children }) => {
   return (
-    <div className='block_row w_100p h_100p'>
-      <div className='block_column w_100p'>
-        { children }
+    <div className='block_column'>
+      <div className="header w_100p h_50">
+        <Link to={ '/' } className='image_centerY align-end text_body lh_unset fit-content'>
+          <Home/> Главная
+        </Link>
+      
+      </div>
+      
+      <div className='block_row w_100p h_100p'>
+        <div className='block_column w_100p'>
+          { children }
+        </div>
       </div>
     </div>
   );

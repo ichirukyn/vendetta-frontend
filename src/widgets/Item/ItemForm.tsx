@@ -10,6 +10,7 @@ import { MenuItem, Select } from "@mui/material";
 import { ItemConstants } from "@/widgets/Item/Item.constants";
 import { createItem, fetchOneItem, updateItem } from "@/shared/api/item";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 
 export interface ITechniqueFormProps {
@@ -25,6 +26,7 @@ const ItemForm: FC<ITechniqueFormProps> = ({ id }) => {
     setValue,
     reset
   } = useForm({ resolver: yupResolver(ItemCreateScheme) })
+  const navigate = useNavigate();
   
   // const [accordion, setAccordion] = useState<null | number>(null)
   // const [effectList, setEffectList] = useState<TechniqueEffectType[] | [] | EffectEmpty[]>([])
@@ -185,7 +187,10 @@ const ItemForm: FC<ITechniqueFormProps> = ({ id }) => {
           ) }/>
         </form>
         
-        <button className='button w_100p mt_10' onClick={ handleSubmit(onSubmit) }>Отправить</button>
+        <div className="block_row justify-between w_100p">
+          <button className='button button_outline_active w_100p mt_10' onClick={ () => navigate(-1) }>Назад</button>
+          <button className='button w_100p mt_10' onClick={ handleSubmit(onSubmit) }>Отправить</button>
+        </div>
       </div>
     </>
   );

@@ -25,6 +25,7 @@ import EnemyStatsForm from "@/widgets/Enemy/EnemyStatsForm";
 import EnemyWeaponForm from "@/widgets/Enemy/EnemyWeaponForm";
 import EnemyTechniqueForm from "@/widgets/Enemy/EnemyTechniqueForm";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 interface IEnemyFormProps {
   id?: number
@@ -38,6 +39,7 @@ const EnemyForm: FC<IEnemyFormProps> = ({ id }) => {
     handleSubmit,
     setValue,
   } = useForm({ resolver: yupResolver(EnemySchemas) })
+  const navigate = useNavigate();
   
   const [accordionStats, setAccordionStats] = useState(false)
   // const [effectList, setEffectList] = useState<TechniqueEffectType[] | [] | EffectEmpty[]>([])
@@ -209,8 +211,10 @@ const EnemyForm: FC<IEnemyFormProps> = ({ id }) => {
           </AccordionDetails>
         </Accordion>
         
-        
-        <button className='button w_100p mt_10' onClick={ handleSubmit(onSubmit) }>Отправить</button>
+        <div className="block_row justify-between w_100p">
+          <button className='button button_outline_active w_100p mt_10' onClick={ () => navigate(-1) }>Назад</button>
+          <button className='button w_100p mt_10' onClick={ handleSubmit(onSubmit) }>Отправить</button>
+        </div>
       </div>
     </>
   );

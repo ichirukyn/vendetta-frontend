@@ -20,6 +20,8 @@ import EffectForm from "@/widgets/Effect/EffectForm";
 import { ClassType, RaceType } from "@/shared/types";
 import { fetchAllClassByRace, fetchAllRace } from "@/shared/api/race";
 import { TechniqueConstants } from "@/widgets/Technique/Technique.constant";
+import { useNavigate } from "react-router-dom";
+import { useTechniqueStore } from "@/shared/store/TechniqueStore";
 
 export interface ITechniqueFormProps {
   id?: number,
@@ -33,6 +35,9 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
     handleSubmit,
     setValue,
   } = useForm({ resolver: yupResolver(TechniqueCreateScheme) })
+  const { getTechniqueList } = useTechniqueStore()
+  
+  const navigate = useNavigate();
   
   const [accordion, setAccordion] = useState<null | number>(null)
   const [effectList, setEffectList] = useState<TechniqueEffectType[] | [] | EffectEmpty[]>([])
@@ -81,6 +86,7 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
       if (!error) {
         toast('Техника создана!', { type: "success" })
         setEffectList([])
+        await getTechniqueList()
       }
     } else {
       updateTechnique(data as TechniqueType, id).then((res) => {
@@ -324,7 +330,10 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
         )) }
         
         
-        <button className='button w_100p mt_10' onClick={ handleSubmit(onSubmit) }>Отправить</button>
+        <div className="block_row justify-between w_100p">
+          <button className='button button_outline_active w_100p mt_10' onClick={ () => navigate(-1) }>Назад</button>
+          <button className='button w_100p mt_10' onClick={ handleSubmit(onSubmit) }>Отправить</button>
+        </div>
       </div>
     </>
   );

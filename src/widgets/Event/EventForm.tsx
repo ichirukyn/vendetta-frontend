@@ -9,6 +9,7 @@ import { Accordion, AccordionDetails, AccordionSummary, MenuItem, Select } from 
 import { toast } from "react-toastify";
 import EventTriggerForm from "@/widgets/Event/EventTriggerForm";
 import { createEventTrigger, deleteEventTrigger, fetchAllEventTrigger, updateEventTrigger } from "@/shared/api/item";
+import { useNavigate } from "react-router-dom";
 
 export interface IEventFormProps {
   id?: number
@@ -22,6 +23,7 @@ const EventForm: FC<IEventFormProps> = ({ id }) => {
     handleSubmit,
     setValue,
   } = useForm({ resolver: yupResolver(EventCreateScheme) })
+  const navigate = useNavigate();
   
   const [accordion, setAccordion] = useState<null | number>(null)
   const [triggerList, setTriggerList] = useState<EventTriggerType[]>([])
@@ -169,7 +171,10 @@ const EventForm: FC<IEventFormProps> = ({ id }) => {
       )) }
       
       
-      <button className='button w_100p mt_10' onClick={ handleSubmit(onSubmit) }>Отправить</button>
+      <div className="block_row justify-between w_100p">
+        <button className='button button_outline_active w_100p mt_10' onClick={ () => navigate(-1) }>Назад</button>
+        <button className='button w_100p mt_10' onClick={ handleSubmit(onSubmit) }>Отправить</button>
+      </div>
     </div>
   );
 };

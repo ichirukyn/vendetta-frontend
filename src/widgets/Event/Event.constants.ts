@@ -11,10 +11,6 @@ export const EventConstants = {
     { value: 'condition', label: 'Условие выполнения' },
   ],
   attribute: [
-    { value: 'race_id', label: 'Раса (По id)' },
-    { value: 'class_id', label: 'Класс (По id)' },
-    
-    { value: 'mana_view', label: 'Мана:', disabled: true },
     ...EffectConstants.attribute,
   ],
 }

@@ -1,4 +1,5 @@
 const pathBase = {
+  arena: `/arena`,
   technique: `/technique`,
   enemy: '/enemy',
   hero: '/hero',
@@ -10,6 +11,15 @@ const pathBase = {
 
 export const pathRoutes = {
   home: '/',
+  arena: {
+    base: `${ pathBase.arena }`,
+    floor: `${ pathBase.arena }/floor`,
+    floor_create: `${ pathBase.arena }/floor/create`,
+    floor_edit: `${ pathBase.arena }/floor/edit`,
+    edit: `${ pathBase.arena }/edit`,
+    create: `${ pathBase.arena }/create`,
+    application: `${ pathBase.arena }/application`,
+  },
   technique: {
     base: `${ pathBase.technique }`,
     edit: `${ pathBase.technique }/edit`,

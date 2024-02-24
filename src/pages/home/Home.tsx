@@ -9,6 +9,7 @@ const Home: FC = () => {
       <h3 className='mb_30'>Админка</h3>
       
       <div className="block_column align-start">
+        <Link to={ pathRoutes.arena.base } className='td_underline tab_active text_title'>Арена</Link>
         <Link to={ pathRoutes.technique.base } className='td_underline tab_active text_title'>Техники</Link>
         <Link to={ pathRoutes.hero.base } className='td_underline tab_active text_title'>Игроки</Link>
         <Link to={ pathRoutes.enemy.base } className='td_underline tab_active text_title'>Противники</Link>

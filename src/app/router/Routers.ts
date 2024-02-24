@@ -20,6 +20,11 @@ import EventEdit from "@/pages/event/EventEdit";
 import EventCreate from "@/pages/event/EventCreate";
 import EventList from "@/pages/event/EventList";
 import BranchList from "@/pages/branch/BranchList";
+import ArenaEdit from "@/pages/arena/arenaEdit";
+import ArenaList from "@/pages/arena/arenaList";
+import ArenaFloorList from "@/pages/arena/arenaFloorList";
+import ArenaFloorCreate from "@/pages/arena/arenaFloorCreate";
+import ArenaFloorEdit from "@/pages/arena/arenaFloorEdit";
 
 
 export const Routers = [
@@ -28,6 +33,33 @@ export const Routers = [
     Component: Home,
     Layout: Default,
   },
+  // Arena
+  {
+    path: pathRoutes.arena.base,
+    Component: ArenaList,
+    Layout: Default,
+  },
+  {
+    path: `${ pathRoutes.arena.edit }/:id`,
+    Component: ArenaEdit,
+    Layout: Default,
+  },
+  {
+    path: `${ pathRoutes.arena.floor }/:id`,
+    Component: ArenaFloorList,
+    Layout: Default,
+  },
+  {
+    path: pathRoutes.arena.floor_create,
+    Component: ArenaFloorCreate,
+    Layout: Default,
+  },
+  {
+    path: `${ pathRoutes.arena.floor_edit }/:id`,
+    Component: ArenaFloorEdit,
+    Layout: Default,
+  },
+  
   // Technique
   {
     path: pathRoutes.technique.base,

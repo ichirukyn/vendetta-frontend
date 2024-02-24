@@ -1,8 +1,8 @@
 import { create } from "zustand";
 
 type TechniqueFilterType = {
-  race_id?: string,
-  class_id?: string
+  race_id?: number,
+  class_id?: number
 }
 
 interface RaceState {
@@ -11,7 +11,7 @@ interface RaceState {
   clearFilter: () => void
 }
 
-const filterDefault = { race_id: undefined, class_id: undefined }
+const filterDefault = { race_id: 0, class_id: 0 }
 
 export const useTechniqueFilter = create<RaceState>((set) => ({
   filter: filterDefault,

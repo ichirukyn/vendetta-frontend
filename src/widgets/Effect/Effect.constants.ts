@@ -8,6 +8,10 @@ export const EffectConstants = {
     { value: 'coast', label: 'Затраты техники' },
   ],
   attribute: [
+    { value: 'race_id', label: 'Раса (По id)' },
+    { value: 'class_id', label: 'Класс (По id)' },
+    
+    { value: 'mana_view', label: 'Мана:', disabled: true },
     { value: 'mana', label: 'Мана' },
     { value: 'mana_max', label: 'Мана от макс. значения' },
     { value: 'mana_percent', label: 'Процент маны' },
@@ -96,6 +100,7 @@ export const EffectConstants = {
     { value: 'evasion_modify', label: 'Модификатор Уклонения' },
     { value: 'counter_modify', label: 'Модификатор Контрудара' },
     { value: 'defence_modify', label: 'Модификатор Защиты' },
+
   ],
   condition: [
     { value: '>', label: 'Больше' },

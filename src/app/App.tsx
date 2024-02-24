@@ -6,16 +6,19 @@ import 'react-toastify/dist/ReactToastify.css'
 import { useRaceStore } from "@/shared/store/RaceStore";
 import { useClassStore } from "@/shared/store/ClassStore";
 import { useTechniqueStore } from "@/shared/store/TechniqueStore";
+import { useArenaStore } from "@/shared/store/ArenaStore";
 
 const App: FC = () => {
   const { getRaceList } = useRaceStore()
   const { getClassList } = useClassStore()
   const { getTechniqueList } = useTechniqueStore()
+  const { getArenaList } = useArenaStore()
   
   useEffect(() => {
     getRaceList()
     getClassList()
     getTechniqueList()
+    getArenaList()
   }, []);
   
   return (

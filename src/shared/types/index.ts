@@ -1,3 +1,4 @@
+export * from './arena'
 export * from './class'
 export * from './enemy'
 export * from './event'

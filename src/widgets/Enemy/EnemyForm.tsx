@@ -1,13 +1,14 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Controller, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { EnemySchemas } from "@/widgets";
-import { ClassType, EnemyStatsType, EnemyTechniqueType, EnemyType, EnemyWeaponType, RaceType } from "@/shared/types";
-import { InferType } from "yup";
-import { fetchAllClassByRace, fetchAllRace } from "@/shared/api/race";
-import { fetchAllClass } from "@/shared/api/class";
+import { Controller, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { EnemySchemas } from '@/widgets';
+import { ClassType, EnemyStatsType, EnemyTechniqueType, EnemyType, EnemyWeaponType, RaceType } from '@/shared/types';
+import { InferType } from 'yup';
+import { fetchAllClassByRace, fetchAllRace } from '@/shared/api/race';
+import { fetchAllClass } from '@/shared/api/class';
 import {
   createEnemy,
+  createEnemyStats,
   createEnemyTechnique,
   createEnemyWeapon,
   deleteEnemyTechnique,
@@ -17,15 +18,16 @@ import {
   fetchOneEnemy,
   updateEnemy,
   updateEnemyStats,
-  updateEnemyWeapon
-} from "@/shared/api/enemy";
-import { Accordion, AccordionDetails, AccordionSummary, MenuItem, Select } from "@mui/material";
-import { Constants } from "@/shared/constants";
-import EnemyStatsForm from "@/widgets/Enemy/EnemyStatsForm";
-import EnemyWeaponForm from "@/widgets/Enemy/EnemyWeaponForm";
-import EnemyTechniqueForm from "@/widgets/Enemy/EnemyTechniqueForm";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+  updateEnemyWeapon,
+} from '@/shared/api/enemy';
+import { Accordion, AccordionDetails, AccordionSummary, MenuItem, Select } from '@mui/material';
+import { Constants } from '@/shared/constants';
+import EnemyStatsForm from '@/widgets/Enemy/EnemyStatsForm';
+import EnemyWeaponForm from '@/widgets/Enemy/EnemyWeaponForm';
+import EnemyTechniqueForm from '@/widgets/Enemy/EnemyTechniqueForm';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { pathRoutes } from '@/app';
 
 interface IEnemyFormProps {
   id?: number
@@ -69,12 +71,13 @@ const EnemyForm: FC<IEnemyFormProps> = ({ id }) => {
           if (data) newList.push(data)
         })
       })
+      
+      await createEnemyStats(stats, enemy.data.id)
       await createEnemyWeapon({ weapon_id: weapon.weapon_id } as EnemyWeaponType, enemy.data.id!)
       
       if (newList.length) setTechniqueList(newList)
-      id = enemy.data.id as number
-      
       toast('Противник создан', { type: 'success' })
+      navigate(`${pathRoutes.enemy.edit}/${id}`)
     } else {
       await updateEnemy(data as EnemyType, id)
       
@@ -212,7 +215,7 @@ const EnemyForm: FC<IEnemyFormProps> = ({ id }) => {
         </Accordion>
         
         <div className="block_row justify-between w_100p">
-          <button className='button button_outline_active w_100p mt_10' onClick={ () => navigate(-1) }>Назад</button>
+          <button className='button button_outline_active w_100p mt_10' onClick={ () => navigate(pathRoutes.enemy.base) }>Назад</button>
           <button className='button w_100p mt_10' onClick={ handleSubmit(onSubmit) }>Отправить</button>
         </div>
       </div>

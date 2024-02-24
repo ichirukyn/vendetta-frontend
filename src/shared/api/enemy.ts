@@ -1,6 +1,6 @@
-import { AxiosResponse } from "axios";
-import { EnemyStatsType, EnemyTechniqueType, EnemyType, EnemyWeaponType, TechniqueType } from "@/shared/types";
-import axiosInstance from "@/shared/api/axios";
+import { AxiosResponse } from 'axios';
+import { EnemyStatsType, EnemyTechniqueType, EnemyType, EnemyWeaponType, TechniqueType } from '@/shared/types';
+import axiosInstance from '@/shared/api/axios';
 
 export const fetchAllEnemy = async () => {
   const response: AxiosResponse<EnemyType[]> = await axiosInstance.get(
@@ -31,6 +31,14 @@ export const updateEnemy = async (enemy: EnemyType, enemy_id: number) => {
   const response: AxiosResponse<EnemyType> = await axiosInstance.put(
     `/enemy/${ enemy_id }`,
     { ...enemy },
+  )
+  
+  return response
+}
+
+export const deleteEnemy = async (enemy_id: number) => {
+  const response: AxiosResponse<EnemyType> = await axiosInstance.delete(
+    `/enemy/${ enemy_id }`,
   )
   
   return response

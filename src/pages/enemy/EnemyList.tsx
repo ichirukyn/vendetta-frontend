@@ -1,10 +1,10 @@
 import { FC, useEffect, useState } from 'react';
-import { EnemyType } from "@/shared/types";
-import { fetchAllEnemy } from "@/shared/api/enemy";
-import Table from "@/shared/ui/Table/Table";
-import { Link } from "react-router-dom";
-import { pathRoutes } from "@/app";
-import { EnemyColumn } from "@/widgets/Enemy";
+import { EnemyType } from '@/shared/types';
+import Table from '@/shared/ui/Table/Table';
+import { Link } from 'react-router-dom';
+import { pathRoutes } from '@/app';
+import { EnemyColumn } from '@/widgets/Enemy';
+import { useEnemyStore } from '@/shared/store/EnemyStore';
 
 type EnemyListType = {
   race_name?: string,
@@ -14,11 +14,12 @@ type EnemyListType = {
 } & EnemyType
 
 const EnemyList: FC = () => {
-  const [enemyList, setEnemyList] = useState<EnemyListType[] | []>([])
+  const [filterList, setFilterList] = useState<EnemyListType[]>([])
+  const { enemyList } = useEnemyStore()
   
   useEffect(() => {
-    fetchAllEnemy().then((res) => {
-      const data = res.data.map((enemy) => {
+    if (enemyList.length) {
+      const data = enemyList.map((enemy) => {
         return {
           ...enemy,
           race_name: enemy.race.name,
@@ -27,13 +28,14 @@ const EnemyList: FC = () => {
           total_stats: enemy.stats?.total_stats || 0,
         }
       })
-      setEnemyList(data as EnemyListType[])
-    })
-  }, []);
+      setFilterList(data as EnemyListType[])
+    }
+  }, [enemyList]);
+  
   return (
     <div className='main__block block_column p_40 w_100p'>
       <h3 className='mb_30'>Список противников</h3>
-      <Table rows={ enemyList } columns={ EnemyColumn } style={ { isHeader: true } }/>
+      <Table rows={ filterList } columns={ EnemyColumn } style={ { isHeader: true } }/>
       
       <div className="block_row justify-end w_100p mt_10">
         <Link to={ pathRoutes.enemy.create }>

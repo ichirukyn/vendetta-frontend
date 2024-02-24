@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
-import { pathRoutes } from "@/app";
-import { GridColDef } from "@mui/x-data-grid";
+import { Link } from 'react-router-dom';
+import { pathRoutes } from '@/app';
+import { GridColDef } from '@mui/x-data-grid';
+import { EnemyActions } from '@/widgets/Enemy/Enemy.menu';
 
 export const EnemyColumn: GridColDef[] = [
   { field: 'id', minWidth: 60, maxWidth: 60 },
@@ -14,4 +15,9 @@ export const EnemyColumn: GridColDef[] = [
   { field: 'class_name', minWidth: 180 },
   { field: 'lvl', minWidth: 50, align: 'center', headerAlign: 'center' },
   { field: 'total_stats', minWidth: 90 },
+  {
+    field: 'menu', minWidth: 50, renderCell: (props) => {
+      return (<EnemyActions props={props} />)
+    }
+  }
 ]

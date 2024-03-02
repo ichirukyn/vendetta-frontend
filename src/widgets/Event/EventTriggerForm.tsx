@@ -176,7 +176,7 @@ const EventTriggerForm: FC<IEventTriggerFormProps> = ({ defaultData, updateData,
       <Controller control={ control } name='mandatory' render={ ({ field }) => (
         <div className="block_column align-start w_100p">
           <label className='image_centerY gap_0 cursor_pointer'>
-            <Checkbox value={ field.value || true } onChange={ field.onChange }/>
+            <Checkbox defaultChecked={ field.value } checked={ field.value } onChange={ field.onChange }/>
             Обязятельный ли триггер?
           </label>
         </div>
@@ -185,7 +185,7 @@ const EventTriggerForm: FC<IEventTriggerFormProps> = ({ defaultData, updateData,
       <Controller control={ control } name='hidden' render={ ({ field }) => (
         <div className="block_column align-start w_100p">
           <label className='image_centerY gap_0 cursor_pointer'>
-            <Checkbox value={ field.value || true } onChange={ field.onChange }/>
+            <Checkbox defaultChecked={ field.value } checked={ field.value } onChange={ field.onChange }/>
             Скрытй ли триггер? (Для скрытых заданий)
           </label>
         </div>

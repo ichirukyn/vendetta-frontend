@@ -31,6 +31,9 @@ export const pathRoutes = {
     edit: `${ pathBase.enemy }/edit`,
     create: `${ pathBase.enemy }/create`,
     application: `${ pathBase.enemy }/application`,
+    team: `${ pathBase.enemy }/team`,
+    team_enemy_create: `${ pathBase.enemy }/team/enemy/create`,
+    team_create: `${ pathBase.enemy }/team/create`,
   },
   hero: {
     base: `${ pathBase.hero }`,

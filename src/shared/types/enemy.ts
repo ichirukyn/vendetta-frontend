@@ -45,3 +45,13 @@ export type EnemyTechniqueType = {
   technique?: TechniqueType;
   lvl?: number;
 }
+
+
+export type EnemyTeamType = {
+  id?: number;
+  enemy_id?: number;
+  team_id?: number;
+  is_leader?: boolean;
+  prefix?: string;
+  enemy?: EnemyType;
+}

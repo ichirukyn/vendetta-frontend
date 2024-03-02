@@ -25,6 +25,9 @@ import ArenaList from "@/pages/arena/arenaList";
 import ArenaFloorList from "@/pages/arena/arenaFloorList";
 import ArenaFloorCreate from "@/pages/arena/arenaFloorCreate";
 import ArenaFloorEdit from "@/pages/arena/arenaFloorEdit";
+import EnemyTeamList from "@/pages/enemy/Team/List";
+import EnemyTeamForm from "@/widgets/Enemy/EnemyTeamForm";
+import TeamForm from "@/widgets/Team/TeamForm";
 
 
 export const Routers = [
@@ -91,6 +94,21 @@ export const Routers = [
   {
     path: `${ pathRoutes.enemy.edit }/:id`,
     Component: EnemyEdit,
+    Layout: Default,
+  },
+  {
+    path: `${ pathRoutes.enemy.team }/:id`,
+    Component: EnemyTeamList,
+    Layout: Default,
+  },
+  {
+    path: `${ pathRoutes.enemy.team_enemy_create }/:id`,
+    Component: EnemyTeamForm,
+    Layout: Default,
+  },
+  {
+    path: pathRoutes.enemy.team_create,
+    Component: TeamForm,
     Layout: Default,
   },
   // Hero

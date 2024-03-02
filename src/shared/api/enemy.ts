@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { EnemyStatsType, EnemyTechniqueType, EnemyType, EnemyWeaponType, TechniqueType } from '@/shared/types';
+import { EnemyStatsType, EnemyTeamType, EnemyTechniqueType, EnemyType, EnemyWeaponType, TechniqueType } from '@/shared/types';
 import axiosInstance from '@/shared/api/axios';
 
 export const fetchAllEnemy = async () => {
@@ -140,6 +140,51 @@ export const updateEnemyTechnique = async (enemy: EnemyTechniqueType, enemy_id: 
 export const deleteEnemyTechnique = async (enemy_id: number, technique_id: number) => {
   const response: AxiosResponse<TechniqueType[]> = await axiosInstance.delete(
     `/enemy/${ enemy_id }/technique/${ technique_id }`,
+  )
+  
+  return response
+}
+
+
+// Team
+export const fetchAllEnemyTeam = async (enemy_id: number) => {
+  const response: AxiosResponse<EnemyTeamType[]> = await axiosInstance.get(
+    `/enemy/${ enemy_id }/team`,
+  )
+  
+  return response
+}
+
+export const fetchOneEnemyTeam = async (enemy_id: number, team_id: number) => {
+  const response: AxiosResponse<EnemyTeamType> = await axiosInstance.get(
+    `/enemy/${ enemy_id }/team/${ team_id }`,
+  )
+  
+  return response
+}
+
+export const createEnemyTeam = async (enemy: EnemyTeamType, enemy_id: number) => {
+  const response: AxiosResponse<EnemyTeamType> = await axiosInstance.post(
+    `/enemy/${ enemy_id }/team`,
+    { ...enemy },
+  )
+  
+  return response
+}
+
+export const updateEnemyTeam = async (enemy: EnemyTeamType, enemy_id: number, team_id: number) => {
+  const response: AxiosResponse<EnemyTeamType> = await axiosInstance.put(
+    `/enemy/${ enemy_id }/team/${ team_id }`,
+    { ...enemy },
+  )
+  
+  return response
+}
+
+
+export const deleteEnemyTeam = async (enemy_id: number, team_id: number) => {
+  const response: AxiosResponse<EnemyTeamType[]> = await axiosInstance.delete(
+    `/enemy/${ enemy_id }/team/${ team_id }`,
   )
   
   return response

@@ -1,36 +1,27 @@
 import { createTheme } from '@mui/material'
 
 export const themeColors = {
-  primary: { main: '#8652FD', hover: '#A47DFE' },
-  secondary: { main: '#1C1C1E' },
+  primary: { main: '#DB6F15', hover: '#D67630' },
+  secondary: { main: '#FFF' },
   error: { main: '#F80332' },
   warning: { main: '#F80332' },
   success: { main: '#02CF0D' },
   background: {
     main: '#FBFBFB',
     secondary: '#FFFFFF',
-    disabled: 'rgba(134, 82, 253, 0.12)',
+    disabled: '#FFFFFF',
     tertiary: '#f6f5f6'
   },
-  border: { main: '#E9E9E9', secondary: '#B9B9B9', additional: 'rgba(134, 82, 253, 0.5)' },
+  border: {
+    main: '#E9E9E9',
+    secondary: '#B9B9B9',
+    additional: '#FFFFFF'
+  },
   textColor: {
-    primary: '#1C1C1E',
+    primary: '#FFF',
     secondary: '#B9B9B9',
     additional: '#FFFFFF',
-    disabled: 'rgba(134, 82, 253, 0.38)'
-  },
-  events: {
-    pink: '#F7D9FF',
-    blue: '#A9EDE0',
-    yellow: '#FFEED9',
-    individualSportsman: '#F7D9FF',
-    individualSportsmanPair: '#A9EDE0',
-    individualTrainer: '#FFEEDC',
-    groupSportsman: '#A9EDE0',
-    groupTrainer: '#DAEDFE',
-    tournament: '#E5F4C9',
-    trainingCamp: '#C9F4D8',
-    groupClubLeader: '#FFEED9'
+    disabled: '#FFFFFF'
   }
 }
 
@@ -39,7 +30,7 @@ export const theme = createTheme({
     MuiDrawer: {
       styleOverrides: {
         paper: {
-          background: "#121123"
+          background: "#FFF"
         }
       }
     },
@@ -85,7 +76,7 @@ export const theme = createTheme({
       dark: themeColors.primary.hover
     },
     secondary: {
-      main: themeColors.secondary.main
+      main: themeColors.secondary.main,
     },
     error: {
       main: themeColors.error.main
@@ -95,9 +86,13 @@ export const theme = createTheme({
     },
     success: {
       main: themeColors.success.main
+    },
+    text: {
+      primary: themeColors.primary.main,
+      secondary: themeColors.secondary.main,
     }
   },
   typography: {
-    fontFamily: ['Golos Text', 'sans-serif'].join(',')
+    fontFamily: ['Golos Text', 'sans-serif'].join(','),
   }
 })

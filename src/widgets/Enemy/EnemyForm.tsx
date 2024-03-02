@@ -28,6 +28,7 @@ import EnemyTechniqueForm from '@/widgets/Enemy/EnemyTechniqueForm';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { pathRoutes } from '@/app';
+import { useEnemyStore } from "@/shared/store/EnemyStore";
 
 interface IEnemyFormProps {
   id?: number
@@ -42,6 +43,7 @@ const EnemyForm: FC<IEnemyFormProps> = ({ id }) => {
     setValue,
   } = useForm({ resolver: yupResolver(EnemySchemas) })
   const navigate = useNavigate();
+  const { getEnemyList } = useEnemyStore()
   
   const [accordionStats, setAccordionStats] = useState(false)
   // const [effectList, setEffectList] = useState<TechniqueEffectType[] | [] | EffectEmpty[]>([])
@@ -77,7 +79,8 @@ const EnemyForm: FC<IEnemyFormProps> = ({ id }) => {
       
       if (newList.length) setTechniqueList(newList)
       toast('Противник создан', { type: 'success' })
-      navigate(`${pathRoutes.enemy.edit}/${id}`)
+      await getEnemyList()
+      navigate(`${ pathRoutes.enemy.edit }/${ id }`)
     } else {
       await updateEnemy(data as EnemyType, id)
       
@@ -102,6 +105,7 @@ const EnemyForm: FC<IEnemyFormProps> = ({ id }) => {
         }
       });
       
+      await getEnemyList()
       toast('Противник обновлен', { type: 'success' })
     }
   }

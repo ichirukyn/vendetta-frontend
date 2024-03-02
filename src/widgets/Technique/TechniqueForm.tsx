@@ -33,6 +33,7 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
     watch,
     formState: { errors },
     handleSubmit,
+    reset,
     setValue,
   } = useForm({ resolver: yupResolver(TechniqueCreateScheme) })
   const { getTechniqueList } = useTechniqueStore()
@@ -46,6 +47,7 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
   const [classList, setClassList] = useState<ClassType[]>([])
   
   const race_id = watch('race_id')
+  const is_stack = watch('is_stack')
   
   const onSubmit = async (data: InferType<typeof TechniqueCreateScheme>) => {
     if (!data.damage || data?.damage < 0) data.damage = 0
@@ -302,7 +304,7 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
           <Controller control={ control } name='is_stack' defaultValue={ false } render={ ({ field }) => (
             <div className="block_column align-start w_100p">
               <label className='image_centerY gap_0 cursor_pointer'>
-                <Checkbox value={ field.value } onChange={ field.onChange }/>
+                <Checkbox defaultChecked={ field.value } checked={ field.value } onChange={ field.onChange }/>
                 Может ли стакатся?
               </label>
             </div>

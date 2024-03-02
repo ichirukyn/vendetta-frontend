@@ -28,6 +28,10 @@
     border-color: $color_active;
     color: $color_active;
     background: transparent;
+
+    &:active {
+      color: $gray_700;
+    }
   }
 
 

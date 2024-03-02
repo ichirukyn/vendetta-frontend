@@ -1,4 +1,4 @@
-import { number, object, string } from "yup";
+import { boolean, number, object, string } from "yup";
 
 export const EnemySchemas = object().shape({
   name: string().required('Введите имя'),
@@ -31,4 +31,10 @@ export const EnemyWeaponSchemas = object().shape({
 export const EnemyTechniqueSchemas = object().shape({
   technique_id: number().required('Выберите технику'),
   lvl: number(),
+})
+
+export const EnemyTeamSchemas = object().shape({
+  enemy_id: number().nullable(),
+  is_leader: boolean().optional(),
+  prefix: string().nullable().optional(),
 })

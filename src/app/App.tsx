@@ -8,6 +8,7 @@ import { useClassStore } from '@/shared/store/ClassStore';
 import { useTechniqueStore } from '@/shared/store/TechniqueStore';
 import { useArenaStore } from '@/shared/store/ArenaStore';
 import { useEnemyStore } from '@/shared/store/EnemyStore';
+import { useTeamStore } from "@/shared/store/TeamStore";
 
 const App: FC = () => {
   const { getRaceList } = useRaceStore()
@@ -15,6 +16,7 @@ const App: FC = () => {
   const { getTechniqueList } = useTechniqueStore()
   const { getArenaList } = useArenaStore()
   const { getEnemyList } = useEnemyStore()
+  const { getTeamList } = useTeamStore()
   
   useEffect(() => {
     getRaceList()
@@ -22,6 +24,7 @@ const App: FC = () => {
     getTechniqueList()
     getArenaList()
     getEnemyList()
+    getTeamList()
   }, []);
   
   return (

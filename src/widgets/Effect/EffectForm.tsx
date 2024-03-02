@@ -212,7 +212,7 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
       <Controller control={ control } name='is_single' defaultValue={ true } render={ ({ field }) => (
         <div className="block_column align-start w_100p">
           <label className='image_centerY gap_0 cursor_pointer'>
-            <Checkbox value={ field.value || true } onChange={ field.onChange }/>
+            <Checkbox defaultChecked={ field.value } checked={ field.value } onChange={ field.onChange }/>
             Применять лишь раз?
           </label>
         </div>
@@ -221,7 +221,7 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
       <Controller control={ control } name='every_turn' defaultValue={ false } render={ ({ field }) => (
         <div className="block_column align-start w_100p">
           <label className='image_centerY gap_0 cursor_pointer'>
-            <Checkbox value={ field.value || true } onChange={ field.onChange }/>
+            <Checkbox defaultChecked={ field.value } checked={ field.value } onChange={ field.onChange }/>
             Применять каждый ход, пока действет эффект?
           </label>
         </div>

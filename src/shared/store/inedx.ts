@@ -1,5 +1,6 @@
 export * from './RaceStore'
 export * from './ClassStore'
 export * from './Technique'
+export * from './TeamStore'
 export * from './TechniqueStore'
 export * from './EnemyStore'

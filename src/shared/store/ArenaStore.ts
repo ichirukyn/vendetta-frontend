@@ -15,7 +15,16 @@ export const useArenaStore = create<ArenaState>((set) => ({
   floor: undefined,
   getArenaList: async () => {
     const res = await fetchAllArena()
-    if (res.data) set({ floorList: res.data })
+    if (res.data) {
+      set((state) => {
+        let floor = state.floor
+        if (state.floor) {
+          floor = res.data.find((floor) => floor.id === state.floor)
+        }
+        
+        return { floorList: res.data, floor: floor }
+      })
+    }
   },
   setFloor: (floor) => set((state) => ({ ...state, floor: floor })),
   clearArenaList: () => set((state) => ({ ...state, floorList: [] })),

@@ -2,34 +2,41 @@ import { FC, useEffect, useState } from 'react';
 import { Link, useParams } from "react-router-dom";
 import { pathRoutes } from "@/app";
 import { useArenaStore } from "@/shared/store/ArenaStore";
-import { EnemyType, FloorEnemyType } from "@/shared/types";
+import { EnemyType } from "@/shared/types";
 import Table from "@/shared/ui/Table/Table";
 import { FloorEnemyColumn } from "@/widgets/Arena";
 
-type FloorEnemy = FloorEnemyType & {
-  name: string,
-  rank: string,
-  race_name: string,
-  class_name: string,
-  lvl: number,
-  total_stats: number,
+type FloorEnemy = EnemyType & {
+  name?: string,
+  rank?: string,
+  race_name?: string,
+  class_name?: string,
+  lvl?: number,
+  total_stats?: number,
 }
 
 const ArenaList: FC = () => {
   const { id } = useParams()
   const { floorList, floor, setFloor } = useArenaStore()
   
-  const [enemies, setEnemies] = useState<EnemyType[]>([])
+  const [enemies, setEnemies] = useState<FloorEnemy[]>([])
   
   useEffect(() => {
     if (id && floorList.length) {
-      const enemyList: EnemyType[] = []
+      const enemyList: FloorEnemy[] = []
       
       floor?.enemies?.forEach((enemy) => {
-        if (enemy?.enemy?.id) enemyList.push({ ...enemy?.enemy })
+        if (enemy?.enemy?.id)
+          enemyList.push({
+            ...enemy?.enemy,
+            race_name: enemy.enemy.race.name,
+            class_name: enemy.enemy.class.name,
+            lvl: enemy.enemy.stats.lvl,
+            total_stats: enemy.enemy.stats.total_stats
+          })
       })
       
-      setEnemies(enemyList as EnemyType[])
+      setEnemies(enemyList)
     }
   }, [floor]);
   

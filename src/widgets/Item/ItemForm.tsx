@@ -13,11 +13,11 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 
-export interface ITechniqueFormProps {
+export interface IItemFormProps {
   id?: number,
 }
 
-const ItemForm: FC<ITechniqueFormProps> = ({ id }) => {
+const ItemForm: FC<IItemFormProps> = ({ id }) => {
   const {
     control,
     watch,

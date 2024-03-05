@@ -32,3 +32,16 @@ export type EffectType = {
   is_single: boolean
   every_turn?: boolean
 }
+
+export type TechniqueBranchType = {
+  id?: number
+  technique_id?: number
+  parent_id?: number
+  is_hidden?: boolean
+  condition_attribute?: string
+  condition?: string
+  condition_value?: number
+  technique?: TechniqueType
+  parent?: TechniqueType
+}
+

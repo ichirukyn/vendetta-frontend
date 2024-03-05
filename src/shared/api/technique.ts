@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import axiosInstance from "@/shared/api/axios";
-import { TechniqueEffectType, TechniqueType } from "@/shared/types/technique";
+import { TechniqueBranchType, TechniqueEffectType, TechniqueType } from "@/shared/types/technique";
 
 type allTechniqueQueryType = {
   hidden?: boolean,
@@ -78,6 +78,51 @@ export const updateTechniqueEffect = async (effect: TechniqueEffectType, effect_
 export const deleteTechniqueEffect = async (effect_id: number, technique_id: number) => {
   const response: AxiosResponse<TechniqueType[]> = await axiosInstance.delete(
     `/technique/${ technique_id }/effect/${ effect_id }`,
+  )
+  
+  return response
+}
+
+
+// Branch
+export const fetchAllBranchTechnique = async () => {
+  const response: AxiosResponse<TechniqueBranchType[]> = await axiosInstance.get(
+    `/technique/branch/`,
+  )
+  
+  return response
+}
+
+export const fetchOneBranchTechnique = async (technique_id: number) => {
+  const response: AxiosResponse<TechniqueBranchType> = await axiosInstance.get(
+    `/technique/branch/${ technique_id }`,
+  )
+  
+  return response
+}
+
+export const createBranchTechnique = async (effect: TechniqueEffectType, technique_id: number) => {
+  const response: AxiosResponse<TechniqueBranchType> = await axiosInstance.post(
+    `/technique/branch/${ technique_id }`,
+    { ...effect },
+  )
+  
+  return response
+}
+
+export const updateBranchTechnique = async (effect: TechniqueEffectType, technique_id: number) => {
+  const response: AxiosResponse<TechniqueBranchType> = await axiosInstance.put(
+    `/technique/branch/${ technique_id }`,
+    { ...effect },
+  )
+  
+  return response
+}
+
+
+export const deleteBranchTechnique = async (technique_id: number) => {
+  const response: AxiosResponse = await axiosInstance.delete(
+    `/technique/branch/${ technique_id } }`,
   )
   
   return response

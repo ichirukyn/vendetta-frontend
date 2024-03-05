@@ -1,31 +1,45 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Group } from '@visx/group';
 import { hierarchy, Tree } from '@visx/hierarchy';
 import { LinearGradient } from '@visx/gradient';
 import { pointRadial } from 'd3-shape';
 import { LinkRadialStep, } from '@visx/shape';
-import { BranchData, LinkTypesProps } from "@/widgets";
+import { BranchData, LinkTypesProps, TreeNode } from "@/widgets";
 import BranchModal from "@/widgets/Branch/BranchModal";
+import { createTechniqueTree } from "@/shared/util/formatTechniqueBranch";
+import { fetchAllBranchTechnique } from "@/shared/api/technique";
 
 const defaultMargin = { top: 30, left: 30, right: 30, bottom: 70 };
 
 export const BranchWidget: FC<LinkTypesProps> = ({ margin = defaultMargin, height, width }) => {
-  const [selectId, setSelectId] = useState<string | undefined>(undefined)
-
+  const [selectId, setSelectId] = useState<number | undefined>(undefined)
+  
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
-
+  
   let origin: { x: number; y: number };
   let sizeWidth: number;
   let sizeHeight: number;
-
+  
   origin = {
     x: innerWidth / 2,
     y: innerHeight / 2,
   };
   sizeWidth = 2 * Math.PI;
   sizeHeight = Math.min(innerWidth, innerHeight) / 2;
-
+  
+  const [data, setData] = useState<TreeNode>(BranchData)
+  
+  useEffect(() => {
+    fetchAllBranchTechnique().then((res) => {
+      if (res.data) {
+        let tree = createTechniqueTree(res.data, 'Техники');
+        setData(tree)
+        console.log(JSON.stringify(tree, null, 2));
+      }
+    })
+  }, []);
+  
   return (
     <div className='block_column align-center branch__wrapper'>
       <svg width={ width } height={ height }>
@@ -33,7 +47,7 @@ export const BranchWidget: FC<LinkTypesProps> = ({ margin = defaultMargin, heigh
         <rect width={ width } height={ height } rx={ 14 } fill="#00000020"/>
         <Group top={ margin.top } left={ margin.left }>
           <Tree
-            root={ hierarchy(BranchData, (d) => (d.isExpanded ? null : d.children)) }
+            root={ hierarchy(data, (d) => (d.isExpanded ? null : d.children)) }
             size={ [sizeWidth, sizeHeight] }
             separation={ (a, b) => (a.parent === b.parent ? 1 : 0.5) / a.depth }
           >
@@ -49,17 +63,17 @@ export const BranchWidget: FC<LinkTypesProps> = ({ margin = defaultMargin, heigh
                     fill="none"
                   />
                 )) }
-
+                
                 { tree.descendants().map((node, key) => {
                   const width = 20;
                   const height = 20;
-
+                  
                   let top: number;
                   let left: number;
                   const [radialX, radialY] = pointRadial(node.x, node.y);
                   top = radialY;
                   left = radialX;
-
+                  
                   return (
                     <Group top={ top } left={ left } key={ key }>
                       { node.depth === 0 && (
@@ -80,7 +94,7 @@ export const BranchWidget: FC<LinkTypesProps> = ({ margin = defaultMargin, heigh
                           strokeDasharray={ node.data.isActivated ? '0' : '2,2' }
                           strokeOpacity={ node.data.isActivated ? 1 : 0.6 }
                           rx={ 10 }
-                          onClick={ () => setSelectId(node.data.name) }
+                          onClick={ () => setSelectId(node.data.id) }
                         />
                       ) }
                       <text
@@ -92,7 +106,7 @@ export const BranchWidget: FC<LinkTypesProps> = ({ margin = defaultMargin, heigh
                       >
                         { node.data.name }
                       </text>
-                      <text dy=".33em" textAnchor="middle">{node.data.emoji ? node.data.emoji : ''}</text>
+                      <text dy=".33em" textAnchor="middle">{ node.data.emoji ? node.data.emoji : '' }</text>
                     </Group>
                   );
                 }) }
@@ -101,7 +115,7 @@ export const BranchWidget: FC<LinkTypesProps> = ({ margin = defaultMargin, heigh
           </Tree>
         </Group>
       </svg>
-
+      
       <BranchModal open={ !!selectId } close={ () => setSelectId(undefined) } id={ selectId! }/>
     </div>
   );

@@ -1,20 +1,29 @@
-import { FC } from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Modal } from "@mui/material";
+import { FC, useEffect, useState } from 'react';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from "@mui/material";
+import { TechniqueType } from "@/shared/types";
+import { fetchOneTechnique } from "@/shared/api/technique";
 
 export interface IBranchModalProps {
   open: boolean,
   close: () => void,
-  id: string,
+  id: number,
 }
 
-const BranchModal: FC<IBranchModalProps> = ({open, close, id}) => {
+const BranchModal: FC<IBranchModalProps> = ({ open, close, id }) => {
+  const [technique, setTechnique] = useState<TechniqueType | undefined>()
+  
+  useEffect(() => {
+    if (!id) return
+    fetchOneTechnique(id).then((res) => {
+      if (res.data) setTechnique(res.data)
+    })
+  }, [id]);
+  
   return (
-    <Dialog open={open} onClose={close}>
-      <DialogTitle fontWeight={800} fontSize={24}>Талант {id}</DialogTitle>
+    <Dialog open={ open } onClose={ close }>
+      <DialogTitle fontWeight={ 800 } fontSize={ 24 } width={ 320 }>{ technique?.name }</DialogTitle>
       <DialogContent>
-        <b className="text_eBold text_body">Стоимость:</b> 3
-        <br/>
-        <b className="text_eBold text_body">Бонусы:</b> Lorem ipsum dolor sit amet, consectetur adipisicing elit. A debitis distinctio dolorum eaque facere
+        { technique?.desc }
       </DialogContent>
       <DialogActions>
         <Button>Изучить</Button>

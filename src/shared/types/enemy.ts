@@ -1,6 +1,7 @@
 import { TechniqueType } from "@/shared/types/technique";
 import { ClassType } from "@/shared/types/class";
 import { RaceType } from "@/shared/types/race";
+import { ItemType } from "@/shared/types/item";
 
 export type EnemyType = {
   id: number;
@@ -54,4 +55,17 @@ export type EnemyTeamType = {
   is_leader?: boolean;
   prefix?: string;
   enemy?: EnemyType;
+}
+
+export type EnemyLootType = {
+  id?: number;
+  enemy_id?: number;
+  item_id?: number;
+  chance?: number;
+  count_min?: number;
+  count_max?: number;
+  count?: number;
+  exp?: number;
+  gold?: number;
+  item?: ItemType;
 }

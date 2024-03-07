@@ -189,3 +189,48 @@ export const deleteEnemyTeam = async (enemy_id: number, team_id: number) => {
   
   return response
 }
+
+
+// Item
+export const fetchAllEnemyItem = async (enemy_id: number) => {
+  const response: AxiosResponse<EnemyTeamType[]> = await axiosInstance.get(
+    `/enemy/${ enemy_id }/item`,
+  )
+  
+  return response
+}
+
+export const fetchOneEnemyItem = async (enemy_id: number, item_id: number) => {
+  const response: AxiosResponse<EnemyTeamType> = await axiosInstance.get(
+    `/enemy/${ enemy_id }/item/${ item_id }`,
+  )
+  
+  return response
+}
+
+export const createEnemyItem = async (enemy: EnemyTeamType, enemy_id: number) => {
+  const response: AxiosResponse<EnemyTeamType> = await axiosInstance.post(
+    `/enemy/${ enemy_id }/item`,
+    { ...enemy },
+  )
+  
+  return response
+}
+
+export const updateEnemyItem = async (enemy: EnemyTeamType, enemy_id: number, item_id: number) => {
+  const response: AxiosResponse<EnemyTeamType> = await axiosInstance.put(
+    `/enemy/${ enemy_id }/item/${ item_id }`,
+    { ...enemy },
+  )
+
+  return response
+}
+
+
+export const deleteEnemyItem = async (enemy_id: number, item_id: number) => {
+  const response: AxiosResponse<EnemyTeamType[]> = await axiosInstance.delete(
+    `/enemy/${ enemy_id }/item/${ item_id }`,
+  )
+  
+  return response
+}

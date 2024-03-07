@@ -22,6 +22,7 @@ import { fetchAllClassByRace, fetchAllRace } from "@/shared/api/race";
 import { TechniqueConstants } from "@/widgets/Technique/Technique.constant";
 import { useNavigate } from "react-router-dom";
 import { useTechniqueStore } from "@/shared/store/TechniqueStore";
+import { pathRoutes } from "@/app";
 
 export interface ITechniqueFormProps {
   id?: number,
@@ -33,7 +34,6 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
     watch,
     formState: { errors },
     handleSubmit,
-    reset,
     setValue,
   } = useForm({ resolver: yupResolver(TechniqueCreateScheme) })
   const { getTechniqueList } = useTechniqueStore()
@@ -77,19 +77,21 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
       
       if (effectList.length) {
         effectList.map(async (effect) => {
-          if (!technique.data.id) {
+          if (!id) {
             error = true
             return toast('Ошибка technique_id', { type: "error" })
           }
-          await createTechniqueEffect(effect as EffectType, technique.data.id)
+          await createTechniqueEffect(effect as EffectType, id)
         })
       }
       
       if (!error) {
         toast('Техника создана!', { type: "success" })
-        setEffectList([])
-        await getTechniqueList()
+        return navigate(`${ pathRoutes.technique.edit }/${ id }`)
+      } else {
+        toast('Попробуй ещё раз, может пройдёт..', { type: "error" })
       }
+      
     } else {
       updateTechnique(data as TechniqueType, id).then((res) => {
         if (res.data) {

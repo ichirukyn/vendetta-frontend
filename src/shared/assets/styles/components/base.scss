@@ -60,6 +60,12 @@ img {
   }
 }
 
+.MuiAutocomplete-root {
+  & .MuiInputLabel-root {
+    top: -5px !important;
+  }
+}
+
 .Mui-expanded {
   margin: 0 !important;
 }

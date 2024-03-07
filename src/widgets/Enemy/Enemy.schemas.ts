@@ -38,3 +38,11 @@ export const EnemyTeamSchemas = object().shape({
   is_leader: boolean().optional(),
   prefix: string().nullable().optional(),
 })
+
+export const EnemyLootSchemas = object().shape({
+  item_id: number().optional(),
+  chance: number(),
+  count_min: number(),
+  count_max: number(),
+  exp: number().optional(),
+})

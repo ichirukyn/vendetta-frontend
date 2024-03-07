@@ -1,1 +1,1 @@
-export type OptionsType = { label: string, value?: number }
+export type OptionsType = { label: string, value?: number | string }

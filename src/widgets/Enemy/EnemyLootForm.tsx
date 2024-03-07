@@ -9,19 +9,14 @@ import { EnemyLootType } from "@/shared/types";
 import { useItemStore } from "@/shared/store/ItemStore";
 import { toast } from "react-toastify";
 
-export interface IEffectCreateProps {
+export interface IEnemyLootProps {
   index: number
   effectDelete: (index: number) => void
   update_data?: (a: InferType<typeof EnemyLootSchemas>, index: number) => void
   defaultData?: EnemyLootType
 }
 
-export type EffectEmpty = {
-  id?: number
-  name: string
-}
-
-const EnemyLootForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, effectDelete }) => {
+const EnemyLootForm: FC<IEnemyLootProps> = ({ update_data, index, defaultData, effectDelete }) => {
   const {
     control,
     formState: { errors },

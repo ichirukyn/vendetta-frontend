@@ -213,8 +213,8 @@ const EnemyForm: FC<IEnemyFormProps> = ({ id }) => {
   }
   
   const lootDelete = (index: number) => {
-    if (id && lootList[index].id) {
-      deleteEnemyItem(lootList[index].id!, id).then(() => {
+    if (id && lootList[index].item_id) {
+      deleteEnemyItem(id, lootList[index].item_id!).then(() => {
         toast('Предмет удалён успешно!', { type: "success" })
       })
     }

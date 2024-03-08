@@ -164,6 +164,14 @@
 }
 
 .branch__wrapper {
+  max-height: calc(100vh - 220px);
+  overflow: auto;
+  align-items: flex-start;
+
+  @include min-desktop_1024 {
+    align-items: center !important;
+  }
+
   .visx-group {
     text {
       font-size: 10px !important;

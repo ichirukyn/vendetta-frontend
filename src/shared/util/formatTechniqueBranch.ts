@@ -9,6 +9,7 @@ export const createTechniqueTree = (data: TechniqueBranchType[], root: string) =
       let child = createTechniqueTree(data, item.technique?.name || '')
       
       child.id = item.technique?.id;
+      child.branch_id = item.id;
       child.desc = item.technique?.desc || '';
       node.children?.push(child)
     }

@@ -93,36 +93,36 @@ export const fetchAllBranchTechnique = async () => {
   return response
 }
 
-export const fetchOneBranchTechnique = async (technique_id: number) => {
+export const fetchOneBranchTechnique = async (branch_id: number) => {
   const response: AxiosResponse<TechniqueBranchType> = await axiosInstance.get(
-    `/technique/branch/${ technique_id }`,
+    `/technique/branch/${ branch_id }`,
   )
   
   return response
 }
 
-export const createBranchTechnique = async (effect: TechniqueEffectType, technique_id: number) => {
+export const createBranchTechnique = async (data: TechniqueBranchType) => {
   const response: AxiosResponse<TechniqueBranchType> = await axiosInstance.post(
-    `/technique/branch/${ technique_id }`,
-    { ...effect },
+    `/technique/branch`,
+    { ...data },
   )
   
   return response
 }
 
-export const updateBranchTechnique = async (effect: TechniqueEffectType, technique_id: number) => {
+export const updateBranchTechnique = async (data: TechniqueBranchType, branch_id: number) => {
   const response: AxiosResponse<TechniqueBranchType> = await axiosInstance.put(
-    `/technique/branch/${ technique_id }`,
-    { ...effect },
+    `/technique/branch/${ branch_id }`,
+    { ...data },
   )
   
   return response
 }
 
 
-export const deleteBranchTechnique = async (technique_id: number) => {
+export const deleteBranchTechnique = async (branch_id: number) => {
   const response: AxiosResponse = await axiosInstance.delete(
-    `/technique/branch/${ technique_id } }`,
+    `/technique/branch/${ branch_id }`,
   )
   
   return response

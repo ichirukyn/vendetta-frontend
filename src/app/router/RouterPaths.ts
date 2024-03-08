@@ -62,5 +62,6 @@ export const pathRoutes = {
   branch: {
     base: `${ pathBase.branch }`,
     view: `${ pathBase.branch }/view`,
+    create: `${ pathBase.branch }/create`,
   },
 }

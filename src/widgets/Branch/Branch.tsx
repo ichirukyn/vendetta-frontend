@@ -7,12 +7,15 @@ import { LinkRadialStep, } from '@visx/shape';
 import { BranchData, LinkTypesProps, TreeNode } from "@/widgets";
 import BranchModal from "@/widgets/Branch/BranchModal";
 import { createTechniqueTree } from "@/shared/util/formatTechniqueBranch";
-import { fetchAllBranchTechnique } from "@/shared/api/technique";
+import { useTechniqueBranchStore } from "@/shared/store/Technique/TechniqueBranchStore";
 
 const defaultMargin = { top: 30, left: 30, right: 30, bottom: 70 };
 
-export const BranchWidget: FC<LinkTypesProps> = ({ margin = defaultMargin, height, width }) => {
+export const BranchWidget: FC<LinkTypesProps> = ({ margin = defaultMargin }) => {
   const [selectId, setSelectId] = useState<number | undefined>(undefined)
+  
+  const width = 2000
+  const height = 2000
   
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
@@ -29,20 +32,23 @@ export const BranchWidget: FC<LinkTypesProps> = ({ margin = defaultMargin, heigh
   sizeHeight = Math.min(innerWidth, innerHeight) / 2;
   
   const [data, setData] = useState<TreeNode>(BranchData)
+  const { getTechniqueBranchList, techniqueBranchList } = useTechniqueBranchStore()
   
   useEffect(() => {
-    fetchAllBranchTechnique().then((res) => {
-      if (res.data) {
-        let tree = createTechniqueTree(res.data, 'Техники');
-        setData(tree)
-        console.log(JSON.stringify(tree, null, 2));
-      }
-    })
+    getTechniqueBranchList()
   }, []);
   
+  useEffect(() => {
+    if (techniqueBranchList) {
+      let tree = createTechniqueTree(techniqueBranchList, 'Техники');
+      setData(tree)
+      console.log(JSON.stringify(tree, null, 2));
+    }
+  }, [techniqueBranchList]);
+  
   return (
-    <div className='block_column align-center branch__wrapper'>
-      <svg width={ width } height={ height }>
+    <div className='block_column w_100p h_100p branch__wrapper'>
+      <svg width={ width } height={ height } style={ { minHeight: height } }>
         <LinearGradient id="links-gradient" from="#fd9b93" to="#fe6e9e"/>
         <rect width={ width } height={ height } rx={ 14 } fill="#00000020"/>
         <Group top={ margin.top } left={ margin.left }>
@@ -94,7 +100,7 @@ export const BranchWidget: FC<LinkTypesProps> = ({ margin = defaultMargin, heigh
                           strokeDasharray={ node.data.isActivated ? '0' : '2,2' }
                           strokeOpacity={ node.data.isActivated ? 1 : 0.6 }
                           rx={ 10 }
-                          onClick={ () => setSelectId(node.data.id) }
+                          onClick={ () => setSelectId(node.data.branch_id) }
                         />
                       ) }
                       <text
@@ -115,7 +121,6 @@ export const BranchWidget: FC<LinkTypesProps> = ({ margin = defaultMargin, heigh
           </Tree>
         </Group>
       </svg>
-      
       <BranchModal open={ !!selectId } close={ () => setSelectId(undefined) } id={ selectId! }/>
     </div>
   );

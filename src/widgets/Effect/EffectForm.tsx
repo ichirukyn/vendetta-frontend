@@ -193,7 +193,7 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
       
       <Controller control={ control } name='direction' defaultValue={ EffectConstants.direction[0].value } render={ ({ field }) => (
         <div className="block_column align-start w_100p">
-          <label>Условие</label>
+          <label>Направление</label>
           <Select className='w_100p' value={ field.value } onChange={ field.onChange }>
             { EffectConstants.direction.map(({ label, value }) => (
               <MenuItem key={ value } value={ value }>{ label }</MenuItem>

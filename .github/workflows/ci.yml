@@ -15,6 +15,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
+          port: 22
           envs: SUDO_PASSWORD, PATH_TO_PROJECT, NETWORK, PROJECT_NAME
           script: |
             echo $SUDO_PASSWORD | sudo -S ls

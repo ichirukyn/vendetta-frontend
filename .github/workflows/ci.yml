@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Execute commands over ssh
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          envs: SUDO_PASSWORD, PATH_TO_PROJECT, NETWORK, PROJECT_NAME
+          script: |
+            echo $SUDO_PASSWORD | sudo -S ls
+            cd $PATH_TO_PROJECT
+            git pull
+            docker-compose up -d --build
+            docker network connect $NETWORK $PROJECT_NAME

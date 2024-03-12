@@ -6,11 +6,13 @@ import { ItemCreateScheme } from "@/widgets/Item/Item.schemas";
 import { InferType } from "yup";
 import { fetchAllRace } from "@/shared/api/race";
 import { fetchAllClass } from "@/shared/api/class";
-import { MenuItem, Select } from "@mui/material";
+import { Autocomplete, MenuItem, Select, TextField } from "@mui/material";
 import { ItemConstants } from "@/widgets/Item/Item.constants";
 import { createItem, fetchOneItem, updateItem } from "@/shared/api/item";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useTechniqueStore } from "@/shared/store/TechniqueStore";
+import { pathRoutes } from "@/app";
 
 
 export interface IItemFormProps {
@@ -28,15 +30,17 @@ const ItemForm: FC<IItemFormProps> = ({ id }) => {
   } = useForm({ resolver: yupResolver(ItemCreateScheme) })
   const navigate = useNavigate();
   
+  const { getTechniqueOption } = useTechniqueStore()
+  
   // const [accordion, setAccordion] = useState<null | number>(null)
   // const [effectList, setEffectList] = useState<TechniqueEffectType[] | [] | EffectEmpty[]>([])
   
   const [raceList, setRaceList] = useState<RaceType[]>([])
   const [classList, setClassList] = useState<ClassType[]>([])
   
-  const race_id = watch('race_id')
   const class_id = watch('class_id')
   const class_type = watch('class_type')
+  const type = watch('type')
   
   const onSubmit = async (data: InferType<typeof ItemCreateScheme>) => {
     if (data.class_type === 'null') data.class_type = null
@@ -46,13 +50,12 @@ const ItemForm: FC<IItemFormProps> = ({ id }) => {
       data.class_id = null
     }
     
-    
-    console.log(data)
     if (!id) {
       createItem(data as ItemType).then((res) => {
         if (res.data) {
           reset()
           toast('Создание успешно', { type: 'success' })
+          navigate(`/${ pathRoutes.item.edit }/${ res.data.id }`)
         }
       })
     } else {
@@ -122,25 +125,9 @@ const ItemForm: FC<IItemFormProps> = ({ id }) => {
             </div>
           ) }/>
           
-          <Controller control={ control } name='value' render={ ({ field }) => (
-            <div className="block_column align-start w_100p">
-              <label>Значение</label>
-              <input type="number" step="0.01" className='w_100p' value={ field.value || 0 } onChange={ field.onChange }
-                     placeholder='0'/>
-            </div>
-          ) }/>
-          
-          <Controller control={ control } name='modify' render={ ({ field }) => (
-            <div className="block_column align-start w_100p">
-              <label>Модификатор улучшения</label>
-              <input type="number" step="0.01" className='w_100p' value={ field.value || 0 } onChange={ field.onChange }
-                     placeholder='* на Значение'/>
-            </div>
-          ) }/>
-          
           <Controller control={ control } name='type' defaultValue={ ItemConstants.type[0].value } render={ ({ field }) => (
             <div className="block_column align-start w_100p">
-              <label>Модификатор стихии</label>
+              <label>Тип предмета</label>
               <Select className='w_100p' value={ field.value } onChange={ field.onChange }>
                 { ItemConstants.type.map(({ value, label }) => (
                   <MenuItem value={ value } key={ value }>{ label }</MenuItem>
@@ -148,6 +135,46 @@ const ItemForm: FC<IItemFormProps> = ({ id }) => {
               </Select>
             </div>
           ) }/>
+          
+          { type === 'weapon' && (
+            <>
+              <Controller control={ control } name='value' render={ ({ field }) => (
+                <div className="block_column align-start w_100p">
+                  <label>Значение</label>
+                  <input type="number" step="0.01" className='w_100p' value={ field.value || 0 } onChange={ field.onChange }
+                         placeholder='0'/>
+                </div>
+              ) }/>
+              
+              <Controller control={ control } name='modify' render={ ({ field }) => (
+                <div className="block_column align-start w_100p">
+                  <label>Модификатор улучшения</label>
+                  <input type="number" step="0.01" className='w_100p' value={ field.value || 0 } onChange={ field.onChange }
+                         placeholder='* на Значение'/>
+                </div>
+              ) }/>
+            </>
+          ) }
+          
+          { type === 'technique_book' && (
+            <Controller control={ control } name='value' render={ ({ field }) => (
+              <div className="block_column align-start w_100p mt_15">
+                <Autocomplete
+                  fullWidth
+                  disablePortal
+                  value={ getTechniqueOption().find(({ value }) => value === field.value) || null }
+                  onChange={ (_, option) => field.onChange(option?.value) }
+                  options={ getTechniqueOption() }
+                  renderInput={ (params) => <TextField { ...params } label="Техника"/> }
+                  getOptionLabel={ (v) => v.label || '' }
+                  isOptionEqualToValue={ (option, value) => {
+                    if (value.label === '') return true
+                    return option.value === value.value
+                  } }
+                />
+              </div>
+            ) }/>
+          ) }
           
           <Controller control={ control } name='class_type' defaultValue={ 'null' } render={ ({ field }) => (
             <div className="block_column align-start w_100p">

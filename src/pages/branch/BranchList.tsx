@@ -6,7 +6,7 @@ import { BranchWidget } from "@/widgets";
 const BranchList: FC = () => {
   return (
     <div className='main__block block_column w_100p'>
-      <div className="w_100p h_100p block_column">
+      <div className="h_100p block_column">
         <BranchWidget height={ 1100 } width={ 1500 }/>
       </div>
       

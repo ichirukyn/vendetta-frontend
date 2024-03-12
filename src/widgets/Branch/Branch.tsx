@@ -8,6 +8,7 @@ import { BranchData, LinkTypesProps, TreeNode } from "@/widgets";
 import BranchModal from "@/widgets/Branch/BranchModal";
 import { createTechniqueTree } from "@/shared/util/formatTechniqueBranch";
 import { useTechniqueBranchStore } from "@/shared/store/Technique/TechniqueBranchStore";
+import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 
 const defaultMargin = { top: 30, left: 30, right: 30, bottom: 70 };
 
@@ -48,80 +49,84 @@ export const BranchWidget: FC<LinkTypesProps> = ({ margin = defaultMargin }) => 
   
   return (
     <div className='block_column w_100p h_100p branch__wrapper'>
-      <svg width={ width } height={ height } style={ { minHeight: height } }>
-        <LinearGradient id="links-gradient" from="#fd9b93" to="#fe6e9e"/>
-        <rect width={ width } height={ height } rx={ 14 } fill="#00000020"/>
-        <Group top={ margin.top } left={ margin.left }>
-          <Tree
-            root={ hierarchy(data, (d) => (d.isExpanded ? null : d.children)) }
-            size={ [sizeWidth, sizeHeight] }
-            separation={ (a, b) => (a.parent === b.parent ? 1 : 0.5) / a.depth }
-          >
-            { (tree) => (
-              <Group top={ origin.y } left={ origin.x }>
-                { tree.links().map((link, i) => (
-                  <LinkRadialStep
-                    key={ i }
-                    data={ link }
-                    percent={ 0.5 }
-                    stroke="#DB6F1599"
-                    strokeWidth="1"
-                    fill="none"
-                  />
-                )) }
-                
-                { tree.descendants().map((node, key) => {
-                  const width = 20;
-                  const height = 20;
-                  
-                  let top: number;
-                  let left: number;
-                  const [radialX, radialY] = pointRadial(node.x, node.y);
-                  top = radialY;
-                  left = radialX;
-                  
-                  return (
-                    <Group top={ top } left={ left } key={ key }>
-                      { node.depth === 0 && (
-                        <circle
-                          r={ 12 }
-                          fill="#DB6F1599"
-                        />
-                      ) }
-                      { node.depth !== 0 && (
-                        <rect
-                          height={ height }
-                          width={ width }
-                          y={ -height / 2 }
-                          x={ -width / 2 }
-                          fill="#272b4d"
-                          stroke={ node.data.isActivated ? '#03c0dc' : '#26deb0' }
-                          strokeWidth={ 1 }
-                          strokeDasharray={ node.data.isActivated ? '0' : '2,2' }
-                          strokeOpacity={ node.data.isActivated ? 1 : 0.6 }
-                          rx={ 10 }
-                          onClick={ () => setSelectId(node.data.branch_id) }
-                        />
-                      ) }
-                      <text
-                        dy="-20px"
-                        fontSize={ 8 }
-                        fontFamily="Arial"
-                        textAnchor="middle"
-                        fill="#fff"
-                      >
-                        { node.data.name }
-                      </text>
-                      <text dy=".33em" textAnchor="middle">{ node.data.emoji ? node.data.emoji : '' }</text>
-                    </Group>
-                  );
-                }) }
-              </Group>
-            ) }
-          </Tree>
-        </Group>
-      </svg>
-      <BranchModal open={ !!selectId } close={ () => setSelectId(undefined) } id={ selectId! }/>
+      <TransformWrapper minScale={ 0.5 } maxScale={ 2 } initialPositionX={ 0 } initialPositionY={ 0 }>
+        <TransformComponent>
+          <svg width={ width } height={ height } style={ { minHeight: height } }>
+            <LinearGradient id="links-gradient" from="#fd9b93" to="#fe6e9e"/>
+            <rect width={ width } height={ height } rx={ 14 } fill='transparent'/>
+            <Group top={ margin.top } left={ margin.left }>
+              <Tree
+                root={ hierarchy(data, (d) => (d.isExpanded ? null : d.children)) }
+                size={ [sizeWidth, sizeHeight] }
+                separation={ (a, b) => (a.parent === b.parent ? 1 : 0.5) / a.depth }
+              >
+                { (tree) => (
+                  <Group top={ origin.y } left={ origin.x }>
+                    { tree.links().map((link, i) => (
+                      <LinkRadialStep
+                        key={ i }
+                        data={ link }
+                        percent={ 0.5 }
+                        stroke="#DB6F1599"
+                        strokeWidth="1"
+                        fill="none"
+                      />
+                    )) }
+                    
+                    { tree.descendants().map((node, key) => {
+                      const width = 20;
+                      const height = 20;
+                      
+                      let top: number;
+                      let left: number;
+                      const [radialX, radialY] = pointRadial(node.x, node.y);
+                      top = radialY;
+                      left = radialX;
+                      
+                      return (
+                        <Group top={ top } left={ left } key={ key }>
+                          { node.depth === 0 && (
+                            <circle
+                              r={ 12 }
+                              fill="#DB6F1599"
+                            />
+                          ) }
+                          { node.depth !== 0 && (
+                            <rect
+                              height={ height }
+                              width={ width }
+                              y={ -height / 2 }
+                              x={ -width / 2 }
+                              fill="#272b4d"
+                              stroke={ node.data.isActivated ? '#03c0dc' : '#26deb0' }
+                              strokeWidth={ 1 }
+                              strokeDasharray={ node.data.isActivated ? '0' : '2,2' }
+                              strokeOpacity={ node.data.isActivated ? 1 : 0.6 }
+                              rx={ 10 }
+                              onClick={ () => setSelectId(node.data.branch_id) }
+                            />
+                          ) }
+                          <text
+                            dy="-20px"
+                            fontSize={ 8 }
+                            fontFamily="Arial"
+                            textAnchor="middle"
+                            fill="#fff"
+                          >
+                            { node.data.name }
+                          </text>
+                          <text dy=".33em" textAnchor="middle">{ node.data.emoji ? node.data.emoji : '' }</text>
+                        </Group>
+                      );
+                    }) }
+                  </Group>
+                ) }
+              </Tree>
+            </Group>
+          </svg>
+          <BranchModal open={ !!selectId } close={ () => setSelectId(undefined) } id={ selectId! }/>
+        </TransformComponent>
+      </TransformWrapper>
     </div>
   );
 };

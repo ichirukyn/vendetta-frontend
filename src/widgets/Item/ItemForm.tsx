@@ -32,9 +32,6 @@ const ItemForm: FC<IItemFormProps> = ({ id }) => {
   
   const { getTechniqueOption } = useTechniqueStore()
   
-  // const [accordion, setAccordion] = useState<null | number>(null)
-  // const [effectList, setEffectList] = useState<TechniqueEffectType[] | [] | EffectEmpty[]>([])
-  
   const [raceList, setRaceList] = useState<RaceType[]>([])
   const [classList, setClassList] = useState<ClassType[]>([])
   

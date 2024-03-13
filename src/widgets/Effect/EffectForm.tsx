@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Checkbox, IconButton, MenuItem, Select } from "@mui/material";
 import { EffectConstants } from "@/widgets";
 import { EffectType } from "@/shared/types/technique";
-import { Delete } from "@mui/icons-material";
+import { ReactComponent as Delete } from '@/shared/assets/icons/Delete.svg'
 
 export interface IEffectCreateProps {
   index: number

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { IconButton, Menu, MenuItem } from '@mui/material';
-import { MoreVert } from '@mui/icons-material';
+import { ReactComponent as MoreVert } from '@/shared/assets/icons/MoreVert.svg'
 import { GridRenderCellParams } from '@mui/x-data-grid';
 import { useOpenMenu } from '@/shared/hooks';
 import { deleteEnemy } from '@/shared/api/enemy';

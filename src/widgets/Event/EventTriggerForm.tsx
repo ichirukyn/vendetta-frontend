@@ -5,7 +5,7 @@ import { EffectConstants, EventConstants, EventTriggerCreateScheme } from "@/wid
 import { EventTriggerType, ItemType } from "@/shared/types";
 import { InferType } from "yup";
 import { Checkbox, IconButton, MenuItem, Select } from "@mui/material";
-import { Delete } from "@mui/icons-material";
+import { ReactComponent as Delete } from '@/shared/assets/icons/Delete.svg'
 import { fetchAllItem } from "@/shared/api/item";
 
 interface IEventTriggerFormProps {

@@ -4,7 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Autocomplete, IconButton, TextField } from "@mui/material";
 import { EnemyLootSchemas } from "@/widgets";
-import { Delete } from "@mui/icons-material";
+import { ReactComponent as Delete } from '@/shared/assets/icons/Delete.svg'
 import { EnemyLootType } from "@/shared/types";
 import { useItemStore } from "@/shared/store/ItemStore";
 import { toast } from "react-toastify";

@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 import { Link } from "react-router-dom";
-import { Home } from "@mui/icons-material";
+import { ReactComponent as Home } from '@/shared/assets/icons/Home.svg'
 
 export interface IDefaultProps {
   children: ReactNode

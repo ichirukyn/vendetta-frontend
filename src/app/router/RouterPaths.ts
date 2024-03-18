@@ -7,6 +7,7 @@ const pathBase = {
   map: '/map',
   event: '/event',
   branch: '/branch',
+  spell: '/spell',
 }
 
 export const pathRoutes = {
@@ -25,6 +26,12 @@ export const pathRoutes = {
     edit: `${ pathBase.technique }/edit`,
     create: `${ pathBase.technique }/create`,
     application: `${ pathBase.technique }/application`,
+  },
+  spell: {
+    base: `${ pathBase.spell }`,
+    edit: `${ pathBase.spell }/edit`,
+    create: `${ pathBase.spell }/create`,
+    application: `${ pathBase.spell }/application`,
   },
   enemy: {
     base: `${ pathBase.enemy }`,

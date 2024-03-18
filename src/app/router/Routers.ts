@@ -30,6 +30,9 @@ import EnemyTeamForm from "@/widgets/Enemy/EnemyTeamForm";
 import TeamForm from "@/widgets/Team/TeamForm";
 import { Roles } from "@/shared/enums";
 import BranchCreate from "@/pages/branch/BranchCreate";
+import SpellList from "@/pages/spell/SpellList";
+import SpellCreate from "@/pages/spell/SpellCreate";
+import SpellEdit from "@/pages/spell/SpellEdit";
 
 
 export const Routers = [
@@ -87,6 +90,26 @@ export const Routers = [
   {
     path: `${ pathRoutes.technique.edit }/:id`,
     Component: TechniqueEdit,
+    Layout: Default,
+    Roles: [Roles.Admin],
+  },
+  
+  // Spell
+  {
+    path: pathRoutes.spell.base,
+    Component: SpellList,
+    Layout: Default,
+    Roles: [Roles.Admin],
+  },
+  {
+    path: pathRoutes.spell.create,
+    Component: SpellCreate,
+    Layout: Default,
+    Roles: [Roles.Admin],
+  },
+  {
+    path: `${ pathRoutes.spell.edit }/:id`,
+    Component: SpellEdit,
     Layout: Default,
     Roles: [Roles.Admin],
   },

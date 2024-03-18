@@ -1,3 +1,14 @@
+export const ElementDamage = [
+  { value: 'element_damage_view', label: 'Стихии:', disabled: true },
+  { value: 'fire_damage', label: 'Огонь' },
+  { value: 'water_damage', label: 'Вода' },
+  { value: 'earth_damage', label: 'Земля' },
+  { value: 'air_damage', label: 'Воздух' },
+  { value: 'light_damage', label: 'Свет' },
+  { value: 'dark_damage', label: 'Тьма' },
+  { value: 'phys_damage', label: 'Физ.' },
+]
+
 export const EffectConstants = {
   type: [
     { value: 'number', label: 'Добавить/Отнять число' },
@@ -68,15 +79,8 @@ export const EffectConstants = {
     { value: 'effect_chance', label: 'Шанс попадания эффектов' },
     // { value: 'debuff_resist', label: 'Сопротивление дебаффам' },
     
-    { value: 'element_damage_view', label: 'Стихии:', disabled: true },
-    { value: 'fire_damage', label: 'Огонь' },
-    { value: 'water_damage', label: 'Вода' },
-    { value: 'earth_damage', label: 'Земля' },
-    { value: 'air_damage', label: 'Воздух' },
-    { value: 'light_damage', label: 'Свет' },
-    { value: 'dark_damage', label: 'Тьма' },
-    { value: 'phys_damage', label: 'Физ.' },
     
+    { ...ElementDamage },
     
     { value: 'element_resist_view', label: 'Сопротивление стихий:', disabled: true },
     { value: 'fire_resist', label: 'Сопротивление к огню' },
@@ -100,7 +104,7 @@ export const EffectConstants = {
     { value: 'evasion_modify', label: 'Модификатор Уклонения' },
     { value: 'counter_modify', label: 'Модификатор Контрудара' },
     { value: 'defence_modify', label: 'Модификатор Защиты' },
-
+  
   ],
   condition: [
     { value: '>', label: 'Больше' },

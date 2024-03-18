@@ -9,11 +9,13 @@ import { useTechniqueStore } from '@/shared/store/TechniqueStore';
 import { useArenaStore } from '@/shared/store/ArenaStore';
 import { useEnemyStore } from '@/shared/store/EnemyStore';
 import { useTeamStore } from "@/shared/store/TeamStore";
+import { useSpellStore } from "@/shared/store/SpellStore";
 
 const App: FC = () => {
   const { getRaceList } = useRaceStore()
   const { getClassList } = useClassStore()
   const { getTechniqueList } = useTechniqueStore()
+  const { getSpellList } = useSpellStore()
   const { getArenaList } = useArenaStore()
   const { getEnemyList } = useEnemyStore()
   const { getTeamList } = useTeamStore()
@@ -22,6 +24,7 @@ const App: FC = () => {
     getRaceList()
     getClassList()
     getTechniqueList()
+    getSpellList()
     getArenaList()
     getEnemyList()
     getTeamList()

@@ -13,7 +13,7 @@ import {
   updateSpell,
   updateSpellEffect
 } from "@/shared/api/spell";
-import { EffectType, SpellEffectType, SpellType } from "@/shared/types/spell";
+import { SpellEffectType, SpellType } from "@/shared/types/spell";
 import { toast } from "react-toastify";
 import { Accordion, AccordionDetails, AccordionSummary, Checkbox, MenuItem, Select } from "@mui/material";
 import EffectForm from "@/widgets/Effect/EffectForm";
@@ -81,7 +81,7 @@ const SpellForm: FC<ISpellFormProps> = ({ id }) => {
             error = true
             return toast('Ошибка spell_id', { type: "error" })
           }
-          await createSpellEffect(effect as EffectType, id)
+          await createSpellEffect(effect as SpellEffectType, id)
         })
       }
       
@@ -107,7 +107,7 @@ const SpellForm: FC<ISpellFormProps> = ({ id }) => {
         i++
         
         if (!effect?.id) {
-          createSpellEffect(effect as EffectType, id).then((res) => {
+          createSpellEffect(effect as SpellEffectType, id).then((res) => {
             effectList[i] = res.data
             setEffectList(effectList)
           })
@@ -115,7 +115,7 @@ const SpellForm: FC<ISpellFormProps> = ({ id }) => {
           continue
         }
         
-        updateSpellEffect(effect as EffectType, effect.id!, id).then((res) => {
+        updateSpellEffect(effect as SpellEffectType, effect.id!, id).then((res) => {
           effectList[i] = res.data
           setEffectList(effectList)
         })
@@ -327,7 +327,7 @@ const SpellForm: FC<ISpellFormProps> = ({ id }) => {
               <EffectForm
                 update_data={ onUpdateEffect }
                 index={ index }
-                defaultData={ effectList[index] as EffectType | undefined }
+                defaultData={ effectList[index] as SpellEffectType | undefined }
                 effectDelete={ effectDelete }/>
             </AccordionDetails>
           </Accordion>

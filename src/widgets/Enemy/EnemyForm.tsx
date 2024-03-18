@@ -2,16 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { EnemySchemas } from '@/widgets';
-import {
-  ClassType,
-  EffectType,
-  EnemyLootType,
-  EnemyStatsType,
-  EnemyTechniqueType,
-  EnemyType,
-  EnemyWeaponType,
-  RaceType
-} from '@/shared/types';
+import { ClassType, EnemyLootType, EnemyStatsType, EnemyTechniqueType, EnemyType, EnemyWeaponType, RaceType } from '@/shared/types';
 import { InferType } from 'yup';
 import { fetchAllClassByRace, fetchAllRace } from '@/shared/api/race';
 import { fetchAllClass } from '@/shared/api/class';
@@ -77,6 +68,7 @@ const EnemyForm: FC<IEnemyFormProps> = ({ id }) => {
     if (!weapon?.weapon_id) return toast('Выберите оружие', { type: 'warning' })
     if (!techniqueList.length) return toast('Выберите минимум 1 технику', { type: 'warning' })
     
+    // CREATE
     if (!id) {
       const enemy = await createEnemy(data as EnemyType)
       if (!enemy.data.id) return toast('Ошибка, повтрорите позже', { type: 'error' })
@@ -110,7 +102,9 @@ const EnemyForm: FC<IEnemyFormProps> = ({ id }) => {
       
       return navigate(`${ pathRoutes.enemy.edit }/${ id }`)
       
-    } else {
+    }
+    // UPDATE
+    else {
       await updateEnemy(data as EnemyType, id)
       
       await updateEnemyStats(stats, id)
@@ -136,24 +130,24 @@ const EnemyForm: FC<IEnemyFormProps> = ({ id }) => {
       
       if (lootList.length < 1) return
       
-      let i = -1
-      for (let loot of lootList) {
-        i++
-        
-        if (!loot?.id) {
-          createEnemyItem(loot as EffectType, id).then((res) => {
-            lootList[i] = res.data
-            setLootList(lootList)
-          })
+      const items = await fetchAllEnemyItem(id)
+      if (!items.data) return
+      
+      // Находим идентификаторы, которые есть в начальном массиве, но нет в новом
+      items.data.forEach((item) => {
+        if (!lootList.find((loot) => loot.id === item.id)) deleteEnemyItem(id, item.item_id!);
+        else {
+          const new_data = { ...lootList.find((loot) => loot.id === item.id) }
+          delete new_data?.item
           
-          continue
+          updateEnemyItem(new_data!, id, item.id!);
         }
-
-        updateEnemyItem(loot as EffectType, loot.id!, id).then((res) => {
-          lootList[i] = res.data
-          setLootList(lootList)
-        })
-      }
+      });
+      
+      // Находим идентификаторы, которые есть в новом массиве, но нет в начальном
+      lootList.forEach((item) => {
+        if (!items.data.find((loot) => loot.id === item.id)) createEnemyItem(item, id!)
+      });
       
       await getEnemyList()
       toast('Противник обновлен', { type: 'success' })

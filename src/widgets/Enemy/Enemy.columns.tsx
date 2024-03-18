@@ -25,7 +25,11 @@ export const EnemyColumn: GridColDef[] = [
 
 export const EnemyTeamColumn: GridColDef[] = [
   { field: 'id', minWidth: 60, maxWidth: 60 },
-  { field: 'name', minWidth: 180, flex: 1 },
+  {
+    field: 'name', minWidth: 180, flex: 1, renderCell: ({ row, formattedValue }) => {
+      return <Link to={ `${ pathRoutes.enemy.edit }/${ row?.enemy_id }` } className='td_underline'>{ formattedValue }</Link>
+    }
+  },
   { field: 'team_id', minWidth: 50 },
   { field: 'is_leader', minWidth: 50 },
   { field: 'prefix', minWidth: 180 },

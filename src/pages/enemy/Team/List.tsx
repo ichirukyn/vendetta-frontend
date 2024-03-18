@@ -15,7 +15,7 @@ const EnemyTeamList: FC = () => {
   
   const [filterList, setFilterList] = useState<EnemyListType[]>([])
   const { enemyTeamList, getEnemyTeamList } = useEnemyTeamStore()
-  
+  console.log(filterList)
   useEffect(() => {
     if (enemyTeamList) {
       setFilterList(enemyTeamList.map((enemyTeam) => {

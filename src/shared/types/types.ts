@@ -1,1 +1,1 @@
-export type OptionsType = { label: string, value?: number | string }
+export type OptionsType = { label: string, value?: number | string, disabled?: boolean }

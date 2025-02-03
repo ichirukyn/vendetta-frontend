@@ -14,8 +14,7 @@ export const SpellColumn: GridColDef[] = [
   { field: 'type_damage', minWidth: 140 },
   { field: 'distance', minWidth: 100 },
   { field: 'is_stack', minWidth: 80 },
-  { field: 'class_id', minWidth: 50 },
-  { field: 'race_id', minWidth: 50 },
   { field: 'type', minWidth: 100 },
+  { field: 'rank', minWidth: 50 },
   { field: 'cooldown', minWidth: 50 },
 ]

@@ -23,9 +23,9 @@ export type SpellEffectType = {
   dependency: string
   dependency_value: number
   dependency_add: number
-  condition_first?: string
+  condition_attribute?: string
   condition?: string
-  condition_second?: number
+  condition_value?: number
   direction: string
   duration: number
   is_single: boolean

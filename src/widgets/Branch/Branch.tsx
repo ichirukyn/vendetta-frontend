@@ -15,8 +15,8 @@ const defaultMargin = { top: 30, left: 30, right: 30, bottom: 70 };
 export const BranchWidget: FC<LinkTypesProps> = ({ margin = defaultMargin }) => {
   const [selectId, setSelectId] = useState<number | undefined>(undefined)
   
-  const width = 2000
-  const height = 2000
+  const width = 200
+  const height = 200
   
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;

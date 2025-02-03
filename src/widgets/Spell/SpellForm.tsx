@@ -16,7 +16,7 @@ import {
 import { SpellEffectType, SpellType } from "@/shared/types/spell";
 import { toast } from "react-toastify";
 import { Accordion, AccordionDetails, AccordionSummary, Checkbox, MenuItem, Select } from "@mui/material";
-import EffectForm from "@/widgets/Effect/EffectForm";
+import EffectForm from "@/widgets/Spell/Effect/EffectForm";
 import { ClassType, RaceType } from "@/shared/types";
 import { fetchAllClassByRace, fetchAllRace } from "@/shared/api/race";
 import { SpellConstants } from "@/widgets/Spell/Spell.constant";

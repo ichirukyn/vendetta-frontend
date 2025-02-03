@@ -12,11 +12,11 @@ interface TechniqueState {
 export const useTechniqueStore = create<TechniqueState>((set, get) => ({
   techniqueList: [],
   getTechniqueList: async () => {
-    const res = await fetchAllTechnique({ hidden: true })
+    const res = await fetchAllTechnique({ hidden: false })
     if (res.data) set({ techniqueList: res.data })
   },
   getTechniqueOption: () => {
-    const technique = get().techniqueList
+    const technique = get().techniqueList as TechniqueType[]
     return technique.map((technique) => ({ label: technique.name, value: technique.id }))
   },
   clearTechniqueList: () => set({ techniqueList: [] }),

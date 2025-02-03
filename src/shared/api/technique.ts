@@ -16,7 +16,7 @@ export const fetchAllTechnique = async ({ race_id, class_id, hidden, hero_id }: 
       params: { race_id, class_id, hidden, hero_id }
     }
   )
-  
+
   return response
 }
 
@@ -24,7 +24,7 @@ export const fetchOneTechnique = async (technique_id: number) => {
   const response: AxiosResponse<TechniqueType> = await axiosInstance.get(
     `/technique/${ technique_id }`,
   )
-  
+
   return response
 }
 
@@ -33,7 +33,7 @@ export const createTechnique = async (technique: TechniqueType) => {
     `/technique`,
     { ...technique },
   )
-  
+
   return response
 }
 
@@ -42,7 +42,7 @@ export const updateTechnique = async (technique: TechniqueType, technique_id: nu
     `/technique/${ technique_id }`,
     { ...technique },
   )
-  
+
   return response
 }
 
@@ -52,7 +52,7 @@ export const fetchAllTechniqueEffect = async (technique_id: number) => {
   const response: AxiosResponse<TechniqueType[]> = await axiosInstance.get(
     `/technique/${ technique_id }/effect`,
   )
-  
+
   return response
 }
 
@@ -61,7 +61,7 @@ export const createTechniqueEffect = async (effect: TechniqueEffectType, techniq
     `/technique/${ technique_id }/effect`,
     { ...effect },
   )
-  
+
   return response
 }
 
@@ -70,7 +70,7 @@ export const updateTechniqueEffect = async (effect: TechniqueEffectType, effect_
     `/technique/${ technique_id }/effect/${ effect_id }`,
     { ...effect },
   )
-  
+
   return response
 }
 
@@ -79,7 +79,7 @@ export const deleteTechniqueEffect = async (effect_id: number, technique_id: num
   const response: AxiosResponse<TechniqueType[]> = await axiosInstance.delete(
     `/technique/${ technique_id }/effect/${ effect_id }`,
   )
-  
+
   return response
 }
 
@@ -89,7 +89,7 @@ export const fetchAllBranchTechnique = async () => {
   const response: AxiosResponse<TechniqueBranchType[]> = await axiosInstance.get(
     `/technique/branch/`,
   )
-  
+
   return response
 }
 
@@ -97,7 +97,7 @@ export const fetchOneBranchTechnique = async (branch_id: number) => {
   const response: AxiosResponse<TechniqueBranchType> = await axiosInstance.get(
     `/technique/branch/${ branch_id }`,
   )
-  
+
   return response
 }
 
@@ -106,7 +106,7 @@ export const createBranchTechnique = async (data: TechniqueBranchType) => {
     `/technique/branch`,
     { ...data },
   )
-  
+
   return response
 }
 
@@ -115,7 +115,7 @@ export const updateBranchTechnique = async (data: TechniqueBranchType, branch_id
     `/technique/branch/${ branch_id }`,
     { ...data },
   )
-  
+
   return response
 }
 
@@ -124,6 +124,6 @@ export const deleteBranchTechnique = async (branch_id: number) => {
   const response: AxiosResponse = await axiosInstance.delete(
     `/technique/branch/${ branch_id }`,
   )
-  
+
   return response
 }

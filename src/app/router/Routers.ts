@@ -42,6 +42,7 @@ export const Routers = [
     Layout: Default,
     Roles: [Roles.Admin],
   },
+  
   // Arena
   {
     path: pathRoutes.arena.base,
@@ -151,6 +152,7 @@ export const Routers = [
     Layout: Default,
     Roles: [Roles.Admin],
   },
+  
   // Hero
   {
     path: pathRoutes.hero.base,

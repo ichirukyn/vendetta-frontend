@@ -27,25 +27,24 @@ const ArenaFloorForm: FC<ITechniqueFormProps> = ({ id }) => {
     reset
   } = useForm({ resolver: yupResolver(ArenaFloorCreateScheme) })
   const navigate = useNavigate();
-  
+
   const [enemies, setEnemies] = useState<EnemyType[]>([])
   const [teams, setTeams] = useState<TeamType[]>([])
   const [floorEnemyId, setFloorEnemyId] = useState<number | undefined>(id)
   const { floorList, floor, getArenaList } = useArenaStore()
-  
+
   const enemy_id = watch('enemy_id')
   const team_id = watch('team_id')
-  
+
   const onSubmit = async (data: InferType<typeof ArenaFloorCreateScheme>) => {
     if (!data.team_id && !data.enemy_id) return toast('Нужно выбрать противника или команду', { type: 'error' })
     if (!data.floor_id) return toast('Нужно выбрать этаж', { type: 'error' })
-    
+
     if (!floorEnemyId) {
       createArenaEnemy(data.floor_id, data as FloorEnemyType).then((res) => {
         if (res.data) {
-          reset()
           toast('Создание успешно', { type: 'success' })
-          setFloorEnemyId(res.data.id)
+          // setFloorEnemyId(res.data.id)
           getArenaList()
         }
       })
@@ -58,8 +57,8 @@ const ArenaFloorForm: FC<ITechniqueFormProps> = ({ id }) => {
       })
     }
   }
-  
-  
+
+
   useEffect(() => {
     fetchAllEnemy().then((res) => {
       if (res.data) setEnemies(res.data)
@@ -68,11 +67,11 @@ const ArenaFloorForm: FC<ITechniqueFormProps> = ({ id }) => {
       if (res.data) setTeams(res.data)
     })
   }, []);
-  
+
   useEffect(() => {
     if (id) setFloorEnemyId(id)
   }, [id]);
-  
+
   useEffect(() => {
     if (floor?.id && floorEnemyId) {
       fetchOneArenaEnemy(floor?.id, floorEnemyId).then((res) => {
@@ -80,14 +79,14 @@ const ArenaFloorForm: FC<ITechniqueFormProps> = ({ id }) => {
       })
     }
   }, [floorEnemyId]);
-  
+
   const setData = (data: FloorEnemyType) => {
     setValue('floor_id', data.floor_id)
     setValue('enemy_id', data.enemy_id)
     setValue('team_id', data.team_id)
   }
-  
-  
+
+
   return (
     <>
       <div className="block_column align-start card brs_10 maxw_450">
@@ -102,7 +101,7 @@ const ArenaFloorForm: FC<ITechniqueFormProps> = ({ id }) => {
               </Select>
             </div>
           ) }/>
-          
+
           <Controller control={ control } name='enemy_id' render={ ({ field }) => (
             <div className="block_column align-start w_100p">
               <label>Противник</label>
@@ -114,7 +113,7 @@ const ArenaFloorForm: FC<ITechniqueFormProps> = ({ id }) => {
               </Select>
             </div>
           ) }/>
-          
+
           <Controller control={ control } name='team_id' defaultValue={ 0 } render={ ({ field }) => (
             <div className="block_column align-start w_100p">
               <label>Группа противников</label>
@@ -127,7 +126,7 @@ const ArenaFloorForm: FC<ITechniqueFormProps> = ({ id }) => {
             </div>
           ) }/>
         </form>
-        
+
         <div className="block_row justify-between w_100p">
           <button className='button button_outline_active w_100p mt_10' onClick={ () => navigate(-1) }>Назад</button>
           <button className='button w_100p mt_10' onClick={ handleSubmit(onSubmit) }>Отправить</button>

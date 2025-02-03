@@ -4,35 +4,38 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Checkbox, IconButton, MenuItem, Select } from "@mui/material";
 import { EffectConstants } from "@/widgets";
-import { EffectType } from "@/shared/types/technique";
 import { ReactComponent as Delete } from '@/shared/assets/icons/Delete.svg'
-import { EffectTypeAttribute } from "@/widgets/Spell/Effect/Effect.constants";
+import { SpellEffectType } from "@/shared/types";
+import { EffectTypeAttribute, EffectTypeList, EffectValueLabel } from "@/widgets/Spell/Effect/Effect.constants";
 
 export interface IEffectCreateProps {
   index: number
   effectDelete: (index: number) => void
   update_data?: (a: InferType<typeof EffectCreateScheme>, index: number) => void
-  defaultData?: EffectType
+  defaultData?: SpellEffectType
 }
+
 
 export const EffectCreateScheme = object().shape({
   name: string().required('Введите название эффекта (Усиление, Щит, Шок и т.п.)'),
   type: string(),
   attribute: string(),
   value: number().optional(),
-  if_first: string().nullable(),
-  if: string().notRequired().nullable(),
-  if_second: number().notRequired().nullable(),
+  
+  dependency: string().optional().nullable(),
+  dependency_value: number().optional().nullable(),
+  dependency_add: number().optional().nullable(),
+  
+  condition_attribute: string().nullable(),
+  condition: string().notRequired().nullable(),
+  condition_value: number().notRequired().nullable(),
+  
   direction: string(),
   duration: number().optional(),
   is_single: boolean().optional(),
   every_turn: boolean().optional()
 })
 
-export type EffectEmpty = {
-  id?: number
-  name: string
-}
 
 const attributeHide = ['hidden']
 const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, effectDelete }) => {
@@ -52,9 +55,9 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
       setValue('type', defaultData.type)
       setValue('attribute', defaultData.attribute)
       setValue('value', defaultData.value)
-      setValue('if_first', defaultData.if_first)
-      setValue('if', defaultData.if)
-      setValue('if_second', defaultData.if_second)
+      setValue('condition_attribute', defaultData.condition_attribute)
+      setValue('condition', defaultData.condition)
+      setValue('condition_value', defaultData.condition_value)
       setValue('direction', defaultData.direction)
       setValue('duration', defaultData.duration)
       setValue('is_single', defaultData.is_single)
@@ -68,10 +71,10 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
     
     if (!data.value) data.value = 0
     
-    if (!data?.if_first || !data?.if || !data?.if_second) {
-      data.if_first = undefined
-      data.if = undefined
-      data.if_second = undefined
+    if (!data?.condition_attribute || !data?.condition || !data?.condition_value) {
+      data.condition_attribute = undefined
+      data.condition = undefined
+      data.condition_value = undefined
     }
     
     if (!data.attribute) {
@@ -90,6 +93,7 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
     }
   }
   
+  
   return (
     <form className='w_100p block_column align-start mt_5' onSubmit={ handleSubmit(onSubmit) }>
       <Controller control={ control } name='name' render={ ({ field }) => (
@@ -104,8 +108,8 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
         <div className="block_column align-start w_100p">
           <label>Тип эффекта</label>
           <Select className='w_100p' value={ field.value } onChange={ field.onChange }>
-            { EffectConstants.type.map(({ label, value }) => (
-              <MenuItem key={ value } value={ value }>{ label }</MenuItem>
+            { EffectTypeList.map(({ label, value, disabled }) => (
+              <MenuItem key={ value } value={ value } disabled={ disabled }>{ label }</MenuItem>
             )) }
           </Select>
         </div>
@@ -137,7 +141,15 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
       <Controller control={ control } name='value' render={ ({ field }) => (
         <div className="block_column align-start w_100p">
           <label>
-            { type === 'period' || type === 'control' ? 'Шанс попадания эффектов (В процентах!)' : 'Значение' }
+            { type
+              ?
+              EffectValueLabel.map((text) => {
+                if (text.value === type) return text.label
+                else return null
+              })
+              :
+              EffectValueLabel[0].label
+            }
           </label>
           <input type="number" step="0.01" className='w_100p' value={ field.value } onChange={ field.onChange }
                  placeholder='1, 0, 0.5, -100, etc..'/>
@@ -145,7 +157,7 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
         </div>
       ) }/>
       
-      <Controller control={ control } name='if_first' defaultValue={ '' } render={ ({ field }) => (
+      <Controller control={ control } name='condition_attribute' defaultValue={ '' } render={ ({ field }) => (
         <div className="block_column align-start w_100p">
           <label>Если атрибут</label>
           <Select className='w_100p' value={ field.value } onChange={ field.onChange }>
@@ -156,7 +168,7 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
         </div>
       ) }/>
       
-      <Controller control={ control } name='if' defaultValue={ '' } render={ ({ field }) => (
+      <Controller control={ control } name='condition' defaultValue={ '' } render={ ({ field }) => (
         <div className="block_column align-start w_100p">
           <label>Условие</label>
           <Select className='w_100p' value={ field.value } onChange={ field.onChange }>
@@ -167,7 +179,7 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
         </div>
       ) }/>
       
-      <Controller control={ control } name='if_second' render={ ({ field }) => (
+      <Controller control={ control } name='condition_value' render={ ({ field }) => (
         <div className="block_column align-start w_100p">
           <label>Значение условия</label>
           <input

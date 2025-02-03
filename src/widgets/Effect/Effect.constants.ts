@@ -9,14 +9,48 @@ export const ElementDamage = [
   { value: 'phys_damage', label: 'Физ.' },
 ]
 
+export const EffectStats = [
+  { value: 'stats_view', label: 'Характеритсики:', disabled: true },
+  { value: 'strength', label: 'Сила' },
+  { value: 'health', label: 'Здоровье' },
+  { value: 'speed', label: 'Скорость' },
+  { value: 'dexterity', label: 'Ловкость' },
+  { value: 'accuracy', label: 'Точность' },
+  { value: 'soul', label: 'Дух' },
+  { value: 'intelligence', label: 'Интеллект' },
+  { value: 'submission', label: 'Подчинение' },
+]
+
+export const EffectFlatStats = [
+  { value: 'flat_stats_view', label: 'Простые характеритсики:', disabled: true },
+  { value: 'flat_strength', label: 'Сила П.' },
+  { value: 'flat_health', label: 'Здоровье П.' },
+  { value: 'flat_speed', label: 'Скорость П.' },
+  { value: 'flat_dexterity', label: 'Ловкость П.' },
+  { value: 'flat_accuracy', label: 'Точность П.' },
+  { value: 'flat_soul', label: 'Дух П.' },
+  { value: 'flat_intelligence', label: 'Интеллект П.' },
+  { value: 'flat_submission', label: 'Подчинение П.' },
+]
+
 export const EffectConstants = {
   type: [
     { value: 'number', label: 'Добавить/Отнять число' },
     { value: 'percent', label: 'Добавить/Отнять процент' },
+    { value: 'break', label: '', disabled: true },
+    
     { value: 'period', label: 'Периодический урон' },
     { value: 'control', label: 'Контроль противника' },
-    { value: 'activate', label: 'Активация техники' },
-    { value: 'coast', label: 'Затраты техники' },
+    { value: 'break_1', label: '', disabled: true },
+    
+    { value: 'shield', label: 'Щит' },
+    { value: 'heal', label: 'Хилл' },
+    { value: 'dependency', label: 'Зависимость от статов' },
+    { value: 'break_2', label: '', disabled: true },
+    
+    { value: 'coast', label: 'Затраты' },
+    { value: 'activate', label: 'Условия активации' },
+    { value: 'hidden', label: 'Скрытый эффект' },
   ],
   attribute: [
     { value: 'race_id', label: 'Раса (По id)' },
@@ -44,25 +78,9 @@ export const EffectConstants = {
     { value: 'shield_max', label: 'Щит от макс. значения' },
     { value: 'shield_percent', label: 'Процент Щита' },
     
-    { value: 'stats_view', label: 'Характеритсики:', disabled: true },
-    { value: 'strength', label: 'Сила' },
-    { value: 'health', label: 'Здоровье' },
-    { value: 'speed', label: 'Скорость' },
-    { value: 'dexterity', label: 'Ловкость' },
-    { value: 'accuracy', label: 'Точность' },
-    { value: 'soul', label: 'Дух' },
-    { value: 'intelligence', label: 'Интеллект' },
-    { value: 'submission', label: 'Подчинение' },
+    { ...EffectStats, },
     
-    { value: 'flat_stats_view', label: 'Простые характеритсики:', disabled: true },
-    { value: 'flat_strength', label: 'Сила П.' },
-    { value: 'flat_health', label: 'Здоровье П.' },
-    { value: 'flat_speed', label: 'Скорость П.' },
-    { value: 'flat_dexterity', label: 'Ловкость П.' },
-    { value: 'flat_accuracy', label: 'Точность П.' },
-    { value: 'flat_soul', label: 'Дух П.' },
-    { value: 'flat_intelligence', label: 'Интеллект П.' },
-    { value: 'flat_submission', label: 'Подчинение П.' },
+    { ...EffectFlatStats, },
     
     { value: 'crit_view', label: 'Криты:', disabled: true },
     { value: 'crit_damage', label: 'Крит урон' },
@@ -136,21 +154,18 @@ export const EffectConstants = {
     { value: 'control_view', label: 'Эффекты контроля:', disabled: true },
     { value: 'stun', label: 'Стан' },
     { value: 'root', label: 'Обездвиживание' },
+    { value: 'fear', label: 'Страх' },
   ],
   coast: [
     { value: 'mana', label: 'Мана' },
-    { value: 'mana_max', label: 'Мана от макс. значения' },
-    { value: 'mana_percent', label: 'Процент маны' },
-    { value: 'control_mana', label: 'Контроль маны' },
+    // { value: 'mana_max', label: 'Мана от макс. значения' },
+    // { value: 'mana_percent', label: 'Процент маны' },
+    // { value: 'control_mana', label: 'Контроль маны' },
     
-    { value: 'qi_view', label: 'Ки:', disabled: true },
+    // { value: 'qi_view', label: 'Ки:', disabled: true },
     { value: 'qi', label: 'Ки' },
-    { value: 'qi_max', label: 'Ки от макс. значения' },
-    { value: 'qi_percent', label: 'Процент ки' },
-    { value: 'control_qi', label: 'Контроль ки' },
-  ],
-  aoe: [
-    { value: 'damage_view', label: 'Урон:', disabled: true },
-    { value: 'default_damage', label: 'Урон игрока' },
+    // { value: 'qi_max', label: 'Ки от макс. значения' },
+    // { value: 'qi_percent', label: 'Процент ки' },
+    // { value: 'control_qi', label: 'Контроль ки' },
   ],
 }

@@ -2,18 +2,18 @@ import { UserType } from "@/shared/types";
 import { create } from "zustand";
 
 interface UserState {
-  userList?: UserType
+  user?: UserType
+  token?: string
   getUser: () => Promise<void>
-  clearUserList: () => void
 }
 
 export const useUserStore = create<UserState>((set) => ({
-  userList: undefined,
+  user: undefined,
+  token: undefined,
   getUser: async () => {
     console.log(localStorage.getItem('authToken'))
     
     // const res = await fetchAllUser({ hidden: true })
     // if (res.data) set({ userList: res.data })
   },
-  clearUserList: () => set({ userList: [] }),
 }))

@@ -11,9 +11,10 @@ services:
     ports:
       - '5000:5000'
     networks:
-      - tg
+      - vendetta-network
 volumes:
   postgresDB:
 networks:
-  tg:
+  vendetta-network:
+    driver: bridge
     external: true

@@ -1,11 +1,14 @@
 FROM node:20-alpine
 
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
 COPY . .
 
-RUN npm i
-RUN npm i -g vite
+RUN npm run build
 
 EXPOSE 5000
-
-RUN npm run build --force
-CMD vite preview --port 5000 --host 0.0.0.0
+CMD ["npm", "run", "preview"]

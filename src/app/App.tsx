@@ -6,20 +6,23 @@ import 'react-toastify/dist/ReactToastify.css';
 import {useRaceStore} from '@/shared/store/RaceStore';
 import {useClassStore} from '@/shared/store/ClassStore';
 import {useTechniqueStore} from '@/shared/store/TechniqueStore';
-import {useArenaStore} from '@/shared/store/ArenaStore';
 import {useEnemyStore} from '@/shared/store/EnemyStore';
 import {useTeamStore} from "@/shared/store/TeamStore";
 import {useSpellStore} from "@/shared/store/SpellStore";
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import {useArenaQuery} from "@/shared/store/hooks";
 
-const queryClient = new QueryClient()
 
 const App: FC = () => {
+  const {floorList} = useArenaQuery()
+
+  useEffect(() => {
+    if (floorList.isError) console.log('FloorListError')
+  }, [floorList.isError]);
+
   const {getRaceList} = useRaceStore()
   const {getClassList} = useClassStore()
   const {getTechniqueList} = useTechniqueStore()
   const {getSpellList} = useSpellStore()
-  const {getArenaList} = useArenaStore()
   const {getEnemyList} = useEnemyStore()
   const {getTeamList} = useTeamStore()
 
@@ -28,18 +31,15 @@ const App: FC = () => {
     getClassList()
     getTechniqueList()
     getSpellList()
-    getArenaList()
     getEnemyList()
     getTeamList()
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <ToastContainer draggable={false}/>
-        <AppRouter/>
-      </BrowserRouter>
-    </QueryClientProvider>
+    <BrowserRouter>
+      <ToastContainer draggable={false}/>
+      <AppRouter/>
+    </BrowserRouter>
   );
 };
 

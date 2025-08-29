@@ -52,7 +52,7 @@ const TechniqueList: FC = () => {
           <label>Раса</label>
           <Select className='w_100p' value={ filter.race_id } onChange={ (e) => setFilter({ ...filter, race_id: Number(e.target.value) }) }>
             <MenuItem value={ 0 }>Любая раса</MenuItem>
-            { raceList.map(({ id, name }) => (
+            { raceList?.map(({ id, name }) => (
               <MenuItem value={ id } key={ id }>{ name }</MenuItem>
             )) }
           </Select>

@@ -28,10 +28,12 @@ const ArenaFloorForm: FC<ITechniqueFormProps> = ({ id }) => {
   } = useForm({ resolver: yupResolver(ArenaFloorCreateScheme) })
   const navigate = useNavigate();
 
+  // const {} = useArena()
+
   const [enemies, setEnemies] = useState<EnemyType[]>([])
   const [teams, setTeams] = useState<TeamType[]>([])
   const [floorEnemyId, setFloorEnemyId] = useState<number | undefined>(id)
-  const { floorList, floor, getArenaList } = useArenaStore()
+  const { floorList, floor } = useArenaStore()
 
   const enemy_id = watch('enemy_id')
   const team_id = watch('team_id')
@@ -45,14 +47,14 @@ const ArenaFloorForm: FC<ITechniqueFormProps> = ({ id }) => {
         if (res.data) {
           toast('Создание успешно', { type: 'success' })
           // setFloorEnemyId(res.data.id)
-          getArenaList()
+          // getArenaList()
         }
       })
     } else {
       updateArenaEnemy(data.floor_id, floorEnemyId, data as FloorEnemyType).then((res) => {
         if (res.data) {
           toast('Обновление успешно', { type: 'success' })
-          getArenaList()
+          // getArenaList()
         }
       })
     }

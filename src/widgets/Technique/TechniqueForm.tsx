@@ -255,7 +255,7 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
               <label>Привязка к расе</label>
               <Select className='w_100p' value={ field.value } onChange={ field.onChange }>
                 <MenuItem value={ 0 }>Любая раса</MenuItem>
-                { raceList.map(({ id, name }) => (
+                { raceList?.map(({ id, name }) => (
                   <MenuItem value={ id } key={ id }>{ name }</MenuItem>
                 )) }
               </Select>

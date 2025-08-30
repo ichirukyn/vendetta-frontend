@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TechniqueCreateScheme } from "@/widgets/Technique/Technique.schemas";
@@ -36,6 +36,7 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
     handleSubmit,
     setValue,
   } = useForm({ resolver: yupResolver(TechniqueCreateScheme) })
+
   const { getTechniqueList } = useTechniqueStore()
   
   const navigate = useNavigate();
@@ -156,7 +157,7 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
     setValue('class_id', data.class_id)
     setValue('type', data.type)
     setValue('cooldown', data.cooldown)
-    setValue('is_stack', data.is_stack)
+    setValue('is_stack', data.is_stack ?? false)
   }
   
   const onUpdateEffect = (data: InferType<typeof EffectCreateScheme>, index: number) => {

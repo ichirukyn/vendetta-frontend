@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { boolean, InferType, number, object, string } from "yup";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -20,9 +20,9 @@ export const EffectCreateScheme = object().shape({
   type: string(),
   attribute: string(),
   value: number().optional(),
-  if_first: string().nullable(),
-  if: string().notRequired().nullable(),
-  if_second: number().notRequired().nullable(),
+  condition_attribute: string().nullable(),
+  condition: string().notRequired().nullable(),
+  condition_value: number().notRequired().nullable(),
   direction: string(),
   duration: number().optional(),
   is_single: boolean().optional(),
@@ -52,9 +52,9 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
       setValue('type', defaultData.type)
       setValue('attribute', defaultData.attribute)
       setValue('value', defaultData.value)
-      setValue('if_first', defaultData.if_first)
-      setValue('if', defaultData.if)
-      setValue('if_second', defaultData.if_second)
+      setValue('condition_attribute', defaultData.condition_attribute)
+      setValue('condition', defaultData.condition)
+      setValue('condition_value', defaultData.condition_value)
       setValue('direction', defaultData.direction)
       setValue('duration', defaultData.duration)
       setValue('is_single', defaultData.is_single)
@@ -68,10 +68,10 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
     
     if (!data.value) data.value = 0
     
-    if (!data?.if_first || !data?.if || !data?.if_second) {
-      data.if_first = undefined
-      data.if = undefined
-      data.if_second = undefined
+    if (!data?.condition_attribute || !data?.condition || !data?.condition_value) {
+      data.condition_attribute = undefined
+      data.condition = undefined
+      data.condition_value = undefined
     }
     
     if (!data.attribute) {
@@ -145,7 +145,7 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
         </div>
       ) }/>
       
-      <Controller control={ control } name='if_first' defaultValue={ '' } render={ ({ field }) => (
+      <Controller control={ control } name='condition_attribute' defaultValue={ '' } render={ ({ field }) => (
         <div className="block_column align-start w_100p">
           <label>Если атрибут</label>
           <Select className='w_100p' value={ field.value } onChange={ field.onChange }>
@@ -156,7 +156,7 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
         </div>
       ) }/>
       
-      <Controller control={ control } name='if' defaultValue={ '' } render={ ({ field }) => (
+      <Controller control={ control } name='condition' defaultValue={ '' } render={ ({ field }) => (
         <div className="block_column align-start w_100p">
           <label>Условие</label>
           <Select className='w_100p' value={ field.value } onChange={ field.onChange }>
@@ -167,7 +167,7 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
         </div>
       ) }/>
       
-      <Controller control={ control } name='if_second' render={ ({ field }) => (
+      <Controller control={ control } name='condition_value' render={ ({ field }) => (
         <div className="block_column align-start w_100p">
           <label>Значение условия</label>
           <input

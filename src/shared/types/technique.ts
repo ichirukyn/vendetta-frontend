@@ -24,9 +24,9 @@ export type EffectType = {
   type: string
   attribute: string
   value: number
-  if_first?: string
-  if?: string
-  if_second?: number
+  condition_attribute?: string
+  condition?: string
+  condition_value?: number
   direction: string
   duration: number
   is_single: boolean

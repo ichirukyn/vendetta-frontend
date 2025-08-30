@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { useParams } from "react-router-dom";
-import ArenaFloorForm from "@/widgets/Arena/ArenaFloorForm";
+import { ArenaFloorForm } from '@/widgets/Arena/ArenaFloorForm'
 
 const ArenaFloorEdit: FC = () => {
   const { id } = useParams()

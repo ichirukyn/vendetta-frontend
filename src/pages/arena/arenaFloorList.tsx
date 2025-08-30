@@ -1,10 +1,10 @@
 import { FC, useEffect, useState } from 'react';
 import { Link, useParams } from "react-router-dom";
 import { pathRoutes } from "@/app";
-import { useArenaStore } from "@/shared/store/ArenaStore";
 import { EnemyType } from "@/shared/types";
 import Table from "@/shared/ui/Table/Table";
 import { FloorEnemyColumn } from "@/widgets/Arena";
+import { useArenaQuery, useArenaStore } from '@/entities'
 
 type FloorEnemy = EnemyType & {
   name?: string,
@@ -17,15 +17,19 @@ type FloorEnemy = EnemyType & {
 
 const ArenaList: FC = () => {
   const { id } = useParams()
-  const { floorList, floor, setFloor } = useArenaStore()
-  
+
+  useArenaQuery(Number(id))
+
+  const arena = useArenaStore(state => state.entity)
+  const arenaList = useArenaStore(state => state.entityList)
+
   const [enemies, setEnemies] = useState<FloorEnemy[]>([])
   
   useEffect(() => {
-    if (id && floorList.length) {
+    if (id && arenaList?.length) {
       const enemyList: FloorEnemy[] = []
       
-      floor?.enemies?.forEach((enemy) => {
+      arena?.enemies?.forEach((enemy) => {
         if (enemy?.enemy?.id)
           enemyList.push({
             ...enemy?.enemy,
@@ -38,18 +42,11 @@ const ArenaList: FC = () => {
       
       setEnemies(enemyList)
     }
-  }, [floor]);
-  
-  useEffect(() => {
-    if (id && floorList.length) {
-      const floorEnemy = floorList.find((floor) => floor?.id === Number(id))
-      if (floorEnemy) setFloor(floorEnemy)
-    }
-  }, [id, floor, floorList.length]);
-  
+  }, [arena]);
+
   return (
     <div className='main__block block_column p_40 w_100p'>
-      <h3 className='mb_30'>Список противников ({ floor?.name })</h3>
+      <h3 className='mb_30'>Список противников ({ arena?.name })</h3>
       <Table rows={ enemies } columns={ FloorEnemyColumn } style={ { isHeader: true } }/>
       
       <div className="block_row justify-end w_100p mt_10">

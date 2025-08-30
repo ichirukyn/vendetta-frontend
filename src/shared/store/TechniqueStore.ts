@@ -12,7 +12,7 @@ interface TechniqueState {
 export const useTechniqueStore = create<TechniqueState>((set, get) => ({
   techniqueList: [],
   getTechniqueList: async () => {
-    const res = await fetchAllTechnique({ hidden: false })
+    const res = await fetchAllTechnique({ hidden: true })
     if (res.data) set({ techniqueList: res.data })
   },
   getTechniqueOption: () => {

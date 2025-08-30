@@ -25,7 +25,7 @@ import {
   updateEnemyWeapon,
 } from '@/shared/api/enemy';
 import { Accordion, AccordionDetails, AccordionSummary, MenuItem, Select } from '@mui/material';
-import { Constants } from '@/shared/constants';
+import { Constants } from '../../shared/constant';
 import EnemyStatsForm from '@/widgets/Enemy/EnemyStatsForm';
 import EnemyWeaponForm from '@/widgets/Enemy/EnemyWeaponForm';
 import EnemyTechniqueForm from '@/widgets/Enemy/EnemyTechniqueForm';

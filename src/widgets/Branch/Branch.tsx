@@ -6,7 +6,7 @@ import { pointRadial } from 'd3-shape';
 import { LinkRadialStep, } from '@visx/shape';
 import { BranchData, LinkTypesProps, TreeNode } from "@/widgets";
 import BranchModal from "@/widgets/Branch/BranchModal";
-import { createTechniqueTree } from "@/shared/util/formatTechniqueBranch";
+import { createTechniqueTree } from "@/shared/utils/formatTechniqueBranch";
 import { useTechniqueBranchStore } from "@/shared/store/Technique/TechniqueBranchStore";
 import { TransformComponent, TransformWrapper } from "react-zoom-pan-pinch";
 

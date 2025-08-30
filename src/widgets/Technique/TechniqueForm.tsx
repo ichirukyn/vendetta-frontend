@@ -55,7 +55,7 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
     if (!data.cooldown || data?.damage < 0) data.cooldown = 0
     
     if (data.damage > 5) data.damage = 5
-    if (data.cooldown > 5) data.cooldown = 5
+    // if (data.cooldown > 5) data.cooldown = 5
     
     if (data.race_id != 0) {
       let classValid = classList.find((item) => item.id === data.class_id && item.race_id == data.race_id)

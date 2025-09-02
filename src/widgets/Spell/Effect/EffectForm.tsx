@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { boolean, InferType, number, object, string } from "yup";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -228,7 +228,9 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
           </label>
         </div>
       ) }/>
-      
+
+      <p>Form errors: {JSON.stringify(errors)}</p>
+
       <div className="block_row justify-between align-center w_100p mt_10">
         <button className='button'>Сохранить</button>
         <IconButton onClick={ () => effectDelete(index) }><Delete/></IconButton>

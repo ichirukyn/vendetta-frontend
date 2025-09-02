@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TechniqueCreateScheme } from "@/widgets/Technique/Technique.schemas";
@@ -333,7 +333,8 @@ const TechniqueForm: FC<ITechniqueFormProps> = ({ id }) => {
             </AccordionDetails>
           </Accordion>
         )) }
-        
+
+        <p>Form errors: {JSON.stringify(errors)}</p>
         
         <div className="block_row justify-between w_100p">
           <button className='button button_outline_active w_100p mt_10' onClick={ () => navigate(-1) }>Назад</button>

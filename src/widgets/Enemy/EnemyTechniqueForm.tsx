@@ -33,7 +33,7 @@ const EnemyTechniqueForm: FC<IEnemyTechniqueFormProps> = ({ techniqueList, updat
   
   return (
     <div className='w_100p'>
-      <label>Техники (Можно выьрать несколько)</label>
+      <label>Техники (Можно выбрать несколько)</label>
       <div className="block_row align-start justify-between gap_15 w_100p mt_10">
         <Select
           labelId="demo-multiple-chip-label"

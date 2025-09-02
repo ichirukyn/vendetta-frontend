@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { EnemySchemas } from '@/widgets';
@@ -47,6 +47,7 @@ const EnemyForm: FC<IEnemyFormProps> = ({ id }) => {
     handleSubmit,
     setValue,
   } = useForm({ resolver: yupResolver(EnemySchemas) })
+
   const navigate = useNavigate();
   const { getEnemyList } = useEnemyStore()
 
@@ -224,101 +225,131 @@ const EnemyForm: FC<IEnemyFormProps> = ({ id }) => {
     <>
       <div className="block_column align-start card brs_10 maxw_450">
         <form className="block_column align-start w_100p">
-          <Controller control={ control } name='name' render={ ({ field }) => (
-            <div className="block_column align-start w_100p">
-              <label>Имя</label>
-              <input type="text" className='w_100p' value={ field.value } onChange={ field.onChange } placeholder='Скелет'/>
-              <label className='text_error_200'>{ errors.name?.message }</label>
-            </div>
-          ) }/>
+          <Controller
+            control={control}
+            name="name"
+            render={({ field }) => (
+              <div className="block_column align-start w_100p">
+                <label>Имя</label>
+                <input type="text" className="w_100p" value={field.value} onChange={field.onChange} placeholder="Скелет" />
+                <label className="text_error_200">{errors.name?.message}</label>
+              </div>
+            )}
+          />
 
-          <Controller control={ control } name='rank' defaultValue={ Constants.rank[0].value } render={ ({ field }) => (
-            <div className="block_column align-start w_100p">
-              <label>Ранг</label>
-              <Select className='w_100p' value={ field.value } onChange={ field.onChange }>
-                { Constants.rank.map(({ value, label }) => (
-                  <MenuItem value={ value } key={ value }>{ label }</MenuItem>
-                )) }
-              </Select>
-            </div>
-          ) }/>
+          <Controller
+            control={control}
+            name="rank"
+            defaultValue={Constants.rank[0].value}
+            render={({ field }) => (
+              <div className="block_column align-start w_100p">
+                <label>Ранг</label>
+                <Select className="w_100p" value={field.value} onChange={field.onChange}>
+                  {Constants.rank.map(({ value, label }) => (
+                    <MenuItem value={value} key={value}>
+                      {label}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </div>
+            )}
+          />
 
+          <Controller
+            control={control}
+            name="race_id"
+            defaultValue={1}
+            render={({ field }) => (
+              <div className="block_column align-start w_100p">
+                <label>Раса</label>
+                <Select className="w_100p" value={field.value} onChange={field.onChange}>
+                  <MenuItem value={0} disabled>
+                    Любая раса
+                  </MenuItem>
+                  {raceList?.map(({ id, name }) => (
+                    <MenuItem value={id} key={id}>
+                      {name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </div>
+            )}
+          />
 
-          <Controller control={ control } name='race_id' defaultValue={ 1 } render={ ({ field }) => (
-            <div className="block_column align-start w_100p">
-              <label>Раса</label>
-              <Select className='w_100p' value={ field.value } onChange={ field.onChange }>
-                <MenuItem value={ 0 } disabled>Любая раса</MenuItem>
-                { raceList?.map(({ id, name }) => (
-                  <MenuItem value={ id } key={ id }>{ name }</MenuItem>
-                )) }
-              </Select>
-            </div>
-          ) }/>
-
-          <Controller control={ control } name='class_id' defaultValue={ 1 } render={ ({ field }) => (
-            <div className="block_column align-start w_100p">
-              <label>Класс</label>
-              <Select className='w_100p' value={ field.value } onChange={ field.onChange }>
-                <MenuItem value={ 0 } disabled>Любой класс</MenuItem>
-                { classList.map(({ id, name }) => (
-                  <MenuItem value={ id } key={ id }>{ name }</MenuItem>
-                )) }
-              </Select>
-            </div>
-          ) }/>
+          <Controller
+            control={control}
+            name="class_id"
+            defaultValue={1}
+            render={({ field }) => (
+              <div className="block_column align-start w_100p">
+                <label>Класс</label>
+                <Select className="w_100p" value={field.value} onChange={field.onChange}>
+                  <MenuItem value={0} disabled>
+                    Любой класс
+                  </MenuItem>
+                  {classList.map(({ id, name }) => (
+                    <MenuItem value={id} key={id}>
+                      {name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </div>
+            )}
+          />
         </form>
 
         <div className="w_100p pb_10">
-          <EnemyWeaponForm weapon={ weapon } updateWeapon={ (weapon) => setWeapon(weapon) }/>
+          <EnemyWeaponForm weapon={weapon} updateWeapon={weapon => setWeapon(weapon)} />
         </div>
 
         <div className="w_100p pb_10">
-          <EnemyTechniqueForm techniqueList={ techniqueList }
-                              updateTechniqueId={ (listId) => setTechniqueList(listId?.map((id) => ({ technique_id: id }))) }/>
+          <EnemyTechniqueForm
+            techniqueList={techniqueList}
+            updateTechniqueId={listId => setTechniqueList(listId?.map(id => ({ technique_id: id })))}
+          />
         </div>
 
-        <Accordion expanded={ accordionStats } onChange={ () => setAccordionStats(!accordionStats) }
-                   className='w_100p'>
-          <AccordionSummary className='b_1 bc_gray_100'>
-            <div onSubmit={ handleSubmit(onSubmit) } className="block_row align-center justify-between w_100p">
-              <p className='text_body'>Характеристики</p>
+        <Accordion expanded={accordionStats} onChange={() => setAccordionStats(!accordionStats)} className="w_100p">
+          <AccordionSummary className="b_1 bc_gray_100">
+            <div onSubmit={handleSubmit(onSubmit)} className="block_row align-center justify-between w_100p">
+              <p className="text_body">Характеристики</p>
             </div>
           </AccordionSummary>
           <AccordionDetails>
-            <EnemyStatsForm stats={ stats } updateStats={ (stats) => setStats(stats) }/>
+            <EnemyStatsForm stats={stats} updateStats={stats => setStats(stats)} />
           </AccordionDetails>
         </Accordion>
 
-        <button className='button button_outline_active w_100p' onClick={ lootAdd }>Добавить предмет (лут)</button>
+        <button className="button button_outline_active w_100p" onClick={lootAdd}>
+          Добавить предмет (лут)
+        </button>
 
-        { lootList.map((value, index) => (
-          <Accordion key={ index } expanded={ accordion === index } onChange={ () => setAccordion(accordion === index ? null : index) }
-                     className='w_100p'>
-            <AccordionSummary aria-controls={ `${ index }-content` } id={ `${ index }-header` } className='b_1 bc_gray_100'>
+        {lootList.map((value, index) => (
+          <Accordion key={index} expanded={accordion === index} onChange={() => setAccordion(accordion === index ? null : index)} className="w_100p">
+            <AccordionSummary aria-controls={`${index}-content`} id={`${index}-header`} className="b_1 bc_gray_100">
               <div className="block_row align-center justify-between w_100p">
-                <p className='text_body'>Предмет: { value?.item?.name || '' }</p>
+                <p className="text_body">Предмет: {value?.item?.name || ''}</p>
               </div>
             </AccordionSummary>
             <AccordionDetails>
-              <EnemyLootForm
-                update_data={ lootUpdate }
-                index={ index }
-                defaultData={ lootList[index] }
-                effectDelete={ lootDelete }
-              />
+              <EnemyLootForm update_data={lootUpdate} index={index} defaultData={lootList[index]} effectDelete={lootDelete} />
             </AccordionDetails>
           </Accordion>
-        )) }
+        ))}
 
+        <p>Form errors: {JSON.stringify(errors)}</p>
 
         <div className="block_row justify-between w_100p">
-          <button className='button button_outline_active w_100p mt_10' onClick={ () => navigate(pathRoutes.enemy.base) }>Назад</button>
-          <button className='button w_100p mt_10' onClick={ handleSubmit(onSubmit) }>Отправить</button>
+          <button className="button button_outline_active w_100p mt_10" onClick={() => navigate(pathRoutes.enemy.base)}>
+            Назад
+          </button>
+          <button className="button w_100p mt_10" onClick={handleSubmit(onSubmit)}>
+            Отправить
+          </button>
         </div>
       </div>
     </>
-  );
+  )
 };
 
 export default EnemyForm;

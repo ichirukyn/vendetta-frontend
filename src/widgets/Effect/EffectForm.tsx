@@ -216,6 +216,8 @@ const EffectForm: FC<IEffectCreateProps> = ({ update_data, index, defaultData, e
           </label>
         </div>
       ) }/>
+
+      <p>Form errors: {JSON.stringify(errors)}</p>
       
       <div className="block_row justify-between align-center w_100p mt_10">
         <button className='button'>Сохранить</button>

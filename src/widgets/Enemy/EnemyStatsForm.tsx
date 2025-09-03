@@ -40,21 +40,21 @@ const EnemyStatsForm: FC<IEnemyStatsFormProps> = ({ stats, updateStats }) => {
 
   const lvl = watch('lvl')
 
-  const updateTotalStats = (e: ChangeEvent<HTMLInputElement>, onChange: (e: ChangeEvent<HTMLInputElement>) => void, stat_name: string) => {
+  const updateTotalStats = (e: ChangeEvent<HTMLInputElement>, stat_name: string) => {
     let total_stats = 0
+    const value = Number(e?.target?.value || 0)
 
     for (let stat of statsList) {
       if (stat == stat_name) {
-        let val = e.target.value
-        total_stats += val ? Number(val) : 0
+        total_stats += value
       } else {
-        let val = getValues(stat as keyof InferType<typeof EnemyStatsSchemas>)
+        const val = getValues(stat as keyof InferType<typeof EnemyStatsSchemas>) || 0
         total_stats += val ? Number(val) : 0
       }
     }
 
     setValue('total_stats', total_stats)
-    onChange(e)
+    setValue(stat_name as keyof InferType<typeof EnemyStatsSchemas>, value)
   }
 
   const onSubmit = (data: InferType<typeof EnemyStatsSchemas>) => {
@@ -118,7 +118,7 @@ const EnemyStatsForm: FC<IEnemyStatsFormProps> = ({ stats, updateStats }) => {
               type="number"
               className="w_100p"
               value={field.value || 1}
-              onChange={e => updateTotalStats(e, field.onChange, 'strength')}
+              onChange={e => updateTotalStats(e, 'strength')}
               placeholder="0"
             />
           </div>
@@ -135,7 +135,7 @@ const EnemyStatsForm: FC<IEnemyStatsFormProps> = ({ stats, updateStats }) => {
               type="number"
               className="w_100p"
               value={field.value || 1}
-              onChange={e => updateTotalStats(e, field.onChange, 'health')}
+              onChange={e => updateTotalStats(e, 'health')}
               placeholder="0"
             />
           </div>
@@ -152,7 +152,7 @@ const EnemyStatsForm: FC<IEnemyStatsFormProps> = ({ stats, updateStats }) => {
               type="number"
               className="w_100p"
               value={field.value || 1}
-              onChange={e => updateTotalStats(e, field.onChange, 'speed')}
+              onChange={e => updateTotalStats(e, 'speed')}
               placeholder="0"
             />
           </div>
@@ -169,7 +169,7 @@ const EnemyStatsForm: FC<IEnemyStatsFormProps> = ({ stats, updateStats }) => {
               type="number"
               className="w_100p"
               value={field.value || 1}
-              onChange={e => updateTotalStats(e, field.onChange, 'accuracy')}
+              onChange={e => updateTotalStats(e, 'accuracy')}
               placeholder="0"
             />
           </div>
@@ -186,7 +186,7 @@ const EnemyStatsForm: FC<IEnemyStatsFormProps> = ({ stats, updateStats }) => {
               type="number"
               className="w_100p"
               value={field.value || 1}
-              onChange={e => updateTotalStats(e, field.onChange, 'dexterity')}
+              onChange={e => updateTotalStats(e, 'dexterity')}
               placeholder="0"
             />
           </div>
@@ -203,7 +203,7 @@ const EnemyStatsForm: FC<IEnemyStatsFormProps> = ({ stats, updateStats }) => {
               type="number"
               className="w_100p"
               value={field.value || 1}
-              onChange={e => updateTotalStats(e, field.onChange, 'soul')}
+              onChange={e => updateTotalStats(e, 'soul')}
               placeholder="0"
             />
           </div>
@@ -220,7 +220,7 @@ const EnemyStatsForm: FC<IEnemyStatsFormProps> = ({ stats, updateStats }) => {
               type="number"
               className="w_100p"
               value={field.value || 1}
-              onChange={e => updateTotalStats(e, field.onChange, 'intelligence')}
+              onChange={e => updateTotalStats(e, 'intelligence')}
               placeholder="0"
             />
           </div>
@@ -237,7 +237,7 @@ const EnemyStatsForm: FC<IEnemyStatsFormProps> = ({ stats, updateStats }) => {
               type="number"
               className="w_100p"
               value={field.value || 1}
-              onChange={e => updateTotalStats(e, field.onChange, 'submission')}
+              onChange={e => updateTotalStats(e, 'submission')}
               placeholder="0"
             />
           </div>
